@@ -34,7 +34,9 @@
     "dev:down": "bash scripts/dev-down.sh",
     "agent:link": "pnpm --filter @forkos/agents run link",
     "dev:providers:near": "pnpm --filter @klero/provider-near dev",
-    "agents:near": "pnpm --filter @forkos/agents start:near"
+    "agents:near": "pnpm --filter @forkos/agents start:near",
+    "dev:approver:near": "pnpm --filter @klero/approver-near dev",
+    "smoke:cap:near": "tsx --env-file-if-exists=.env scripts/smoke-cap-near.ts"
   },
   "devDependencies": {
     "@forkos/shared": "workspace:^",
@@ -50,6 +52,7 @@
     "typescript": "~5.9.3",
     "viem": "^2.40.0",
     "vitest": "^3.2.0",
-    "zod": "^3.25.0"
+    "zod": "^3.25.0",
+    "@klero/near": "workspace:^"
   }
 }

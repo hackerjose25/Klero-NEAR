@@ -1,9 +1,9 @@
 {
   "network": "near:testnet",
   "rpc": "https://test.rpc.fastnear.com",
-  "createdAt": "2026-11-09T07:09:27.545Z",
+  "createdAt": "2026-11-09T09:10:35.010Z",
   "operatorId": "klero-mw8x6bn1.testnet",
-  "contractId": "klero.klero-mw8x6bn1.testnet",
+  "contractId": "klero-v2.klero-mw8x6bn1.testnet",
   "token": {
     "id": "fusd.klero-mw8x6bn1.testnet",
     "symbol": "FUSD",
@@ -32,5 +32,9 @@
     "b.human.klero-mw8x6bn1.testnet",
     "c.human.klero-mw8x6bn1.testnet"
   ],
-  "explorer": "https://testnet.nearblocks.io/address/klero.klero-mw8x6bn1.testnet"
+  "spendCap": "1000000",
+  "previousContracts": [
+    "klero.klero-mw8x6bn1.testnet"
+  ],
+  "explorer": "https://testnet.nearblocks.io/address/klero-v2.klero-mw8x6bn1.testnet"
 }

@@ -119,7 +119,7 @@ app.post<{ Params: { providerId: string }; Body: { jobKey: string; round: number
         if (nowNs + DEADLINE_MARGIN_NS > BigInt(it.deadline_ns)) throw new Error('too close to deadline: not settling, agent will be refunded');
 
         const s = await near.settle(near.account(me.accountId, keys[me.accountId]!), intentId);
-        const after = await near.intentState(intentId);
+        const after = await near.settledState(intentId);
         if (after !== 'PAID') throw new Error(`settle did not land: ${after}`);
         req.log.info(`settled ${intentId} → PAID ${nearblocksTx(s.hash)}`);
         const d: Done = { jobKey, round, providerId, result, settleTx: s.hash, paidBy: agent };

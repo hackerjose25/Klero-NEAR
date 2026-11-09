@@ -16,7 +16,9 @@ NEAR HACKATHON (deadline 2026-11-14 23:59 UTC). Only NEAR work after the baselin
 | `backend/scripts/bootstrap-near.ts`, `smoke-near.ts` | NEAR testnet setup and live proof |
 | `backend/packages/near` (`@klero/near`) | NEAR contract client (`KleroNear`), deployment/key loaders, optional LLM (`@klero/near/llm`) |
 | `backend/services/provider-near` | one server hosting the 3 providers on NEAR: directory, 402 challenge, verify escrow, work, settle |
-| `backend/apps/agents/src/run-near.ts` | three-agent race on NEAR (claim → escrow → result, void on failure) |
+| `backend/apps/agents/src/run-near.ts` | three-agent race on NEAR (claim → approval if over cap → escrow → result, void on failure) |
+| `backend/services/approver-near` | World ID (or manual) approval → `approve_overcap` on-chain; deny → `abandon_round` |
+| `backend/scripts/smoke-cap-near.ts` | proof that the contract refuses an unapproved over-cap escrow |
 | `backend/deployments/near-testnet.json` | current testnet deployment (public ids only) |
 | `frontend/` | Next.js app (see `frontend/AGENTS.md`) |
 | `docs/proof-near.md` | verified NEAR output; README claims must match it |
@@ -26,8 +28,11 @@ NEAR HACKATHON (deadline 2026-11-14 23:59 UTC). Only NEAR work after the baselin
 - Contract wasm: `cd contracts && cargo build --release --target wasm32-unknown-unknown`
 - Backend deps: `cd backend && corepack pnpm install`
 - NEAR setup / proof: `pnpm bootstrap:near`, `pnpm smoke:near` (pnpm 9.15 is installed globally)
-- NEAR agent flow: `pnpm dev:providers:near` (port 4050), then `NEAR_AUTO_APPROVE=1 pnpm agents:near`
-- Env (optional): `LLM_API_KEY`, `LLM_BASE_URL`, `LLM_MODEL`, `PROVIDERS_FAIL_ONCE`, `NEAR_SPEND_CAP` (default 1 FUSD)
+- NEAR agent flow: `pnpm dev:providers:near` (4050) + `pnpm dev:approver:near` (4060), then `pnpm agents:near`
+- Cap proof: `pnpm smoke:cap:near`
+- Env (optional): `WORLD_CLIENT_ID`, `WORLD_CLIENT_SECRET`, `LLM_API_KEY`, `LLM_BASE_URL`, `LLM_MODEL`, `PROVIDERS_FAIL_ONCE`, `FORCE_PROVIDER`
+- The current contract is in `deployments/near-testnet.json` (`contractId`, v2). The cap is on-chain (`set_cap`), not an env var.
+- NEAR calls that trigger cross-contract work finish in several receipts: wait for `FINAL` and poll past `SETTLING`/`VOIDING`.
 - No Python on this machine; use node for scripted edits.
 - Rust is at `~/.cargo/bin` (add to PATH in new shells). Toolchain: stable MSVC.
 

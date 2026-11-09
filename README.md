@@ -10,30 +10,34 @@
 > [`pre-hackathon...main`](https://github.com/hackerjose25/Klero-NEAR/compare/pre-hackathon...main). Change log: [HISTORY.md](HISTORY.md).
 >
 > **What runs on NEAR (testnet), verified:**
-> - [`contracts/klero`](contracts/klero): one contract is referee and escrow. Agents of one human `claim` a job; the first claim wins.
->   The winner escrows FUSD (NEP-141) with a deadline. Before it, the provider `settle`s → **PAID**. After it, anyone `void_intent`s →
->   **VOID**, refunded. The windows don't overlap, so every payment ends exactly one way, readable with `get_intent_state`.
+> - [`contracts/klero`](contracts/klero): one contract is referee, escrow and policy. Agents of one human `claim` a job; the first
+>   claim wins. The winner escrows FUSD (NEP-141) with a deadline. Before it, the provider `settle`s → **PAID**. After it, anyone
+>   `void_intent`s → **VOID**, refunded. The windows don't overlap, so every payment ends exactly one way (`get_intent_state`).
+> - **On-chain spend cap:** each human has a per-payment cap in the contract. An escrow above it is refused by the contract unless the
+>   operator recorded a one-shot approval for that exact job, round and maximum amount, given by the human through World ID.
 > - Agents are **sub-accounts** of the human, each with a **claim-only function-call key** (it can call `claim`, nothing else).
-> - Live proof with NearBlocks links: [docs/proof-near.md](docs/proof-near.md). Contract:
->   [`klero.klero-mw8x6bn1.testnet`](https://testnet.nearblocks.io/address/klero.klero-mw8x6bn1.testnet).
+> - **Pay on delivery:** providers check the escrow on-chain, do the work, then `settle`. A provider that fails never settles, so the
+>   agent voids after the deadline and is refunded.
+> - Live proof with NearBlocks links: [docs/proof-near.md](docs/proof-near.md). Contract (v2):
+>   [`klero-v2.klero-mw8x6bn1.testnet`](https://testnet.nearblocks.io/address/klero-v2.klero-mw8x6bn1.testnet).
 >
-> **Try it:**
-> 1. `cd contracts && cargo test` → 16 tests pass (on Windows first `export AWS_LC_SYS_PREBUILT_NASM=1`).
+> **Try it** (testnet; `cd backend` for steps 3–7):
+> 1. `cd contracts && cargo test` → 22 tests pass (on Windows first `export AWS_LC_SYS_PREBUILT_NASM=1`).
 > 2. `cd contracts && cargo build --release --target wasm32-unknown-unknown`
-> 3. `cd backend && pnpm install && pnpm bootstrap:near` → creates your own testnet accounts, deploys, writes `deployments/near-testnet.json`.
-> 4. `pnpm smoke:near` → see three claims with one winner, one escrow, settle → `PAID`; then a 30 s escrow → `EXPIRED` → void → `VOID`, refunded.
+> 3. `pnpm install && pnpm bootstrap:near` → creates your own testnet accounts, deploys, sets the cap, writes `deployments/near-testnet.json`.
+> 4. `pnpm smoke:near` → three claims, one winner, escrow, settle → `PAID`; then a 30 s escrow → `EXPIRED` → void → `VOID`, refunded.
+> 5. `pnpm smoke:cap:near` → an escrow above the cap with no approval is refused by the contract; the agent's balance is unchanged.
+> 6. Start `pnpm dev:providers:near` and `pnpm dev:approver:near`, then `pnpm agents:near` → three agents pick providers, one wins,
+>    gets a 402, escrows, the provider delivers, then settles; the other two receive the result. `payments on-chain this run: 1`.
+>    - `PROVIDERS_FAIL_ONCE=scribe-b` on the providers → crash after escrow → void → refund → round 1.
+>    - `FORCE_PROVIDER=scribe-premium` on the agents → 2 FUSD is over the cap → the agent prints an approval link. Deny → round
+>      abandoned, no money moved; approve → `approve_overcap` on-chain → escrow → delivered.
+> 7. Optional env (`backend/.env`): `WORLD_CLIENT_ID` / `WORLD_CLIENT_SECRET` for World ID approvals (without them the approver runs in a
+>    clearly labelled **manual mode**, a local Approve/Deny page); `LLM_API_KEY` (OpenAI, or NEAR AI Cloud with
+>    `LLM_BASE_URL=https://cloud-api.near.ai/v1`) for LLM choices and real transcripts (without it: persona rules, labelled stub transcripts).
 >
-> 5. Full agent flow: `pnpm dev:providers:near` in one terminal, then `NEAR_AUTO_APPROVE=1 pnpm agents:near` in another → three agents
->    pick providers, one wins the claim, gets a 402, escrows, the provider delivers, then settles; the other two receive the result.
->    `payments on-chain this run: 1`. Start the providers with `PROVIDERS_FAIL_ONCE=scribe-b` to see a crash after escrow → void → refund → round 1.
->    Optional: `LLM_API_KEY` (OpenAI, or NEAR AI Cloud with `LLM_BASE_URL=https://cloud-api.near.ai/v1`) for LLM choices and real
->    transcripts; without it, agents use persona rules and transcripts are labelled stubs.
->
-> **Pay on delivery:** providers check the escrow on-chain, do the work, then `settle`. A provider that fails never settles, so the
-> agent voids after the deadline and is refunded.
->
-> **Not yet on NEAR:** World ID approval for over-cap payments (`NEAR_AUTO_APPROVE=1` stands in for it), the API/dashboard and
-> frontend still run on the Hedera path (in progress, see HISTORY.md).
+> **Not yet verified on NEAR:** a World ID approval end to end (code is in `services/approver-near`, waiting on app credentials). The
+> Hedera-era API, dashboard and frontend are not wired to NEAR.
 >
 > Libraries: `near-sdk` / `near-contract-standards` (Rust), `near-api-js`. Licence: MIT ([LICENSE](LICENSE)).
 

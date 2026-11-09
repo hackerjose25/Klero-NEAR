@@ -2,6 +2,27 @@
 
 What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UTC. Baseline: tag `pre-hackathon`.
 
+## 2026-11-09: Day 4, on-chain spend cap + human approval
+- Contract v2: per-human `set_cap`, operator-only one-shot `approve_overcap(job, round, max_amount)`, enforced in
+  `ft_on_transfer` (an over-cap escrow with no matching approval panics, so the token refunds the payer). Views `get_cap`,
+  `get_approval`. 6 new tests (22 total). Deployed as a new account `klero-v2.klero-mw8x6bn1.testnet`, because the state layout
+  changed. v1 is kept as history.
+- Bootstrap: v2 contract, the human's cap (1 FUSD), one claim-only key per contract (`<agent>#claim@<contract>`, checked
+  on-chain, not just in the local file), and a faucet top-up (a throwaway faucet account deleted into the operator).
+- `services/approver-near` (`pnpm dev:approver:near`, port 4060): checks on-chain that the agent won the round and the price is
+  over the cap, then runs a World ID device flow. It verifies the ID token (issuer, audience, freshness) and that the same World
+  identity approves every time (enrolled on first use, stored as a salted hash in `.secrets/`), then calls `approve_overcap`.
+  A deny or timeout calls `abandon_round` (no money moved). Without World credentials it runs a clearly labelled manual mode.
+- Agents: an over-cap price asks the approver, prints the link, and waits; on deny they retry in the next round.
+  `NEAR_AUTO_APPROVE` is removed. `FORCE_PROVIDER` is for demos.
+- `scripts/smoke-cap-near.ts` (`pnpm smoke:cap:near`): proof that the contract refuses an unapproved over-cap escrow.
+- Bug found and fixed: the provider read the intent state before the settle callback had run, saw `SETTLING`, and reported
+  failure, although the payment completed (2 FUSD paid once, result not delivered to the agents). Calls now wait for `FINAL`,
+  and readers poll past `SETTLING`/`VOIDING`. A rerun delivered correctly.
+- Read calls retry on network errors (a public RPC reset crashed one run's final summary).
+- Verified on testnet (`docs/proof-near.md`): unapproved over-cap escrow refused; deny → round abandoned; approve → escrow →
+  delivered, 1 payment. Approvals ran in manual mode (no World credentials yet).
+
 ## 2026-11-09: Day 3, agents and providers run on NEAR
 - `packages/near` (`@klero/near`): `KleroNear` client (claim, escrow via `ft_transfer_call`, settle, void, views), deployment and
   key loaders, and an optional OpenAI-compatible LLM (`LLM_API_KEY` / `LLM_BASE_URL`, e.g. NEAR AI Cloud).

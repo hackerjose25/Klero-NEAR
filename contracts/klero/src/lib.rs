@@ -30,6 +30,8 @@ enum StorageKey {
     Links,
     Jobs,
     Intents,
+    Caps,
+    Approvals,
 }
 
 #[near(serializers = [borsh, json])]
@@ -99,6 +101,10 @@ pub struct Klero {
     links: LookupMap<AccountId, Link>,
     jobs: LookupMap<String, Job>,
     intents: LookupMap<String, Intent>,
+    /// Per-human spend cap (token base units). Escrows above it need an operator approval.
+    caps: LookupMap<String, U128>,
+    /// One-shot over-cap approvals: intent_id → max amount. Consumed by the escrow.
+    approvals: LookupMap<String, U128>,
 }
 
 pub fn intent_id_of(job_key: &str, round: u32) -> String {
@@ -120,6 +126,8 @@ impl Klero {
             links: LookupMap::new(StorageKey::Links),
             jobs: LookupMap::new(StorageKey::Jobs),
             intents: LookupMap::new(StorageKey::Intents),
+            caps: LookupMap::new(StorageKey::Caps),
+            approvals: LookupMap::new(StorageKey::Approvals),
         }
     }
 
@@ -133,6 +141,26 @@ impl Klero {
         }
         self.links.insert(agent.clone(), Link { human: human.clone(), epoch, active: true });
         emit("link", json!({ "agent": agent, "human": human, "epoch": epoch }));
+    }
+
+    /// Set (or clear with None) a human's per-payment spend cap.
+    pub fn set_cap(&mut self, human: String, cap: Option<U128>) {
+        self.assert_operator();
+        match cap {
+            Some(c) => self.caps.insert(human.clone(), c),
+            None => self.caps.remove(&human),
+        };
+        emit("cap", json!({ "human": human, "cap": cap }));
+    }
+
+    /// Record a human's approval (World ID step-up, checked off-chain by the operator) for one over-cap
+    /// payment: this job, this round, at most `max_amount`. Used once by the escrow.
+    pub fn approve_overcap(&mut self, job_key: String, round: u32, max_amount: U128) {
+        self.assert_operator();
+        let intent_id = intent_id_of(&job_key, round);
+        require!(self.intents.get(&intent_id).is_none(), "intent already exists");
+        self.approvals.insert(intent_id.clone(), max_amount);
+        emit("approve", json!({ "intent_id": intent_id, "max_amount": max_amount }));
     }
 
     pub fn unlink_agent(&mut self, agent: AccountId) {
@@ -274,6 +302,14 @@ impl Klero {
         self.links.get(&agent).cloned()
     }
 
+    pub fn get_cap(&self, human: String) -> Option<U128> {
+        self.caps.get(&human).copied()
+    }
+
+    pub fn get_approval(&self, intent_id: String) -> Option<U128> {
+        self.approvals.get(&intent_id).copied()
+    }
+
     pub fn get_job(&self, job_key: String) -> Option<Job> {
         self.jobs.get(&job_key).cloned()
     }
@@ -335,6 +371,13 @@ impl FungibleTokenReceiver for Klero {
 
         let intent_id = intent_id_of(&m.job_key, m.round);
         require!(self.intents.get(&intent_id).is_none(), "intent already exists"); // exactly once
+        if let Some(cap) = self.caps.get(&link.human).copied() {
+            if amount.0 > cap.0 {
+                let approved = self.approvals.get(&intent_id).copied().unwrap_or_else(|| env::panic_str("over cap: human approval required"));
+                require!(amount.0 <= approved.0, "over cap: amount exceeds the approved maximum");
+                self.approvals.remove(&intent_id); // one-shot
+            }
+        }
         let now = env::block_timestamp();
         let provider = job.provider.clone().unwrap();
         let intent = Intent {
@@ -553,6 +596,72 @@ mod tests {
         let job = k.get_job("j".into()).unwrap();
         assert_eq!((job.round, job.status), (1, JobStatus::Open));
         assert!(k.get_intent("j:0".into()).is_none());
+    }
+
+    fn capped() -> Klero {
+        ctx("op.testnet", 1000);
+        let mut k = Klero::new(acct("op.testnet"), acct("fusd.testnet"));
+        k.link_agent(acct("a.testnet"), "h".into(), 1);
+        k.set_cap("h".into(), Some(U128(1_000_000)));
+        ctx("a.testnet", 1000);
+        k.claim("j".into(), 0, acct("p.testnet"));
+        k
+    }
+    const MSG: &str = r#"{"job_key":"j","round":0,"ttl_s":120}"#;
+
+    #[test]
+    fn under_cap_needs_no_approval() {
+        let mut k = capped();
+        ctx("fusd.testnet", 1000);
+        let _ = k.ft_on_transfer(acct("a.testnet"), U128(1_000_000), MSG.into());
+        assert!(k.get_intent("j:0".into()).is_some());
+    }
+
+    #[test]
+    #[should_panic(expected = "over cap: human approval required")]
+    fn over_cap_without_approval_rejected() {
+        let mut k = capped();
+        ctx("fusd.testnet", 1000);
+        let _ = k.ft_on_transfer(acct("a.testnet"), U128(2_000_000), MSG.into());
+    }
+
+    #[test]
+    fn over_cap_with_approval_accepted_once() {
+        let mut k = capped();
+        ctx("op.testnet", 1000);
+        k.approve_overcap("j".into(), 0, U128(2_000_000));
+        ctx("fusd.testnet", 1000);
+        let _ = k.ft_on_transfer(acct("a.testnet"), U128(2_000_000), MSG.into());
+        assert!(k.get_intent("j:0".into()).is_some());
+        assert!(k.get_approval("j:0".into()).is_none()); // consumed
+    }
+
+    #[test]
+    #[should_panic(expected = "exceeds the approved maximum")]
+    fn approval_caps_the_amount() {
+        let mut k = capped();
+        ctx("op.testnet", 1000);
+        k.approve_overcap("j".into(), 0, U128(1_500_000));
+        ctx("fusd.testnet", 1000);
+        let _ = k.ft_on_transfer(acct("a.testnet"), U128(2_000_000), MSG.into());
+    }
+
+    #[test]
+    #[should_panic(expected = "over cap: human approval required")]
+    fn approval_is_bound_to_its_round() {
+        let mut k = capped();
+        ctx("op.testnet", 1000);
+        k.approve_overcap("j".into(), 1, U128(2_000_000));
+        ctx("fusd.testnet", 1000);
+        let _ = k.ft_on_transfer(acct("a.testnet"), U128(2_000_000), MSG.into());
+    }
+
+    #[test]
+    #[should_panic(expected = "only operator")]
+    fn only_operator_approves() {
+        let mut k = capped();
+        ctx("a.testnet", 1000);
+        k.approve_overcap("j".into(), 0, U128(2_000_000));
     }
 
     #[test]

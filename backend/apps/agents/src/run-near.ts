@@ -7,11 +7,11 @@
 //
 // Usage: pnpm agents:near            (providers must be running: pnpm dev:providers:near)
 import { createHash } from 'node:crypto';
-import { KleroNear, intentIdOf, loadNearKeys, nearblocksTx, type NearJob } from '@klero/near';
+import { KleroNear, claimKeyId, intentIdOf, loadNearKeys, nearblocksTx, type NearJob } from '@klero/near';
 import { llm, LLM_MODEL } from '@klero/near/llm';
 
 const PROVIDERS = (process.env.PROVIDERS_URL ?? 'http://localhost:4050').replace(/\/$/, '');
-const CAP = BigInt(process.env.NEAR_SPEND_CAP ?? '1000000'); // 1 FUSD: above this a human must approve
+const APPROVER = (process.env.APPROVER_URL ?? 'http://localhost:4060').replace(/\/$/, '');
 const near = new KleroNear();
 const keys = loadNearKeys();
 const sha256 = (b: Uint8Array | string) => createHash('sha256').update(b).digest('hex');
@@ -25,6 +25,11 @@ const PERSONAS = [
 ];
 
 async function choose(persona: (typeof PERSONAS)[number], services: Service[], tag: string): Promise<Service> {
+  const forced = process.env.FORCE_PROVIDER && services.find((s) => s.providerId === process.env.FORCE_PROVIDER);
+  if (forced) {
+    console.log(`[${tag}] FORCE_PROVIDER → ${forced.providerId}`);
+    return forced;
+  }
   if (!llm) {
     const pick = persona.rule(services);
     console.log(`[${tag}] rule (${persona.text.slice(0, 28)}…) → ${pick.providerId}`);
@@ -59,7 +64,7 @@ type Outcome = { agent: string; kind: 'PAID_BY_ME' | 'PAID_BY_OTHER' | 'FAILED';
 
 async function runAgent(agent: string, i: number, job: { jobKey: string; audioUrl: string; inputHash: string }, services: Service[]): Promise<Outcome> {
   const tag = agent.split('.')[0]!;
-  const claimer = near.account(agent, keys[`${agent}#claim`]!); // claim-only key
+  const claimer = near.account(agent, keys[claimKeyId(agent, near.d.contractId)]!); // claim-only key
   const payer = near.account(agent, keys[agent]!);
   const byAccount = Object.fromEntries(services.map((s) => [s.payTo, s]));
 
@@ -78,11 +83,28 @@ async function runAgent(agent: string, i: number, job: { jobKey: string; audioUr
       return fetchResult(agent, tag, job.jobKey, byAccount[j.provider!]!);
     }
 
-    // winner: policy cap
-    if (BigInt(svc.price) > CAP) {
-      console.log(`[${tag}] ${Number(svc.price) / 1e6} FUSD is over the ${Number(CAP) / 1e6} FUSD cap → needs human approval`);
-      if (process.env.NEAR_AUTO_APPROVE !== '1') return { agent: tag, kind: 'FAILED', detail: 'over cap, approval not given (set NEAR_AUTO_APPROVE=1 until World ID is wired)' };
-      console.log(`[${tag}] approval: auto (NEAR_AUTO_APPROVE=1)`);
+    // winner: the human's spend cap lives on-chain; above it the contract refuses the escrow without an approval
+    const cap = await near.cap(near.d.human.humanHash);
+    if (cap && BigInt(svc.price) > BigInt(cap)) {
+      console.log(`[${tag}] ${Number(svc.price) / 1e6} FUSD is over the on-chain cap of ${Number(cap) / 1e6} FUSD → asking the human`);
+      const res = await fetch(`${APPROVER}/approvals`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ jobKey: job.jobKey, round, amount: svc.price, agent }),
+      });
+      let a = (await res.json()) as { id: string; mode: string; status: string; reason?: string; userCode?: string; verificationUriComplete?: string; approveTx?: string };
+      if (!res.ok) return { agent: tag, kind: 'FAILED', detail: `approver: ${JSON.stringify(a)}` };
+      console.log(`[${tag}] approve here (${a.mode === 'world' ? 'World App' : 'MANUAL stand-in, no World ID configured'}): ${a.verificationUriComplete}${a.userCode ? `  code ${a.userCode}` : ''}`);
+      while (a.status === 'PENDING') {
+        await sleep(2000);
+        a = (await (await fetch(`${APPROVER}/approvals/${a.id}`)).json()) as typeof a;
+      }
+      if (a.status !== 'APPROVED') {
+        console.log(`[${tag}] approval ${a.status} (${a.reason ?? ''}) → round abandoned, no money moved`);
+        await waitJob(job.jobKey, (x) => x.round > round);
+        continue;
+      }
+      console.log(`[${tag}] approved on-chain  ${nearblocksTx(a.approveTx!)}`);
     }
 
     const body = { jobKey: job.jobKey, round, agent, audioUrl: job.audioUrl, inputHash: job.inputHash };
@@ -104,7 +126,9 @@ async function runAgent(agent: string, i: number, job: { jobKey: string; audioUr
     console.log(`[${tag}] provider did not deliver (${out.error?.code}) → waiting for the deadline to void`);
     const intentId = intentIdOf(job.jobKey, round);
     while ((await near.intentState(intentId)) === 'PENDING') await sleep(3000);
-    if ((await near.intentState(intentId)) === 'EXPIRED') {
+    const st = await near.settledState(intentId);
+    if (st === 'PAID') continue; // it was delivered after all: next pass fetches the result
+    if (st === 'EXPIRED') {
       const v = await near.voidIntent(payer, intentId);
       console.log(`[${tag}] voided → refunded  ${nearblocksTx(v.hash)}`);
     }

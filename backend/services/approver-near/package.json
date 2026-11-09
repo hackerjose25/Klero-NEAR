@@ -1,0 +1,14 @@
+{
+  "name": "@klero/approver-near",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx --env-file-if-exists=../../.env src/index.ts"
+  },
+  "dependencies": {
+    "@klero/near": "workspace:*",
+    "fastify": "^5.6.0",
+    "jose": "^6.0.0"
+  }
+}

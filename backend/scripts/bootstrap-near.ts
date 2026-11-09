@@ -64,9 +64,27 @@ if (!(await exists(OP))) {
 const op = acct(OP);
 log(`operator ${OP}`);
 
+// Testnet top-up: the faucet funds a throwaway account, which is deleted with the operator as beneficiary.
+async function faucetTopUp() {
+  const tmp = `tmp-${Date.now().toString(36)}.testnet`;
+  const kp = KeyPair.fromRandom('ed25519');
+  const r = await fetch(FAUCET, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ newAccountId: tmp, newAccountPublicKey: kp.getPublicKey().toString() }),
+  });
+  if (!r.ok) throw new Error(`faucet ${r.status}: ${await r.text()}`);
+  for (let i = 0; i < 20 && !(await exists(tmp)); i++) await new Promise((s) => setTimeout(s, 1500));
+  await new Account(tmp, provider, kp.toString() as KeyPairString).deleteAccount(OP);
+  log(`faucet top-up via ${tmp} → ${OP}`);
+}
+const opAvailable = async () => BigInt((await op.getState()).balance.available);
+
 // ---------- 2. sub-accounts ----------
 const FUSD = `fusd.${OP}`;
-const KLERO = `klero.${OP}`;
+// v2 adds on-chain spend caps + approvals (state layout changed, so it is a new account; v1 `klero.` is kept as history)
+const KLERO = `klero-v2.${OP}`;
+const CAP = '1000000'; // 1 FUSD per payment; above it, a World ID approval is required
 const HUMAN = `human.${OP}`;
 const PROVIDERS = { 'scribe-a': '50000', 'scribe-b': '40000', 'scribe-premium': '2000000' } as const;
 const AGENTS = ['a', 'b', 'c'].map((p) => `${p}.${HUMAN}`);
@@ -83,7 +101,8 @@ async function sub(parent: Account, id: string, near: `${number}`) {
 }
 
 await sub(op, FUSD, '2.5');
-await sub(op, KLERO, '3.2');
+if (!(await exists(KLERO)) && (await opAvailable()) < nearToYocto('4')) await faucetTopUp();
+await sub(op, KLERO, '3.0');
 for (const name of Object.keys(PROVIDERS)) await sub(op, `${name}.${OP}`, '0.1');
 await sub(op, HUMAN, '0.8');
 for (const a of AGENTS) await sub(acct(HUMAN), a, '0.2');
@@ -146,13 +165,21 @@ for (const a of AGENTS) {
   log(`linked ${a}`);
 }
 
+// ---------- 5b. on-chain spend cap for the human ----------
+const cap = await view<string | null>(KLERO, 'get_cap', { human: humanHash });
+if (cap !== CAP) {
+  await op.callFunction({ contractId: KLERO, methodName: 'set_cap', args: { human: humanHash, cap: CAP }, gas: 30n * TGAS });
+  log(`cap for the human set to ${Number(CAP) / 1e6} FUSD`);
+}
+
 // ---------- 6. scoped agent keys ----------
 // Each agent also gets a function-call key that can ONLY call `claim` on the Klero contract,
 // with a 0.25 NEAR gas allowance. It cannot move tokens or touch any other contract.
 for (const a of AGENTS) {
-  const id = `${a}#claim`;
-  if (secrets.keys[id]) continue;
+  const id = `${a}#claim@${KLERO}`; // one claim key per contract
   const kp = keyFor(id);
+  const onChain = await acct(a).getAccessKey(kp.getPublicKey()).then(() => true, () => false);
+  if (onChain) continue;
   await acct(a).addFunctionCallAccessKey({
     publicKey: kp.getPublicKey(),
     contractId: KLERO,
@@ -175,6 +202,8 @@ const deployment = {
   ),
   human: { accountId: HUMAN, humanHash },
   agents: AGENTS,
+  spendCap: CAP,
+  previousContracts: [`klero.${OP}`],
   explorer: `https://testnet.nearblocks.io/address/${KLERO}`,
 };
 writeFileSync(DEPLOY, JSON.stringify(deployment, null, 2));

@@ -77,3 +77,43 @@ a PAID_BY_ME · b PAID_BY_OTHER · c PAID_BY_OTHER
 payments on-chain this run: 1 [{"provider":"scribe-b","receivedFUSD":0.04}]
 ```
 The transcripts in these runs are labelled stubs because no LLM key was configured; the payment flow is the same either way.
+
+## On-chain spend cap + human approval (Day 4, contract v2)
+
+Contract v2: [`klero-v2.klero-mw8x6bn1.testnet`](https://testnet.nearblocks.io/address/klero-v2.klero-mw8x6bn1.testnet)
+(v1 `klero.klero-mw8x6bn1.testnet` above is kept as history). The human's cap is stored on-chain: 1 FUSD per payment.
+
+### The contract refuses an over-cap escrow with no approval (`pnpm smoke:cap:near`)
+```text
+human cap on-chain: 1 FUSD; trying to escrow 2 FUSD with no approval
+claim → won=true  https://testnet.nearblocks.io/txns/6AfuPXZ9DERK2VDfp7yHXFsz25upQzXPb1xV2cbonkqv
+escrow tx  https://testnet.nearblocks.io/txns/3x7pWyBVxQwksQ2inqQAvRvdq7ug2zb5SBet2JXEZ5HJ
+intent created: false
+agent balance: 5.96 → 5.96 FUSD (refunded by the token: true)
+OK: the contract refused the over-cap escrow (ft_on_transfer panicked: "over cap: human approval required")
+```
+
+### Deny, then approve (`FORCE_PROVIDER=scribe-premium pnpm agents:near`, approver in manual mode)
+World ID credentials were not configured for this run, so the approver ran in **manual mode**: its local review page stood in for
+World App, and the "human" clicks were sent to it by the test harness. The on-chain part is the same in both modes.
+```text
+job 09fd9a665884f511… (run mw91tmb0), 3 agents, LLM: off (persona rules)
+[a] claim round 0 via scribe-premium → WON  https://testnet.nearblocks.io/txns/9eGE86nFmkJCvGwXjbStKPgvapd5KU38urHkvC4AFp9m
+[a] 2 FUSD is over the on-chain cap of 1 FUSD → asking the human
+[b] claim round 0 via scribe-premium → lost  https://testnet.nearblocks.io/txns/A8MunebmoHNUGiAi2g39vE9atCYLCfxopMJCuVT1yshV
+[c] claim round 0 via scribe-premium → lost  https://testnet.nearblocks.io/txns/3pGvsvvAnt22UjPCJhmrHihyd22WsvV396sn61soSTRw
+[a] approve here (MANUAL stand-in, no World ID configured): http://localhost:4060/approvals/ap_d7d1507bf05d27e6/review
+[a] approval DENIED (denied by the human) → round abandoned, no money moved
+[a] claim round 1 via scribe-premium → WON  https://testnet.nearblocks.io/txns/KEauzCTM5gn4WcWxa1oZ8zgwjhFRcGGnZYS96BdscFN
+[a] 2 FUSD is over the on-chain cap of 1 FUSD → asking the human
+[a] approve here (MANUAL stand-in, no World ID configured): http://localhost:4060/approvals/ap_112f5f3012cd0970/review
+[c] claim round 1 via scribe-premium → lost  https://testnet.nearblocks.io/txns/EjswDzASz6froSw3JUj2yvJPiLDwiyf1J5AxSp659kFF
+[b] claim round 1 via scribe-premium → lost  https://testnet.nearblocks.io/txns/DWPe6yU7crQrD4KBBozQ1CZNAuaQo4ZY9qC4aJ1ZXuGU
+[a] approved on-chain  https://testnet.nearblocks.io/txns/2PhM7MnTLYqX7atRwmYGkvJCxuVmYyiRpx3KGhLhdH9u
+[a] escrowed 2 FUSD  https://testnet.nearblocks.io/txns/7ddLR9TyJWMSn9ma2wECt3BrbrDiXmTeDMFzyRhgWEpc
+[a] delivered + settled  https://testnet.nearblocks.io/txns/3JJXKaohMc2sEb5XzYur6CmZBrX6mke3apvigcQGWHhb
+[b] received the winner's result from scribe-premium
+[c] received the winner's result from scribe-premium
+```
+(The run then crashed while reading final balances for its summary: a dropped connection to the public RPC. Read calls are now
+retried. All on-chain steps above had completed.)

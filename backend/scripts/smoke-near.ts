@@ -29,7 +29,7 @@ async function race(jobKey: string, providerName: string) {
   const prov = d.providers[providerName].accountId;
   const results = await Promise.all(
     d.agents.map(async (a: string) => {
-      const claimer = new Account(a, provider, keys[`${a}#claim`]); // claim-only key
+      const claimer = new Account(a, provider, keys[`${a}#claim@${d.contractId}`]); // claim-only key
       const r = await call(claimer, d.contractId, 'claim', { job_key: jobKey, round: 0, provider: prov });
       console.log(`[${short(a)}] claim → won=${r.result}  ${tx(r.hash)}`);
       return { agent: a, won: (r.result as unknown) === true };

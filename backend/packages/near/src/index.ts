@@ -49,6 +49,9 @@ export function loadNearKeys(path = join(BACKEND, '.secrets', 'near-testnet-keys
   return JSON.parse(readFileSync(path, 'utf8')).keys;
 }
 
+/** Secrets key id of an agent's claim-only function-call key for a given contract. */
+export const claimKeyId = (agent: string, contractId: string) => `${agent}#claim@${contractId}`;
+
 export const intentIdOf = (jobKey: string, round: number) => `${jobKey}:${round}`;
 export const nearblocksTx = (hash: string) => `https://testnet.nearblocks.io/txns/${hash}`;
 
@@ -62,8 +65,17 @@ export class KleroNear {
     return new Account(id, this.provider, key);
   }
 
-  private view<T>(contractId: string, method: string, args: Record<string, unknown>) {
-    return this.provider.callFunction({ contractId, method, args }) as Promise<T>;
+  /** Read-only call, retried on network errors (public testnet RPCs drop connections now and then). */
+  private async view<T>(contractId: string, method: string, args: Record<string, unknown>): Promise<T> {
+    for (let i = 0; ; i++) {
+      try {
+        return (await this.provider.callFunction({ contractId, method, args })) as T;
+      } catch (e) {
+        const msg = String((e as Error)?.message ?? e) + String((e as { cause?: unknown })?.cause ?? '');
+        if (i >= 3 || !/fetch failed|ECONNRESET|ETIMEDOUT|socket|network|50[234]/i.test(msg)) throw e;
+        await new Promise((r) => setTimeout(r, 500 * 2 ** i));
+      }
+    }
   }
 
   job(jobKey: string) {
@@ -75,6 +87,26 @@ export class KleroNear {
   intentState(intentId: string) {
     return this.view<IntentState | null>(this.d.contractId, 'get_intent_state', { intent_id: intentId });
   }
+  cap(human: string) {
+    return this.view<string | null>(this.d.contractId, 'get_cap', { human });
+  }
+  /** Operator: record a human's World ID approval for one over-cap payment. */
+  approveOvercap(operator: Account, jobKey: string, round: number, maxAmount: string) {
+    return this.call(operator, this.d.contractId, 'approve_overcap', { job_key: jobKey, round, max_amount: maxAmount });
+  }
+  /** Operator: close a claimed round that never escrowed (e.g. approval denied). No money moved. */
+  abandonRound(operator: Account, jobKey: string) {
+    return this.call(operator, this.d.contractId, 'abandon_round', { job_key: jobKey });
+  }
+  /** Poll until the intent leaves a transitional state (SETTLING / VOIDING). */
+  async settledState(intentId: string, timeoutMs = 30_000): Promise<IntentState | null> {
+    const start = Date.now();
+    for (;;) {
+      const st = await this.intentState(intentId);
+      if ((st !== 'SETTLING' && st !== 'VOIDING') || Date.now() - start > timeoutMs) return st;
+      await new Promise((r) => setTimeout(r, 1000));
+    }
+  }
   link(agent: string) {
     return this.view<{ human: string; epoch: number; active: boolean } | null>(this.d.contractId, 'get_link', { agent });
   }
@@ -83,7 +115,8 @@ export class KleroNear {
   }
 
   private async call(signer: Account, contractId: string, methodName: string, args: object, deposit = 0n, gas = 50n * TGAS) {
-    const r = await signer.callFunctionRaw({ contractId, methodName, args, deposit, gas });
+    // FINAL: wait for every receipt (cross-contract transfer + callback), not just the first one
+    const r = await signer.callFunctionRaw({ contractId, methodName, args, deposit, gas, waitUntil: 'FINAL' });
     return { hash: r.transaction.hash as string, result: getTransactionLastResult(r as never) as unknown };
   }
 
