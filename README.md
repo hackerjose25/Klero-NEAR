@@ -23,7 +23,17 @@
 > 3. `cd backend && pnpm install && pnpm bootstrap:near` → creates your own testnet accounts, deploys, writes `deployments/near-testnet.json`.
 > 4. `pnpm smoke:near` → see three claims with one winner, one escrow, settle → `PAID`; then a 30 s escrow → `EXPIRED` → void → `VOID`, refunded.
 >
-> **Not yet on NEAR:** the API, agent LLMs, provider service, World ID approval and frontend still run on the Hedera path (in progress, see HISTORY.md).
+> 5. Full agent flow: `pnpm dev:providers:near` in one terminal, then `NEAR_AUTO_APPROVE=1 pnpm agents:near` in another → three agents
+>    pick providers, one wins the claim, gets a 402, escrows, the provider delivers, then settles; the other two receive the result.
+>    `payments on-chain this run: 1`. Start the providers with `PROVIDERS_FAIL_ONCE=scribe-b` to see a crash after escrow → void → refund → round 1.
+>    Optional: `LLM_API_KEY` (OpenAI, or NEAR AI Cloud with `LLM_BASE_URL=https://cloud-api.near.ai/v1`) for LLM choices and real
+>    transcripts; without it, agents use persona rules and transcripts are labelled stubs.
+>
+> **Pay on delivery:** providers check the escrow on-chain, do the work, then `settle`. A provider that fails never settles, so the
+> agent voids after the deadline and is refunded.
+>
+> **Not yet on NEAR:** World ID approval for over-cap payments (`NEAR_AUTO_APPROVE=1` stands in for it), the API/dashboard and
+> frontend still run on the Hedera path (in progress, see HISTORY.md).
 >
 > Libraries: `near-sdk` / `near-contract-standards` (Rust), `near-api-js`. Licence: MIT ([LICENSE](LICENSE)).
 

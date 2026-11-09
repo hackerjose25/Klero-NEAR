@@ -32,7 +32,9 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "dev:up": "bash scripts/dev-up.sh",
     "dev:down": "bash scripts/dev-down.sh",
-    "agent:link": "pnpm --filter @forkos/agents run link"
+    "agent:link": "pnpm --filter @forkos/agents run link",
+    "dev:providers:near": "pnpm --filter @klero/provider-near dev",
+    "agents:near": "pnpm --filter @forkos/agents start:near"
   },
   "devDependencies": {
     "@forkos/shared": "workspace:^",

@@ -99,7 +99,7 @@ for (const a of AGENTS) {
 // ---------- 3. contracts ----------
 async function deploy(id: string, file: string, init: Record<string, unknown>) {
   const code = await acct(id).getContractCode().catch(() => null);
-  if (code && code.code_base64) return log(`${id} already deployed`);
+  if (code && code.code?.length) return log(`${id} already deployed`);
   await acct(id).deployContract(readFileSync(`${WASM}/${file}`));
   await acct(id).callFunction({ contractId: id, methodName: 'new', args: init, gas: 30n * TGAS });
   log(`deployed ${file} → ${id}`);

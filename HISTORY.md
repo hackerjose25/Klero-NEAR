@@ -2,6 +2,22 @@
 
 What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UTC. Baseline: tag `pre-hackathon`.
 
+## 2026-11-09: Day 3, agents and providers run on NEAR
+- `packages/near` (`@klero/near`): `KleroNear` client (claim, escrow via `ft_transfer_call`, settle, void, views), deployment and
+  key loaders, and an optional OpenAI-compatible LLM (`LLM_API_KEY` / `LLM_BASE_URL`, e.g. NEAR AI Cloud).
+- `services/provider-near`: one server for scribe-a/b/premium. It serves the provider directory, answers a 402 challenge until
+  the escrow exists, fences on the on-chain winner/provider/round, does the work, re-checks the deadline, then settles
+  (**pay on delivery**). It is idempotent per intent, and losers fetch the result only if linked to the same human.
+  `PROVIDERS_FAIL_ONCE` simulates a crash after escrow.
+- `apps/agents/src/run-near.ts` (`pnpm agents:near`): three agents choose (LLM or persona rule), claim with claim-only keys,
+  the winner escrows on 402, losers wait for PAID and fetch the result; on non-delivery the winner voids after the deadline
+  and the job goes to the next round. A spend cap (1 FUSD) needs approval; `NEAR_AUTO_APPROVE=1` stands in for World ID for now.
+- Verified on testnet (`docs/proof-near.md`): the happy path gives 1 payment for 3 agents; a provider crash gives void →
+  refund → round 1 → 1 payment.
+- Fix: the bootstrap re-run check used a field that doesn't exist (`code_base64`), so a re-run would have tried to redeploy.
+- No LLM key is configured locally yet, so these runs used persona rules and stub transcripts.
+- Tooling: pnpm 9.15.0 installed globally (the root scripts call `pnpm`).
+
 ## 2026-11-09: Day 2, deployed and proven on NEAR testnet (`9801c34`)
 - `backend/scripts/bootstrap-near.ts` (`pnpm bootstrap:near`): resumable testnet setup. It creates the operator via the faucet,
   FUSD token, Klero contract, three provider accounts, one human with agents `a`/`b`/`c` as sub-accounts, claim-only

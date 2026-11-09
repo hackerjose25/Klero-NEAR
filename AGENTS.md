@@ -14,6 +14,9 @@ NEAR HACKATHON (deadline 2026-11-14 23:59 UTC). Only NEAR work after the baselin
 | `contracts/fusd` | NEP-141 test token |
 | `backend/` | pnpm monorepo (Node ≥ 22): api, provider, facilitator, agents, cli, mcp. Still Hedera-wired except the NEAR scripts |
 | `backend/scripts/bootstrap-near.ts`, `smoke-near.ts` | NEAR testnet setup and live proof |
+| `backend/packages/near` (`@klero/near`) | NEAR contract client (`KleroNear`), deployment/key loaders, optional LLM (`@klero/near/llm`) |
+| `backend/services/provider-near` | one server hosting the 3 providers on NEAR: directory, 402 challenge, verify escrow, work, settle |
+| `backend/apps/agents/src/run-near.ts` | three-agent race on NEAR (claim → escrow → result, void on failure) |
 | `backend/deployments/near-testnet.json` | current testnet deployment (public ids only) |
 | `frontend/` | Next.js app (see `frontend/AGENTS.md`) |
 | `docs/proof-near.md` | verified NEAR output; README claims must match it |
@@ -22,7 +25,10 @@ NEAR HACKATHON (deadline 2026-11-14 23:59 UTC). Only NEAR work after the baselin
 - Contract tests: `cd contracts && AWS_LC_SYS_PREBUILT_NASM=1 cargo test`
 - Contract wasm: `cd contracts && cargo build --release --target wasm32-unknown-unknown`
 - Backend deps: `cd backend && corepack pnpm install`
-- NEAR setup / proof: `corepack pnpm bootstrap:near`, `corepack pnpm smoke:near`
+- NEAR setup / proof: `pnpm bootstrap:near`, `pnpm smoke:near` (pnpm 9.15 is installed globally)
+- NEAR agent flow: `pnpm dev:providers:near` (port 4050), then `NEAR_AUTO_APPROVE=1 pnpm agents:near`
+- Env (optional): `LLM_API_KEY`, `LLM_BASE_URL`, `LLM_MODEL`, `PROVIDERS_FAIL_ONCE`, `NEAR_SPEND_CAP` (default 1 FUSD)
+- No Python on this machine; use node for scripted edits.
 - Rust is at `~/.cargo/bin` (add to PATH in new shells). Toolchain: stable MSVC.
 
 ## Rules

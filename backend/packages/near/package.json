@@ -1,0 +1,14 @@
+{
+  "name": "@klero/near",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./llm": "./src/llm.ts"
+  },
+  "dependencies": {
+    "near-api-js": "7.4.0",
+    "openai": "^7.52.0"
+  }
+}
