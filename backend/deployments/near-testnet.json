@@ -1,0 +1,36 @@
+{
+  "network": "near:testnet",
+  "rpc": "https://test.rpc.fastnear.com",
+  "createdAt": "2026-11-09T07:09:27.545Z",
+  "operatorId": "klero-mw8x6bn1.testnet",
+  "contractId": "klero.klero-mw8x6bn1.testnet",
+  "token": {
+    "id": "fusd.klero-mw8x6bn1.testnet",
+    "symbol": "FUSD",
+    "decimals": 6
+  },
+  "providers": {
+    "scribe-a": {
+      "accountId": "scribe-a.klero-mw8x6bn1.testnet",
+      "price": "50000"
+    },
+    "scribe-b": {
+      "accountId": "scribe-b.klero-mw8x6bn1.testnet",
+      "price": "40000"
+    },
+    "scribe-premium": {
+      "accountId": "scribe-premium.klero-mw8x6bn1.testnet",
+      "price": "2000000"
+    }
+  },
+  "human": {
+    "accountId": "human.klero-mw8x6bn1.testnet",
+    "humanHash": "1a90f4c294b71e4fe9ef94fc2ffe68cfe287a924cb5667538cb91854a55499c9"
+  },
+  "agents": [
+    "a.human.klero-mw8x6bn1.testnet",
+    "b.human.klero-mw8x6bn1.testnet",
+    "c.human.klero-mw8x6bn1.testnet"
+  ],
+  "explorer": "https://testnet.nearblocks.io/address/klero.klero-mw8x6bn1.testnet"
+}
