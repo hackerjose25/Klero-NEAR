@@ -2,6 +2,33 @@
 
 **Agents fork. Money doesn't.** The exactly-once layer for AI agent payments.
 
+> ## NEAR HACKATHON
+>
+> This repository is Klero's entry for [NEAR HACKATHON](https://nearhackathon.com) (tracks: `security`, `swarms`, `agents`).
+> Klero was first built on **Hedera** (everything below the line, originally for ETHGlobal). As the rules allow (Q-002), only the
+> **NEAR integration** is the hackathon work. The baseline is tag [`pre-hackathon`](https://github.com/hackerjose25/Klero-NEAR/tree/pre-hackathon); the hackathon diff is
+> [`pre-hackathon...main`](https://github.com/hackerjose25/Klero-NEAR/compare/pre-hackathon...main). Change log: [HISTORY.md](HISTORY.md).
+>
+> **What runs on NEAR (testnet), verified:**
+> - [`contracts/klero`](contracts/klero): one contract is referee and escrow. Agents of one human `claim` a job; the first claim wins.
+>   The winner escrows FUSD (NEP-141) with a deadline. Before it, the provider `settle`s → **PAID**. After it, anyone `void_intent`s →
+>   **VOID**, refunded. The windows don't overlap, so every payment ends exactly one way, readable with `get_intent_state`.
+> - Agents are **sub-accounts** of the human, each with a **claim-only function-call key** (it can call `claim`, nothing else).
+> - Live proof with NearBlocks links: [docs/proof-near.md](docs/proof-near.md). Contract:
+>   [`klero.klero-mw8x6bn1.testnet`](https://testnet.nearblocks.io/address/klero.klero-mw8x6bn1.testnet).
+>
+> **Try it:**
+> 1. `cd contracts && cargo test` → 16 tests pass (on Windows first `export AWS_LC_SYS_PREBUILT_NASM=1`).
+> 2. `cd contracts && cargo build --release --target wasm32-unknown-unknown`
+> 3. `cd backend && pnpm install && pnpm bootstrap:near` → creates your own testnet accounts, deploys, writes `deployments/near-testnet.json`.
+> 4. `pnpm smoke:near` → see three claims with one winner, one escrow, settle → `PAID`; then a 30 s escrow → `EXPIRED` → void → `VOID`, refunded.
+>
+> **Not yet on NEAR:** the API, agent LLMs, provider service, World ID approval and frontend still run on the Hedera path (in progress, see HISTORY.md).
+>
+> Libraries: `near-sdk` / `near-contract-standards` (Rust), `near-api-js`. Licence: MIT ([LICENSE](LICENSE)).
+
+---
+
 Your agent sent a payment and the connection dropped. Did it pay? Klero gives every agent payment exactly two
 possible endings — **PAID once, or provably VOID** — and lets anyone check which one happened without trusting us.
 
