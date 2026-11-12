@@ -49,6 +49,13 @@ Every line below is in [`docs/proof-near.md`](../proof-near.md), with a NearBloc
 - A 2 FUSD escrow with no approval, over a 1 FUSD cap → **refused by the contract**, balance unchanged.
 - Over-cap: deny → round abandoned, nothing moved; approve → `approve_overcap` on-chain → escrow → delivered.
 
+## You don't have to trust us
+
+`pnpm audit:near` rebuilds every job from public data alone. It uses NearBlocks to find the transactions, an archival NEAR RPC
+for their logs, and the contract's own views. Per job it checks: one winner per round, paid at most once, the payer is the round
+winner, the cap is respected or approved, each settlement and refund appears as a real token transfer, and the contract's state
+matches the replay. Results on testnet: contract v2, 3 jobs and 25 checks; v1, 5 jobs and 42 checks. **All passed.**
+
 ## How it's made
 
 - **Contract:** Rust, `near-sdk` + `near-contract-standards`. NEP-297 events (`claim`, `intent`, `settled`, `void`), cross-contract
