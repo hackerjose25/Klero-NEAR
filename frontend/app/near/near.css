@@ -1,0 +1,40 @@
+/* /near — reuses the app tokens from app.css (cream paper, black ink, neon accent). */
+.nr-wrap { max-width: 1080px; margin: 0 auto; padding: 40px 16px 80px; display: grid; gap: 40px; }
+.nr-kicker { text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; font-weight: 600; background: var(--neon); justify-self: start; padding: 4px 8px; }
+.nr-h1 { font-family: var(--font-num); font-size: clamp(34px, 6vw, 64px); line-height: 1; letter-spacing: -0.03em; }
+.nr-h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mute); margin-bottom: 14px !important; }
+.nr-lead { max-width: 720px; font-size: 17px; color: var(--dark); margin-top: -16px !important; }
+.nr-micro { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--mute); }
+.nr-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); border-top: 1px solid var(--ink); }
+.nr-facts > * { display: grid; gap: 4px; align-content: start; padding: 14px 14px 14px 0; border-bottom: 1px solid var(--line); }
+.nr-facts a:hover .mono { text-decoration: underline; }
+.nr-grid { display: grid; gap: 16px; }
+.nr-card { border: 1px solid var(--ink); background: #fff; padding: 18px; display: grid; gap: 12px; }
+.nr-card a { text-decoration: underline; text-decoration-color: var(--line); }
+.nr-card-head { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
+.nr-label { font-weight: 600; margin-bottom: 4px !important; }
+.nr-count { display: grid; justify-items: end; }
+.nr-count .num { font-size: 34px; line-height: 1; }
+.nr-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.nr-table th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--mute); font-weight: 500; padding: 0 8px 6px 0; border-bottom: 1px solid var(--line); }
+.nr-table td { padding: 8px 8px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.nr-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; padding: 3px 7px; margin-right: 8px; }
+.nr-ok { background: var(--ok-bg); color: var(--ok); }
+.nr-void { background: var(--bad-bg); color: var(--bad); }
+.nr-warn { background: var(--warn-bg); color: var(--warn); }
+.nr-info { background: var(--info-bg); color: var(--info); }
+.nr-none { background: var(--pale-2); color: var(--mute); }
+.nr-clock { font-size: 12px; color: var(--info); }
+.nr-err { color: var(--bad); font-size: 13px; }
+.nr-err button { text-decoration: underline; margin-left: 6px; }
+.nr-form { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.nr-form input { flex: 1 1 260px; min-width: 0; padding: 10px 12px; border: 1px solid var(--ink); background: #fff; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; }
+.nr-form select { padding: 10px; border: 1px solid var(--ink); background: #fff; }
+.nr-form button { padding: 10px 18px; background: var(--ink); color: var(--pale) !important; font-weight: 600; }
+.nr-verify { border-top: 1px solid var(--ink); padding-top: 20px; }
+.nr-verify p { max-width: 720px; }
+.nr-verify a { text-decoration: underline; }
+.nr-verify code { background: var(--pale-2); padding: 1px 5px; font-size: 13px; }
+@media (max-width: 640px) {
+  .nr-table th:nth-child(3), .nr-table td:nth-child(3) { display: none; }
+}

@@ -21,8 +21,12 @@ export default function Header() {
                 HOW IT WORKS
               </a>
               <div className="main-header-navigation-dot" />
-              <a href="#faq" className="main-header-navigation-link last">
+              <a href="#faq" className="main-header-navigation-link">
                 FAQ
+              </a>
+              <div className="main-header-navigation-dot" />
+              <a href="/near" className="main-header-navigation-link last">
+                LIVE ON NEAR
               </a>
             </div>
             <div className="header-button-box">

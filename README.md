@@ -39,8 +39,11 @@
 >    clearly labelled **manual mode**, a local Approve/Deny page); `LLM_API_KEY` (OpenAI, or NEAR AI Cloud with
 >    `LLM_BASE_URL=https://cloud-api.near.ai/v1`) for LLM choices and real transcripts (without it: persona rules, labelled stub transcripts).
 >
+> **Web page:** [`frontend/app/near`](frontend/app/near) (`/near`) reads jobs and payments live from the contract in the browser (PAID / VOID /
+> PENDING with a countdown), with NearBlocks links and a job lookup. It builds; it is not on the public Vercel site until redeployed.
+>
 > **Not yet verified on NEAR:** a World ID approval end to end (code is in `services/approver-near`, waiting on app credentials). The
-> Hedera-era API, dashboard and frontend are not wired to NEAR.
+> Hedera-era API, dashboard and the rest of the frontend are not wired to NEAR.
 >
 > Submission text: [docs/submission/description.md](docs/submission/description.md). Video script: [docs/demo-video.md](docs/demo-video.md).
 >

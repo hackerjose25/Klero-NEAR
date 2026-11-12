@@ -2,6 +2,12 @@
 
 What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UTC. Baseline: tag `pre-hackathon`.
 
+## 2026-11-12: `/near` web page
+- `frontend/app/near`: a standalone page that reads the v2 (and v1) contract from the browser over public RPC: each proof job's rounds
+  with PAID / VOID / PENDING (with a deadline countdown) / NO ESCROW, payer → provider, amount, the human's on-chain cap, NearBlocks
+  links, and a lookup for any job key. The landing header links to it ("LIVE ON NEAR"). `next build` passes; RPC reads checked by hand.
+- Why: the public site only showed Hedera. Judges need to see the NEAR state without running anything.
+
 ## 2026-11-12: independent NEAR audit (`pnpm audit:near`)
 - `apps/cli/src/audit-near.ts`, command `audit-near`: lists the contract and token transactions from NearBlocks v3 (v1 is retired on
   testnet), reads receipt logs from an archival RPC (the regular RPC had already pruned 3-day-old txs), replays the events, and checks
