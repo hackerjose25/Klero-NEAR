@@ -39,6 +39,8 @@
 > **Not yet verified on NEAR:** a World ID approval end to end (code is in `services/approver-near`, waiting on app credentials). The
 > Hedera-era API, dashboard and frontend are not wired to NEAR.
 >
+> Submission text: [docs/submission/description.md](docs/submission/description.md). Video script: [docs/demo-video.md](docs/demo-video.md).
+>
 > Libraries: `near-sdk` / `near-contract-standards` (Rust), `near-api-js`. Licence: MIT ([LICENSE](LICENSE)).
 
 ---
@@ -334,7 +336,7 @@ powershell -ExecutionPolicy Bypass -File backend\scripts\win\dev-up.ps1     # st
 ```
 
 Also in `backend\scripts\win\`: `use-meeting.ps1 -N <n>` (fresh demo meeting) and `topup-baseline.ps1`. The full
-demo walkthrough is [`docs/demo-video.md`](docs/demo-video.md).
+demo walkthrough is [`docs/demo-video-hedera.md`](docs/demo-video-hedera.md).
 
 ```bash
 pnpm test          # 135 tests in 15 files

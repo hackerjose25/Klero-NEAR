@@ -1,104 +1,78 @@
-# Project Description
+# Klero on NEAR
 
-Klero makes sure an AI agent's payment happens exactly once: it either settles one time, or it is proven that it never happened and never can.
+**Agents fork. Money doesn't.** Klero makes sure an AI agent's payment happens exactly once. Every payment ends in one of
+two states, **PAID once** or **provably VOID (refunded)**, and anyone can read which one from a NEAR contract.
 
-Every agent wallet built so far stops *bad* payments, using limits, allowlists and scam checks. None of them answer the question that actually breaks agents: **your agent sent a payment and the connection dropped, so did it pay?** Retry and you might pay twice. Give up and the work never ships. It gets worse with parallel agents. Your Claude agent and your Cursor agent can both decide to buy the same transcription, and today nothing stops them.
+Tracks: **AI Security**, **AI Swarms**, **AI Agents**. Network: NEAR testnet.
 
-Klero gives every agent payment exactly two possible endings: **PAID once, or provably VOID.** There is no third state and no guessing.
+## The problem
 
-## How one job runs
+Agent wallets today stop *bad* payments with limits and allowlists. They don't answer the question that breaks agents:
+**the agent sent a payment and the connection dropped. Did it pay?** If it retries, it may pay twice. If it gives up, the work
+never ships. With parallel agents it gets worse: three agents working for one person can all decide to buy the same thing.
 
-![Klero pipeline: job request to one payment](klero-pipeline.png)
+## What Klero does on NEAR
 
-The important move is the **jobKey**. Every agent that works for the same human computes the same key for the same job, `sha256(human | capability | input)`, even if they run in different apps. So three agents asking for the same thing are recognisably asking for the *same* thing.
+One Rust contract, [`klero-v2.klero-mw8x6bn1.testnet`](https://testnet.nearblocks.io/address/klero-v2.klero-mw8x6bn1.testnet),
+acts as referee, escrow and policy:
 
-Each agent posts a CLAIM to the **Hedera Consensus Service**, and HCS consensus order is the referee: the first valid claim wins. The losers don't buy again. They wait and receive the winner's result.
+1. **Referee (swarms).** Agents that work for the same human compute the same job key. Each one calls `claim(job, round,
+   provider)`, and the first claim in a round wins. The losers don't pay. They wait and receive the winner's result.
+2. **Escrow with a deadline.** The winner pays the provider's 402 challenge by sending FUSD (NEP-141) with `ft_transfer_call`.
+   The contract holds it as an intent with a deadline.
+3. **Exactly one ending.** Before the deadline, only the provider can `settle` → **PAID**. After it, anyone can `void_intent` →
+   **VOID**, and the payer is refunded. The two windows don't overlap, so a payment cannot end both ways or end twice.
+   `get_intent_state` is a public view: VOID is a fact you read from the contract, not a guess.
+4. **Pay on delivery.** The provider checks the escrow on-chain, does the work, re-checks the deadline, and only then settles.
+   A provider that crashes never gets paid. The agent voids after the deadline, gets its refund, and the job moves to the next
+   round.
 
-A real run on testnet, three agents linked to one Orb-verified World ID:
+## A human stays in charge (security)
 
-```
-3 agents claim → HCS seq 10, 11, 12 → seq 10 wins → over the 1.00 FUSD cap → World ID approval
-→ 2.00 FUSD paid once → Agent A: PAID_BY_OTHER · Agent B: PAID_BY_ME · Agent C: PAID_BY_OTHER
-Mirror Node counter: payments = 1
-```
+- **Agents are sub-accounts of the human** (`a.human…`, `b.human…`, `c.human…`), and each signs with a **claim-only
+  function-call key**: it can call `claim` on the Klero contract and nothing else. A leaked agent key can't move money anywhere.
+- **The spend cap is enforced on-chain.** Each human has a per-payment cap stored in the contract (1 FUSD in the demo). An
+  escrow above it makes `ft_on_transfer` panic, so the token refunds the payer, unless the operator recorded a one-shot
+  `approve_overcap` for that exact job, round and maximum amount.
+- **The approval comes from the human.** The approver service checks on-chain that the agent really won and the price really is
+  over the cap, then asks the human (World ID device flow; a clearly labelled manual mode when no World credentials are set).
+  Deny → `abandon_round`, no money moves. Approve → the same payment goes through.
 
-The same meeting through three ordinary agents: **3 payments** (0.04 + 2.00 + 2.00 FUSD), counted from Mirror Node.
+## Verified on testnet
 
-## The death clock
+Every line below is in [`docs/proof-near.md`](../proof-near.md), with a NearBlocks link per transaction:
 
-![Klero death clock: unknown payment to PAID or provably VOID](klero-deathclock.png)
+- 3 agents claim one job → 1 winner → escrow → provider delivers and settles → **payments on-chain: 1**. The two losers get the
+  result for free.
+- Provider crashes after escrow → deadline passes → void → refund → round 1 → **still 1 payment**.
+- An escrow that is never settled → `EXPIRED` → void → **VOID**, the balance back to what it was before the escrow.
+- A 2 FUSD escrow with no approval, over a 1 FUSD cap → **refused by the contract**, balance unchanged.
+- Over-cap: deny → round abandoned, nothing moved; approve → `approve_overcap` on-chain → escrow → delivered.
 
-In Hedera's x402 `exact` scheme the client builds the transfer, so we choose the transaction id **before sending** and give it a validity window of 120 seconds. Hedera rejects a duplicate transaction id, and it rejects a transaction whose window has passed. Those two network rules are what make a lost payment answerable:
+## How it's made
 
-```
-PAID     Mirror Node has the tx id with SUCCESS
-FAILED   Mirror Node has the tx id with another result (the money did not move)
-VOID     now > deadline + 45 s AND Mirror Node returns 404
-UNKNOWN  anything else: wait, resend the same bytes, never re-sign
-```
+- **Contract:** Rust, `near-sdk` + `near-contract-standards`. NEP-297 events (`claim`, `intent`, `settled`, `void`), cross-contract
+  `ft_transfer` with callbacks (`on_settled`, `on_voided`) and transient `SETTLING`/`VOIDING` states. 22 unit tests: double
+  claim, settle twice, settle after the deadline, void before it, cap and approval cases. Plus a NEP-141 test token, FUSD (6 dp).
+- **Off-chain:** TypeScript with `near-api-js` 7. A resumable bootstrap creates every testnet account, key and balance. A
+  provider server hosts three transcription providers. The agent runner does the race. The approver handles World ID. The
+  agents can choose providers with an LLM through any OpenAI-compatible endpoint, including NEAR AI Cloud.
 
-VOID is a proof, not a timeout. After the deadline every node rejects those bytes as expired, and any copy sent before it would already be on Mirror Node. So a 404 after `deadline + 45 s` means the payment didn't happen and *can't*, not even if someone still holds the signed bytes. The intent is written to disk before it is sent, and retries only ever resend the identical bytes.
+**Hacky parts worth naming**
 
-## A person stays in charge
+- **Reading too early.** `settle` finishes over several receipts. Our provider read the intent while the callback was still
+  pending, saw `SETTLING`, and reported a failure, although the payment had completed. Calls now wait for `FINAL`, and readers
+  poll past `SETTLING`/`VOIDING`.
+- **Gas versus balance.** The first escrow failed before it was sent, because the agent held too little NEAR to prepay 100 TGas.
+  No tokens moved. Now we use 50 TGas, and the bootstrap tops up the agents.
+- **New state layout, new account.** Adding the cap changed the contract state, so v2 was deployed as a new account. v1 is kept
+  as history.
 
-Agents are backed by a real human through **World**:
+## Origin and honesty
 
-- **World ID Agent Pass** protects three actions, all checked in our backend: linking an agent, firing or replacing one, and spending above the autonomous cap. Each approval is bound to a digest of the exact action (job, round, provider, amount), so it can't be replayed onto a different payment. One person's agents share one World ID subject, which is what gives them one budget and one dedupe scope across apps.
-- **World AgentKit** sits on the payment path. The provider's 402 carries the AgentKit challenge, the winning agent signs it with its own key, and before any money moves the provider checks the signature is fresh, single-use, made by the HCS winner, and that the wallet belongs to a human in **AgentBook**.
-
-Under the cap, an agent finds the service on HCS and pays end to end with zero human steps. Above it, the payment stops and waits for a phone approval, and then *that same payment* settles.
-
-## You don't have to trust us
-
-One command rebuilds every job from the public HCS topic and checks each claim of payment against the ledger. It never touches our servers:
-
-```
-pnpm forkos audit --topic 0.0.11332888 --operator 0.0.5899352 --providers 0.0.11332881,0.0.11332882,0.0.11332883
-21 jobs, 79 checks — ALL PASSED
-```
-
-It checks five things per job: at most one settled payment, the settlement is real on the ledger, every abandoned round is provably void, the payment came from the winner, and any refund is real.
-
-## Also shipped
-
-- **Our own x402 facilitator** on Hedera testnet, settling payments in an HTS token (FUSD `0.0.11332887`). The facilitator pays the HBAR fee, so agents don't need HBAR.
-- **Four layers against double payment**, each shown live: our facilitator's replay table (`forkos_replay_detected`), Hedera itself (`DUPLICATE_TRANSACTION`), the clock (`forkos_intent_expired` and `TRANSACTION_EXPIRED`), and the VOID proof.
-- **A provider fence**: a provider runs a job only for the live winner with current authority, and only after settlement.
-- **Fire an agent and it is dead immediately.** Its epoch bumps, its tokens stop working, and providers refuse it through the fence. Linking it back takes a new World approval and gives it a new epoch.
-- **An MCP server**, so an agent in Claude Desktop or Cursor can call Klero directly (`forkos_whoami`, `forkos_services`, `forkos_buy_transcription`).
-- **A dashboard** for linking agents, watching races live, approving over-cap payments and reading a per-payment proof page.
-
-## What we deliberately didn't build
-
-- **Testnet only.** Nothing here has handled real money.
-- **Budget keys are custodial.** The API holds each human's budget-account key, encrypted with AES-256-GCM. Hedera Agent Accounts would remove this; we ran out of time.
-- **World identities are test identities**, as the Mumbai track specifies.
-- **A refunded job is final.** There's no automatic retry with another provider.
-- **The provider set is ours.** Third-party sellers can be *paid* today, but only a fenced provider gets the execution guarantee.
-
----
-
-# How it's Made
-
-**Stack.** A TypeScript pnpm monorepo. The backend is three Fastify 5 services (API, facilitator, providers) on Postgres 16; the frontend is Next.js 16 with React 19 and TanStack Query. Ledger access is `@hiero-ledger/sdk` end to end, with **zero Solidity files**. Payments use `@x402/core` and `@x402/hedera` 2.30.0. World ID tokens are verified with `jose`, AgentKit signatures with `viem`, and every boundary is validated with Zod. The demo service is meeting transcription: OpenAI Whisper plus a short summary. It's deployed on Vercel (frontend) and Render (backend), and the test suite has about 135 tests across 15 files.
-
-**Hedera is the whole trust layer, three native services deep.**
-
-- **HCS** is the referee, the service directory and the audit log. Providers announce themselves there, agents claim jobs there, and every intent, settlement, void, link and approval is published there. We first stored the directory and agent links on a separate data layer, then removed it: HCS already gave us ordering and a public record, so one less system to trust.
-- **HTS** carries the money: FUSD payments and refunds.
-- **Mirror Node** is the judge. The resolver, the payment counter and the public audit all read it.
-
-**Our own facilitator.** We use `x402ResourceServer` directly instead of the Fastify middleware, because the middleware runs the route handler *before* settlement. That's fine for a free API, but unsafe for a paid job. Our order is fence → verify → record → settle → re-fence → run. The facilitator also refuses any intent with less than 2 seconds of its clock left, and caps the validity window at 120 seconds.
-
-**World ID** uses the Device Authorization Grant against `auth.world.org`. Every ID token is checked against the issuer's JWKS for `iss`, `aud`, `exp`, and an `auth_time` that is fresh and no earlier than the attempt started. Device codes are stored encrypted and never leave the backend. An over-cap approval is consumed in the same database transaction that writes the payment intent, so it can't be used twice. **AgentKit** is deliberately *not* registered as an x402 hook, so it can never change how a Hedera payment is verified or settled. It can only refuse an agent.
-
-## The hacky parts worth naming
-
-- **Mirror Node rejects `sequencenumber=gt:0`.** It's the natural way to say "read the topic from the start", but HCS sequence numbers begin at 1, so it returns HTTP 400. Three places in our own spec made this call, and we only found it by running against live testnet.
-- **Reading a long topic could take minutes.** Following `links.next` in a loop walked for more than 4 minutes on a busy public topic. We rebuilt the reader to be bounded and resumable, and to throw on gaps. A gap-free prefix in order is never wrong, only incomplete, so a winner can be decided without reading everything, while a gap could produce a wrong winner.
-- **A stalled Mirror request crashed our winning agent, twice.** With no timeout, a hung connection waited 300 seconds and the agent died, both times *after* the payment had already gone through. Now every request has a 15-second deadline and up to 3 retries for network errors and 5xx. A 404 is never retried, because a 404 is an answer and the VOID proof rests on it.
-- **The World approval page got users stuck.** After the World App said proofs were shared, the browser page only offered "Continue with a passkey", and users without one sat in `authorization_pending` until the code expired. The fix, sending `acr_values=orb-face` on the device request, was in the step-up guide rather than the device-flow guide.
-- **"Access denied" looked identical to "cancel".** With accepted accounts left on Orb-only, every test identity was refused in a way that looked exactly like a user pressing cancel. We switched to "Any account", as the track's mocked proofs require.
-- **An abandoned round must cost nothing.** In one live run the winner picked a 2.00 FUSD provider, its over-cap approval was never given, and the round was abandoned. No intent was created, no money moved, and the audit shows that round as provably void before the next round paid once.
-
-Every number above comes from a live testnet run, and `docs/proof.md` in the repo has the raw output.
+Klero was first built on Hedera, as tag [`pre-hackathon`](https://github.com/hackerjose25/Klero-NEAR/tree/pre-hackathon). Only the
+NEAR work is the hackathon entry: [`pre-hackathon...main`](https://github.com/hackerjose25/Klero-NEAR/compare/pre-hackathon...main).
+NEAR made the design simpler: on Hedera, VOID was inferred from transaction expiry plus a 404. On NEAR the contract holds the money
+and the state machine, so VOID is contract state. Everything runs on testnet only. The proof runs used persona rules and labelled stub
+transcripts (no LLM key set), and approvals ran in manual mode (no World credentials set). The Hedera-era web dashboard is not
+wired to NEAR.

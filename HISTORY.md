@@ -2,6 +2,11 @@
 
 What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UTC. Baseline: tag `pre-hackathon`.
 
+## 2026-11-12: submission docs for NEAR
+- `docs/submission/description.md` rewritten for NEAR. It only claims what `docs/proof-near.md` shows, and says what is not verified (World ID, LLM, web dashboard). The Hedera version moved to `description-hedera.md`.
+- `docs/demo-video.md` is now a 60–90 s NEAR script. The Hedera script moved to `demo-video-hedera.md`.
+- Why: the old texts described only Hedera, and the judges review the NEAR integration.
+
 ## 2026-11-09: Day 4, on-chain spend cap + human approval
 - Contract v2: per-human `set_cap`, operator-only one-shot `approve_overcap(job, round, max_amount)`, enforced in
   `ft_on_transfer` (an over-cap escrow with no matching approval panics, so the token refunds the payer). Views `get_cap`,
