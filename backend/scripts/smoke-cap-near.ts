@@ -2,9 +2,9 @@
 // contract itself, and the token refunds it automatically. No money moves.
 // Usage: pnpm smoke:cap:near
 import { createHash } from 'node:crypto';
-import { KleroNear, claimKeyId, intentIdOf, loadNearKeys, nearblocksTx } from '@klero/near';
+import { PhoebeNear, claimKeyId, intentIdOf, loadNearKeys, nearblocksTx } from '@klero/near';
 
-const near = new KleroNear();
+const near = new PhoebeNear();
 const keys = loadNearKeys();
 const agent = near.d.agents[0]!;
 const premium = near.d.providers['scribe-premium']!;

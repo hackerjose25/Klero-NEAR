@@ -11,7 +11,7 @@ import { ApprovalProvider } from './approvals';
 export function report(e: unknown) {
   if (e instanceof ApiError) {
     const map: Record<string, string> = {
-      NETWORK: 'Cannot reach the Klero API.',
+      NETWORK: 'Cannot reach the Phoebe API.',
       UNAUTHORIZED: 'Session expired — sign in with World ID again.',
       FORBIDDEN: 'Not allowed (demo key or owner token missing).',
       SCHEMA: 'API and web are out of sync — check the console.',

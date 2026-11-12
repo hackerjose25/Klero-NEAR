@@ -85,7 +85,7 @@ export default function Faq() {
                   </div>
                   <div className="faq-ans-box">
                     <p className="faq-ans-text">
-                      Both call claim on the Klero contract. The first claim in the round wins and the other backs off and receives the result. One job, one payment.
+                      Both call claim on the Phoebe contract. The first claim in the round wins and the other backs off and receives the result. One job, one payment.
                     </p>
                   </div>
                 </div>
@@ -102,7 +102,7 @@ export default function Faq() {
                   </div>
                   <div className="faq-ans-box">
                     <p className="faq-ans-text">
-                      Very little. Agents claim with a function-call key scoped to the claim method of the Klero contract, and the contract accepts an escrow only from the round's winner, within the human's cap.
+                      Very little. Agents claim with a function-call key scoped to the claim method of the Phoebe contract, and the contract accepts an escrow only from the round's winner, within the human's cap.
                     </p>
                   </div>
                 </div>

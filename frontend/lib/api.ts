@@ -25,7 +25,7 @@ async function call<S extends ZodType>(method: 'GET' | 'POST' | 'PUT', path: str
   try {
     r = await fetch(`${ENV.API_URL}${path}`, { method, headers, body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined, cache: 'no-store' });
   } catch {
-    throw new ApiError('NETWORK', 'Cannot reach the Klero API.', 0);
+    throw new ApiError('NETWORK', 'Cannot reach the Phoebe API.', 0);
   }
   const text = await r.text();
   let json: any = {};

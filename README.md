@@ -1,11 +1,14 @@
-# Klero
+# Phoebe
 
 **Agents fork. Money doesn't.** The exactly-once layer for AI agent payments.
 
 > ## NEAR HACKATHON
 >
-> This repository is Klero's entry for [NEAR HACKATHON](https://nearhackathon.com) (tracks: `security`, `swarms`, `agents`).
-> Klero was first built on **Hedera** (everything below the line, originally for ETHGlobal). As the rules allow (Q-002), only the
+> **Phoebe** (Greek *Phoibe*, "bright, radiant") was called **Klero** before the hackathon; on-chain ids such as
+> `klero-v2.klero-mw8x6bn1.testnet` keep the old name because NEAR account names are permanent.
+>
+> This repository is Phoebe's entry for [NEAR HACKATHON](https://nearhackathon.com) (tracks: `security`, `swarms`, `agents`).
+> Phoebe was first built on **Hedera** (everything below the line, originally for ETHGlobal). As the rules allow (Q-002), only the
 > **NEAR integration** is the hackathon work. The baseline is tag [`pre-hackathon`](https://github.com/hackerjose25/Klero-NEAR/tree/pre-hackathon); the hackathon diff is
 > [`pre-hackathon...main`](https://github.com/hackerjose25/Klero-NEAR/compare/pre-hackathon...main). Change log: [HISTORY.md](HISTORY.md).
 >
@@ -51,7 +54,7 @@
 
 ---
 
-Your agent sent a payment and the connection dropped. Did it pay? Klero gives every agent payment exactly two
+Your agent sent a payment and the connection dropped. Did it pay? Phoebe gives every agent payment exactly two
 possible endings — **PAID once, or provably VOID** — and lets anyone check which one happened without trusting us.
 
 | | |
@@ -70,7 +73,7 @@ from World's issuer, not inferred from the code. Raw output is in [`docs/proof.m
 rather than left vague — including one claim this README used to make that turned out to be wrong, which is struck
 through and corrected rather than deleted.
 
-> Klero was built under the working name **ForkOS**, so some identifiers still carry it: the `pnpm forkos audit`
+> Phoebe was built under the working name **ForkOS**, so some identifiers still carry it: the `pnpm forkos audit`
 > CLI, the `@forkos/*` packages, the `forkos:` payment memo and error codes such as `forkos_replay_detected`.
 
 ---
@@ -84,11 +87,11 @@ you may pay twice. Give up and the work never ships.
 It gets worse with parallel agents. Your Claude agent and your Cursor agent work for the same person, and both can
 decide to buy the same transcription. Nothing today notices that they are asking for the same thing.
 
-Klero fixes both on Hedera, and keeps a person in charge of the agents through World.
+Phoebe fixes both on Hedera, and keeps a person in charge of the agents through World.
 
 ## How one job runs
 
-![Klero pipeline: job request to one payment](docs/submission/klero-pipeline.png)
+![Phoebe pipeline: job request to one payment](docs/submission/klero-pipeline.png)
 
 **The jobKey is the move.** Every agent of one human computes the same key for the same job —
 `sha256(humanHash | capability | inputHash)` — even when they run in different apps. So three agents asking for the
@@ -135,7 +138,7 @@ closed round 0 and opened round 1. An abandoned round that costs nothing is the 
 
 ## The death clock ✅
 
-![Klero death clock: unknown payment to PAID or provably VOID](docs/submission/klero-deathclock.png)
+![Phoebe death clock: unknown payment to PAID or provably VOID](docs/submission/klero-deathclock.png)
 
 In Hedera's x402 `exact` scheme the **client** builds the transfer and sets its transaction id, so we know the id
 *before sending*. The network rejects a duplicate id, and rejects a transaction whose `validStart + validDuration`
@@ -291,7 +294,7 @@ Two traps worth naming, because they cost us hours:
 
 - **A dashboard** ([klero-eta.vercel.app](https://klero-eta.vercel.app)) — link agents, watch races live, approve
   over-cap payments, and a per-payment proof page at `/proof/[intentId]`.
-- **An MCP server** (`backend/apps/mcp`) so an agent in Claude Desktop or Cursor calls Klero directly:
+- **An MCP server** (`backend/apps/mcp`) so an agent in Claude Desktop or Cursor calls Phoebe directly:
   `forkos_whoami`, `forkos_services`, `forkos_buy_transcription`.
 - **Fire an agent and it is dead immediately.** Its epoch bumps, its tokens die, and providers refuse it through the
   fence. Linking it back takes another World approval and returns it as a new epoch.
@@ -331,7 +334,7 @@ pnpm dev:api                    # :4040
 
 pnpm agent:link "Agent A"       # approve on your phone (World ID)
 pnpm baseline                   # 3 independent agents -> 3 payments
-pnpm agents 3                   # 3 Klero agents       -> 1 payment
+pnpm agents 3                   # 3 Phoebe agents       -> 1 payment
 ```
 
 **Windows, one command** (after setup; Docker Desktop running) — starts Postgres + migrations, the facilitator, the

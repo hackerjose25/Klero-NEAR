@@ -1,4 +1,4 @@
-// Thin client for the Klero contract on NEAR. Used by the agents, the providers and the scripts.
+// Thin client for the Phoebe contract on NEAR. Used by the agents, the providers and the scripts.
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -55,7 +55,7 @@ export const claimKeyId = (agent: string, contractId: string) => `${agent}#claim
 export const intentIdOf = (jobKey: string, round: number) => `${jobKey}:${round}`;
 export const nearblocksTx = (hash: string) => `https://testnet.nearblocks.io/txns/${hash}`;
 
-export class KleroNear {
+export class PhoebeNear {
   readonly provider: JsonRpcProvider;
   constructor(readonly d: NearDeployment = loadNearDeployment()) {
     this.provider = new JsonRpcProvider({ url: process.env.NEAR_RPC_URL ?? d.rpc });
@@ -126,7 +126,7 @@ export class KleroNear {
     return { won: r.result === true, hash: r.hash };
   }
 
-  /** Winner escrows `amount` (token base units) on the Klero contract via NEP-141 ft_transfer_call. */
+  /** Winner escrows `amount` (token base units) on the Phoebe contract via NEP-141 ft_transfer_call. */
   async escrow(payer: Account, jobKey: string, round: number, amount: string, ttlS = 120) {
     const msg = JSON.stringify({ job_key: jobKey, round, ttl_s: ttlS });
     return this.call(payer, this.d.token.id, 'ft_transfer_call', { receiver_id: this.d.contractId, amount, msg }, 1n);

@@ -1,4 +1,4 @@
-# Klero on NEAR testnet: proof
+# Phoebe on NEAR testnet: proof
 
 Raw output of `pnpm smoke:near` (backend/scripts/smoke-near.ts), run 2026-11-09. Every link opens the transaction on NearBlocks.
 
@@ -9,7 +9,7 @@ Raw output of `pnpm smoke:near` (backend/scripts/smoke-near.ts), run 2026-11-09.
 | Operator | [`klero-mw8x6bn1.testnet`](https://testnet.nearblocks.io/address/klero-mw8x6bn1.testnet) |
 | Agents (sub-accounts of one human) | `a`, `b`, `c` `.human.klero-mw8x6bn1.testnet` |
 
-Each claim is signed with the agent's **claim-only function-call key**: it can call `claim` on the Klero contract and nothing else.
+Each claim is signed with the agent's **claim-only function-call key**: it can call `claim` on the Phoebe contract and nothing else.
 
 ```text
 === Run 1: three agents, one job → one payment ===
@@ -122,7 +122,7 @@ retried. All on-chain steps above had completed.)
 
 The auditor lists the contract's transactions and the escrows sent through the token from NearBlocks (only to find tx hashes).
 It reads every receipt's logs from an archival NEAR RPC and replays the NEP-297 events. It checks each job against the token's
-`ft_transfer` events and the contract's own views. No Klero server or key is involved. Checks per job: one winner per round, paid at
+`ft_transfer` events and the contract's own views. No Phoebe server or key is involved. Checks per job: one winner per round, paid at
 most once, payer is the round winner, cap respected (or approved), one ending per intent, settlement and refund visible as token
 transfers, contract state matches the replay, and the replay saw every intent the contract holds. The last check was added after a
 deliberately wrong `--token` (escrows not found) still passed; with it, that run reports `VIOLATIONS FOUND`.

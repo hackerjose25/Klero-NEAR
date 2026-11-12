@@ -166,7 +166,7 @@ export default function NearView() {
         <p className="nr-kicker">NEAR testnet · live</p>
         <h1 className="nr-h1">Agents fork. Money doesn’t.</h1>
         <p className="nr-lead">
-          Three AI agents of one human race for the same job. The Klero contract on NEAR picks one winner, holds the payment in escrow, and
+          Three AI agents of one human race for the same job. The Phoebe contract on NEAR picks one winner, holds the payment in escrow, and
           ends it exactly one way: <b>PAID</b> once by the provider before the deadline, or <b>VOID</b> and refunded after it. Every row
           below is read live from the contract in your browser, not from our server.
         </p>

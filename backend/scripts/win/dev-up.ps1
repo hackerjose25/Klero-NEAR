@@ -1,10 +1,10 @@
-# Starts the whole Klero backend on Windows: Postgres + migrations, facilitator, 3 providers, API.
+# Starts the whole Phoebe backend on Windows: Postgres + migrations, facilitator, 3 providers, API.
 # One command, from anywhere:
-#   powershell -ExecutionPolicy Bypass -File D:\Projects\Klero-1\backend\scripts\win\dev-up.ps1
+#   powershell -ExecutionPolicy Bypass -File D:\Projects\Phoebe-1\backend\scripts\win\dev-up.ps1
 # Services run hidden in the background; logs go to backend\.logs\<service>.log. Stop with dev-down.ps1.
 . (Join-Path $PSScriptRoot 'common.ps1')
 
-Write-Host "Klero backend -> $BackendDir" -ForegroundColor Cyan
+Write-Host "Phoebe backend -> $BackendDir" -ForegroundColor Cyan
 
 Write-Host '1/5 Postgres'
 $null = Invoke-Native { docker info }
@@ -42,7 +42,7 @@ Write-Host ''
 if (-not $ok) { Write-Host 'Some services failed - check backend\.logs\*.log' -ForegroundColor Red; exit 1 }
 
 $dir = (Invoke-RestMethod -TimeoutSec 30 'http://localhost:4040/v1/directory').services
-Write-Host 'Klero backend is up.' -ForegroundColor Green
+Write-Host 'Phoebe backend is up.' -ForegroundColor Green
 Write-Host ("  directory (HCS)   {0}" -f (($dir | ForEach-Object { "$($_.providerId)@$([double]$_.price / 1e6)" }) -join ', '))
 Write-Host ("  AgentKit mode     {0}" -f (Get-EnvValue 'PROVIDER_AGENTKIT'))
 Write-Host ("  demo meeting      {0}" -f (Get-EnvValue 'SAMPLE_AUDIO_URL'))

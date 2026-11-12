@@ -23,8 +23,8 @@ export function AppShell({ title, children, right, narrow }: { title?: string; c
     <div className={`sp-shell wide${narrow ? ' narrow' : ''}`}>
       {status === 'down' && <div className="sp-banner warn"><WifiOff size={16} /> Live updates are off — reconnecting…</div>}
       <header className="sp-top">
-        <Link href="/" className="sp-brand" aria-label="Klero home">
-          <img className="mark" src="/assets/klero_mark.png" alt="" />Klero
+        <Link href="/" className="sp-brand" aria-label="Phoebe home">
+          <img className="mark" src="/assets/klero_mark.png" alt="" />Phoebe
         </Link>
         <nav className="navlinks">
           {NAV.map((n) => <Link key={n.href} href={n.href} className={path.startsWith(n.href) ? 'active' : ''}>{n.label}</Link>)}
@@ -40,7 +40,7 @@ export function AppShell({ title, children, right, narrow }: { title?: string; c
         )}
       </header>
       <main className="sp-page">
-        {error && !cfg ? <Notice tone="bad"><b>Can’t reach the Klero API.</b> Check <code>NEXT_PUBLIC_API_URL</code> and the API’s <code>WEB_ORIGIN</code>.</Notice> : children}
+        {error && !cfg ? <Notice tone="bad"><b>Can’t reach the Phoebe API.</b> Check <code>NEXT_PUBLIC_API_URL</code> and the API’s <code>WEB_ORIGIN</code>.</Notice> : children}
       </main>
     </div>
   );

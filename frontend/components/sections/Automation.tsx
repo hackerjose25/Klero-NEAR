@@ -47,10 +47,10 @@ export default function Automation() {
                 <div className="primary-button-text-items w-variant-c8937a21-aef7-f716-ecab-1c4a85c94367">
                   <div className="primary-button-text-wrap">
                     <div className="primary-button-text one">
-                      TRY KLERO
+                      TRY PHOEBE
                     </div>
                     <div className="primary-button-text two">
-                      TRY KLERO
+                      TRY PHOEBE
                     </div>
                   </div>
                 </div>
@@ -81,12 +81,12 @@ export default function Automation() {
                 <img src="/assets/klero-site-logo.svg" loading="lazy" alt="Logo" className="automation-apps-logo" />
               </div>
               <div className="automation-apps-logo-box">
-                <img src="/assets/klero-web-badge.svg" loading="lazy" alt="Open the Klero web app" className="automation-apps-logo" />
+                <img src="/assets/klero-web-badge.svg" loading="lazy" alt="Open the Phoebe web app" className="automation-apps-logo" />
               </div>
             </div>
             <div className="automation-apps-flex">
               <div fade-anim="True" className="automation-apps-banner-box">
-                <img src="/assets/klero-web-app.svg" loading="lazy" alt="Klero web app race dashboard" className="automation-apps-banner" />
+                <img src="/assets/klero-web-app.svg" loading="lazy" alt="Phoebe web app race dashboard" className="automation-apps-banner" />
               </div>
               <div className="automation-apps-shape-flex">
                 <div className="automation-apps-shape-wrap">
@@ -99,7 +99,7 @@ export default function Automation() {
                 </div>
                 <div fade-anim="True" className="automation-apps-content-box">
                   <p className="automation-apps-content-text">
-                    Klero ships as a Rust contract, an agent runner, a provider server and a CLI. Anyone can rebuild the whole history from public data with pnpm audit:near.
+                    Phoebe ships as a Rust contract, an agent runner, a provider server and a CLI. Anyone can rebuild the whole history from public data with pnpm audit:near.
                   </p>
                 </div>
               </div>

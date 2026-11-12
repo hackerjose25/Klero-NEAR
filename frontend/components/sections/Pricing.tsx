@@ -81,10 +81,10 @@ export default function Pricing() {
                               <div className="primary-button-text-items">
                                 <div className="primary-button-text-wrap">
                                   <div className="primary-button-text one">
-                                    TRY KLERO
+                                    TRY PHOEBE
                                   </div>
                                   <div className="primary-button-text two">
-                                    TRY KLERO
+                                    TRY PHOEBE
                                   </div>
                                 </div>
                               </div>
@@ -219,10 +219,10 @@ export default function Pricing() {
                               <div className="primary-button-text-items">
                                 <div className="primary-button-text-wrap">
                                   <div className="primary-button-text one">
-                                    TRY KLERO
+                                    TRY PHOEBE
                                   </div>
                                   <div className="primary-button-text two">
-                                    TRY KLERO
+                                    TRY PHOEBE
                                   </div>
                                 </div>
                               </div>
@@ -359,10 +359,10 @@ export default function Pricing() {
                               <div className="primary-button-text-items">
                                 <div className="primary-button-text-wrap">
                                   <div className="primary-button-text one">
-                                    TRY KLERO
+                                    TRY PHOEBE
                                   </div>
                                   <div className="primary-button-text two">
-                                    TRY KLERO
+                                    TRY PHOEBE
                                   </div>
                                 </div>
                               </div>
@@ -474,7 +474,7 @@ export default function Pricing() {
                             <div className="home-pricing-type-title w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
                               {"How agents pay "}
                               <br />
-                              without Klero
+                              without Phoebe
                             </div>
                           </div>
                           <div className="home-pricing-tag-box w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
@@ -497,10 +497,10 @@ export default function Pricing() {
                               <div className="primary-button-text-items">
                                 <div className="primary-button-text-wrap">
                                   <div className="primary-button-text one">
-                                    TRY KLERO
+                                    TRY PHOEBE
                                   </div>
                                   <div className="primary-button-text two">
-                                    TRY KLERO
+                                    TRY PHOEBE
                                   </div>
                                 </div>
                               </div>
@@ -593,7 +593,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6 hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
-                              Klero on NEAR: 1 payment per job
+                              Phoebe on NEAR: 1 payment per job
                             </div>
                           </div>
                         </div>

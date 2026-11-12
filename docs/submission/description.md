@@ -1,6 +1,6 @@
-# Klero on NEAR
+# Phoebe on NEAR
 
-**Agents fork. Money doesn't.** Klero makes sure an AI agent's payment happens exactly once. Every payment ends in one of
+**Agents fork. Money doesn't.** Phoebe makes sure an AI agent's payment happens exactly once. Every payment ends in one of
 two states, **PAID once** or **provably VOID (refunded)**, and anyone can read which one from a NEAR contract.
 
 Tracks: **AI Security**, **AI Swarms**, **AI Agents**. Network: NEAR testnet.
@@ -11,7 +11,7 @@ Agent wallets today stop *bad* payments with limits and allowlists. They don't a
 **the agent sent a payment and the connection dropped. Did it pay?** If it retries, it may pay twice. If it gives up, the work
 never ships. With parallel agents it gets worse: three agents working for one person can all decide to buy the same thing.
 
-## What Klero does on NEAR
+## What Phoebe does on NEAR
 
 One Rust contract, [`klero-v2.klero-mw8x6bn1.testnet`](https://testnet.nearblocks.io/address/klero-v2.klero-mw8x6bn1.testnet),
 acts as referee, escrow and policy:
@@ -30,7 +30,7 @@ acts as referee, escrow and policy:
 ## A human stays in charge (security)
 
 - **Agents are sub-accounts of the human** (`a.human…`, `b.human…`, `c.human…`), and each signs with a **claim-only
-  function-call key**: it can call `claim` on the Klero contract and nothing else. A leaked agent key can't move money anywhere.
+  function-call key**: it can call `claim` on the Phoebe contract and nothing else. A leaked agent key can't move money anywhere.
 - **The spend cap is enforced on-chain.** Each human has a per-payment cap stored in the contract (1 FUSD in the demo). An
   escrow above it makes `ft_on_transfer` panic, so the token refunds the payer, unless the operator recorded a one-shot
   `approve_overcap` for that exact job, round and maximum amount.
@@ -77,7 +77,7 @@ matches the replay. Results on testnet: contract v2, 3 jobs and 25 checks; v1, 5
 
 ## Origin and honesty
 
-Klero was first built on Hedera, as tag [`pre-hackathon`](https://github.com/hackerjose25/Klero-NEAR/tree/pre-hackathon). Only the
+Phoebe was first built on Hedera, as tag [`pre-hackathon`](https://github.com/hackerjose25/Klero-NEAR/tree/pre-hackathon). Only the
 NEAR work is the hackathon entry: [`pre-hackathon...main`](https://github.com/hackerjose25/Klero-NEAR/compare/pre-hackathon...main).
 NEAR made the design simpler: on Hedera, VOID was inferred from transaction expiry plus a 404. On NEAR the contract holds the money
 and the state machine, so VOID is contract state. Everything runs on testnet only. The proof runs used persona rules and labelled stub

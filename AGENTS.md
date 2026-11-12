@@ -3,9 +3,11 @@
 Instructions for AI coding agents working in this repo.
 
 ## What this is
-Klero: exactly-once payments for AI agents. It started on Hedera (tag `pre-hackathon`) and is being ported to **NEAR** for
+Phoebe: exactly-once payments for AI agents. It started on Hedera (tag `pre-hackathon`) and is being ported to **NEAR** for
 NEAR HACKATHON (deadline 2026-11-14 23:59 UTC). Only NEAR work after the baseline is judged. The plan is
 `docs/planning/near-port-plan.md`, and progress is in `HISTORY.md`.
+
+Name: **Phoebe** (formerly Klero). On-chain ids, the `klero` event standard, `@klero/*` packages and asset file names keep the old name on purpose.
 
 ## Layout
 | Path | What |
@@ -14,7 +16,7 @@ NEAR HACKATHON (deadline 2026-11-14 23:59 UTC). Only NEAR work after the baselin
 | `contracts/fusd` | NEP-141 test token |
 | `backend/` | pnpm monorepo (Node ≥ 22): api, provider, facilitator, agents, cli, mcp. Still Hedera-wired except the NEAR scripts |
 | `backend/scripts/bootstrap-near.ts`, `smoke-near.ts` | NEAR testnet setup and live proof |
-| `backend/packages/near` (`@klero/near`) | NEAR contract client (`KleroNear`), deployment/key loaders, optional LLM (`@klero/near/llm`) |
+| `backend/packages/near` (`@klero/near`) | NEAR contract client (`PhoebeNear`), deployment/key loaders, optional LLM (`@klero/near/llm`) |
 | `backend/services/provider-near` | one server hosting the 3 providers on NEAR: directory, 402 challenge, verify escrow, work, settle |
 | `backend/apps/agents/src/run-near.ts` | three-agent race on NEAR (claim → approval if over cap → escrow → result, void on failure) |
 | `backend/services/approver-near` | World ID (or manual) approval → `approve_overcap` on-chain; deny → `abandon_round` |

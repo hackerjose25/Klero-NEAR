@@ -184,11 +184,11 @@ export default function Footer() {
             </div>
             <div fade-anim="True" className="footer-bottom-wrap">
               <a href="/" aria-current="page" className="footer-logo-box w-inline-block w--current">
-                <img loading="lazy" src="/assets/klero_logo.svg" alt="Klero logo" className="footer-logo" />
+                <img loading="lazy" src="/assets/klero_logo.svg" alt="Phoebe logo" className="footer-logo" />
               </a>
               <div className="footer-copy-right-flex">
                 <p className="footer-copy-right-text">
-                  © 2026 - KLERO | Built for “
+                  © 2026 - PHOEBE | Built for “
                   <a href="https://nearhackathon.com" target="_blank" className="footer-copy-right-text-link">
                     NEAR HACKATHON
                   </a>

@@ -1,6 +1,6 @@
 # Tops up the three baseline-lane wallets with FUSD from the treasury (operator) so `pnpm baseline` can keep
 # paying 3 times. Testnet only.
-#   powershell -ExecutionPolicy Bypass -File D:\Projects\Klero-1\backend\scripts\win\topup-baseline.ps1 [-Fusd 20]
+#   powershell -ExecutionPolicy Bypass -File D:\Projects\Phoebe-1\backend\scripts\win\topup-baseline.ps1 [-Fusd 20]
 param([int]$Fusd = 20)
 . (Join-Path $PSScriptRoot 'common.ps1')
 $tsx = Join-Path $BackendDir 'node_modules\.bin\tsx.cmd'

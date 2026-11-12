@@ -1,4 +1,4 @@
-// Sets up Klero on NEAR testnet: operator, token, contract, providers, one human with three agents.
+// Sets up Phoebe on NEAR testnet: operator, token, contract, providers, one human with three agents.
 // Usage: pnpm bootstrap:near   (safe to re-run: every step skips what already exists)
 //
 // Keys are appended to .secrets/near-testnet-keys.json the moment an account exists on-chain,
@@ -83,7 +83,7 @@ const opAvailable = async () => BigInt((await op.getState()).balance.available);
 // ---------- 2. sub-accounts ----------
 const FUSD = `fusd.${OP}`;
 // v2 adds on-chain spend caps + approvals (state layout changed, so it is a new account; v1 `klero.` is kept as history)
-const KLERO = `klero-v2.${OP}`;
+const PHOEBE = `klero-v2.${OP}`;
 const CAP = '1000000'; // 1 FUSD per payment; above it, a World ID approval is required
 const HUMAN = `human.${OP}`;
 const PROVIDERS = { 'scribe-a': '50000', 'scribe-b': '40000', 'scribe-premium': '2000000' } as const;
@@ -101,8 +101,8 @@ async function sub(parent: Account, id: string, near: `${number}`) {
 }
 
 await sub(op, FUSD, '2.5');
-if (!(await exists(KLERO)) && (await opAvailable()) < nearToYocto('4')) await faucetTopUp();
-await sub(op, KLERO, '3.0');
+if (!(await exists(PHOEBE)) && (await opAvailable()) < nearToYocto('4')) await faucetTopUp();
+await sub(op, PHOEBE, '3.0');
 for (const name of Object.keys(PROVIDERS)) await sub(op, `${name}.${OP}`, '0.1');
 await sub(op, HUMAN, '0.8');
 for (const a of AGENTS) await sub(acct(HUMAN), a, '0.2');
@@ -124,10 +124,10 @@ async function deploy(id: string, file: string, init: Record<string, unknown>) {
   log(`deployed ${file} → ${id}`);
 }
 await deploy(FUSD, 'fusd.wasm', { owner: OP });
-await deploy(KLERO, 'klero.wasm', { operator: OP, token: FUSD });
+await deploy(PHOEBE, 'klero.wasm', { operator: OP, token: FUSD });
 
 // ---------- 4. token registrations + demo balances ----------
-for (const id of [KLERO, ...Object.keys(PROVIDERS).map((n) => `${n}.${OP}`)]) {
+for (const id of [PHOEBE, ...Object.keys(PROVIDERS).map((n) => `${n}.${OP}`)]) {
   const bal = await view<unknown>(FUSD, 'storage_balance_of', { account_id: id });
   if (bal) continue;
   await op.callFunction({
@@ -155,9 +155,9 @@ for (const a of AGENTS) {
 // Placeholder until the World ID flow is wired to NEAR: a stable hash for the demo human.
 const humanHash = createHash('sha256').update(`demo-human:${HUMAN}`).digest('hex');
 for (const a of AGENTS) {
-  if (await view<unknown>(KLERO, 'get_link', { agent: a })) continue;
+  if (await view<unknown>(PHOEBE, 'get_link', { agent: a })) continue;
   await op.callFunction({
-    contractId: KLERO,
+    contractId: PHOEBE,
     methodName: 'link_agent',
     args: { agent: a, human: humanHash, epoch: 1 },
     gas: 30n * TGAS,
@@ -166,23 +166,23 @@ for (const a of AGENTS) {
 }
 
 // ---------- 5b. on-chain spend cap for the human ----------
-const cap = await view<string | null>(KLERO, 'get_cap', { human: humanHash });
+const cap = await view<string | null>(PHOEBE, 'get_cap', { human: humanHash });
 if (cap !== CAP) {
-  await op.callFunction({ contractId: KLERO, methodName: 'set_cap', args: { human: humanHash, cap: CAP }, gas: 30n * TGAS });
+  await op.callFunction({ contractId: PHOEBE, methodName: 'set_cap', args: { human: humanHash, cap: CAP }, gas: 30n * TGAS });
   log(`cap for the human set to ${Number(CAP) / 1e6} FUSD`);
 }
 
 // ---------- 6. scoped agent keys ----------
-// Each agent also gets a function-call key that can ONLY call `claim` on the Klero contract,
+// Each agent also gets a function-call key that can ONLY call `claim` on the Phoebe contract,
 // with a 0.25 NEAR gas allowance. It cannot move tokens or touch any other contract.
 for (const a of AGENTS) {
-  const id = `${a}#claim@${KLERO}`; // one claim key per contract
+  const id = `${a}#claim@${PHOEBE}`; // one claim key per contract
   const kp = keyFor(id);
   const onChain = await acct(a).getAccessKey(kp.getPublicKey()).then(() => true, () => false);
   if (onChain) continue;
   await acct(a).addFunctionCallAccessKey({
     publicKey: kp.getPublicKey(),
-    contractId: KLERO,
+    contractId: PHOEBE,
     methodNames: ['claim'],
     allowance: nearToYocto('0.25'),
   });
@@ -195,7 +195,7 @@ const deployment = {
   rpc: RPC,
   createdAt: new Date().toISOString(),
   operatorId: OP,
-  contractId: KLERO,
+  contractId: PHOEBE,
   token: { id: FUSD, symbol: 'FUSD', decimals: 6 },
   providers: Object.fromEntries(
     Object.entries(PROVIDERS).map(([n, price]) => [n, { accountId: `${n}.${OP}`, price }]),
@@ -204,8 +204,8 @@ const deployment = {
   agents: AGENTS,
   spendCap: CAP,
   previousContracts: [`klero.${OP}`],
-  explorer: `https://testnet.nearblocks.io/address/${KLERO}`,
+  explorer: `https://testnet.nearblocks.io/address/${PHOEBE}`,
 };
 writeFileSync(DEPLOY, JSON.stringify(deployment, null, 2));
 log(`wrote ${DEPLOY}`);
-console.log(await view(KLERO, 'get_config'));
+console.log(await view(PHOEBE, 'get_config'));

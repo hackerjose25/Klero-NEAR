@@ -1,4 +1,4 @@
-// Klero approver on NEAR: turns a human's World ID approval into an on-chain `approve_overcap`.
+// Phoebe approver on NEAR: turns a human's World ID approval into an on-chain `approve_overcap`.
 //
 //   agent (round winner, price over the human's on-chain cap) → POST /approvals
 //   approver checks on-chain that the agent won this round, then starts a World ID device flow
@@ -16,9 +16,9 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Fastify from 'fastify';
 import { createRemoteJWKSet, jwtVerify } from 'jose';
-import { KleroNear, loadNearKeys, nearblocksTx } from '@klero/near';
+import { PhoebeNear, loadNearKeys, nearblocksTx } from '@klero/near';
 
-const near = new KleroNear();
+const near = new PhoebeNear();
 const keys = loadNearKeys();
 const operator = near.account(near.d.operatorId, keys[near.d.operatorId]!);
 const PUBLIC_URL = (process.env.APPROVER_PUBLIC_URL ?? 'http://localhost:4060').replace(/\/$/, '');
@@ -202,7 +202,7 @@ app.get<{ Params: { id: string } }>('/approvals/:id/review', async (req, reply) 
   if (!a || a.mode !== 'manual') return reply.code(404).send('not found');
   const esc = (s: string) => s.replace(/[<>&"]/g, (c) => `&#${c.charCodeAt(0)};`);
   return reply.type('text/html').send(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width">
-<title>Klero approval</title><body style="font:16px system-ui;max-width:520px;margin:40px auto;padding:0 16px">
+<title>Phoebe approval</title><body style="font:16px system-ui;max-width:520px;margin:40px auto;padding:0 16px">
 <h2>Approve an over-cap payment?</h2>
 <p style="background:#fff3cd;padding:8px">Manual mode: World ID is not configured, so this page stands in for World App.</p>
 <p>Agent <b>${esc(a.agent)}</b> wants to pay <b>${Number(a.amount) / 1e6} FUSD</b><br>job ${esc(a.jobKey.slice(0, 16))}…, round ${a.round}</p>

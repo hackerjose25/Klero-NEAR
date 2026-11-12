@@ -1,6 +1,6 @@
-// Klero providers on NEAR: one server hosts scribe-a, scribe-b and scribe-premium.
+// Phoebe providers on NEAR: one server hosts scribe-a, scribe-b and scribe-premium.
 //
-// Payment rule: pay on delivery. The agent's FUSD sits in the Klero contract's escrow. The provider checks the
+// Payment rule: pay on delivery. The agent's FUSD sits in the Phoebe contract's escrow. The provider checks the
 // escrow on-chain, does the work, and only then calls `settle`. If the work fails or runs past the deadline, the
 // provider never settles and anyone can void the intent, which refunds the agent. Money moves at most once.
 //
@@ -11,10 +11,10 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import Fastify from 'fastify';
 import { toFile } from 'openai';
-import { KleroNear, intentIdOf, loadNearKeys, nearblocksTx } from '@klero/near';
+import { PhoebeNear, intentIdOf, loadNearKeys, nearblocksTx } from '@klero/near';
 import { llm, LLM_MODEL } from '@klero/near/llm';
 
-const near = new KleroNear();
+const near = new PhoebeNear();
 const keys = loadNearKeys();
 const PUBLIC_URL = (process.env.PROVIDERS_PUBLIC_URL ?? 'http://localhost:4050').replace(/\/$/, '');
 const SAMPLE = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'provider', 'public', 'sample-meeting.mp3');
@@ -92,7 +92,7 @@ app.post<{ Params: { providerId: string }; Body: { jobKey: string; round: number
     if (state === null) {
       // x402-style challenge: pay into escrow, then call again
       return reply.code(402).send(
-        err('PAYMENT_REQUIRED', 'escrow the price on the Klero contract, then retry', {
+        err('PAYMENT_REQUIRED', 'escrow the price on the Phoebe contract, then retry', {
           accepts: { token: near.d.token.id, amount: me.price, payTo: me.accountId, escrow: near.d.contractId, msg: { job_key: jobKey, round, ttl_s: 120 } },
         }),
       );

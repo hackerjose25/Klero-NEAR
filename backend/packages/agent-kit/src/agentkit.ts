@@ -1,6 +1,6 @@
 // World AgentKit, agent side: prove this agent's wallet is backed by a real human (World AgentBook).
 // The provider puts an `extensions.agentkit` challenge in its x402 402 response; the agent signs it (SIWE, EIP-191)
-// with its own key — the same key as its Hedera account — and hands the header to the Klero API, which only
+// with its own key — the same key as its Hedera account — and hands the header to the Phoebe API, which only
 // relays it. Payment stays on Hedera; World Chain is only the chain the SIWE message names.
 import { H_AGENT, H_JOB, H_ROUND, type ServiceRow } from '@forkos/shared';
 import { createAgentkitClient, type AgentkitClient } from '@worldcoin/agentkit';

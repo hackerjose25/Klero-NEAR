@@ -1,6 +1,6 @@
 # Points the demo job at a fresh, never-paid meeting and restarts the API (a paid meeting skips straight to
 # "already paid"). Creates services\provider\public\video-<N>.mp3 from the sample if it does not exist.
-#   powershell -ExecutionPolicy Bypass -File D:\Projects\Klero-1\backend\scripts\win\use-meeting.ps1 -N 20
+#   powershell -ExecutionPolicy Bypass -File D:\Projects\Phoebe-1\backend\scripts\win\use-meeting.ps1 -N 20
 param([Parameter(Mandatory = $true)][int]$N)
 . (Join-Path $PSScriptRoot 'common.ps1')
 $public = Join-Path $BackendDir 'services\provider\public'

@@ -34,10 +34,10 @@ export default function Benefits() {
                 <div className="primary-button-text-items w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e">
                   <div className="primary-button-text-wrap w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e">
                     <div className="primary-button-text one">
-                      TRY KLERO
+                      TRY PHOEBE
                     </div>
                     <div className="primary-button-text two">
-                      TRY KLERO
+                      TRY PHOEBE
                     </div>
                   </div>
                 </div>
@@ -76,7 +76,7 @@ export default function Benefits() {
                   One Winner
                 </div>
                 <p className="paragraph-small benefits-card-content-description">
-                  Agents call claim on the Klero contract. The first claim in a round wins, and every agent, provider and auditor reads the same winner from the contract.
+                  Agents call claim on the Phoebe contract. The first claim in a round wins, and every agent, provider and auditor reads the same winner from the contract.
                 </p>
               </div>
             </div>

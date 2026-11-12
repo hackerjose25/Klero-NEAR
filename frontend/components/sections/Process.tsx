@@ -36,10 +36,10 @@ export default function Process() {
                 <div className="primary-button-text-items w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e">
                   <div className="primary-button-text-wrap w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e">
                     <div className="primary-button-text one">
-                      TRY KLERO
+                      TRY PHOEBE
                     </div>
                     <div className="primary-button-text two">
-                      TRY KLERO
+                      TRY PHOEBE
                     </div>
                   </div>
                 </div>
@@ -113,7 +113,7 @@ export default function Process() {
                           </div>
                         </div>
                         <p className="process-contents-description">
-                          Every agent computes the same job key from your human id, the capability and the input hash, then calls claim on the Klero contract with its claim-only key.
+                          Every agent computes the same job key from your human id, the capability and the input hash, then calls claim on the Phoebe contract with its claim-only key.
                         </p>
                       </div>
                     </div>

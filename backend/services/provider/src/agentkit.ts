@@ -36,7 +36,7 @@ function consumeNonce(nonce: string): boolean {
 export async function agentkitChallenge(): Promise<Record<string, unknown> | undefined> {
   if (env.PROVIDER_AGENTKIT === 'off') return undefined;
   const decl = declareAgentkitExtension({
-    statement: 'Klero: this agent is backed by a real human (World AgentKit)',
+    statement: 'Phoebe: this agent is backed by a real human (World AgentKit)',
     network: AGENTKIT_CHAIN,
     resourceUri: ENDPOINT,
     expirationSeconds: CHALLENGE_TTL_S,

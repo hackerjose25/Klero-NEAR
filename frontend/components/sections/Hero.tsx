@@ -24,10 +24,10 @@ export default function Hero() {
                 <div className="primary-button-text-items w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e">
                   <div className="primary-button-text-wrap w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e">
                     <div className="primary-button-text one">
-                      TRY KLERO
+                      TRY PHOEBE
                     </div>
                     <div className="primary-button-text two">
-                      TRY KLERO
+                      TRY PHOEBE
                     </div>
                   </div>
                 </div>
@@ -97,7 +97,7 @@ export default function Hero() {
                   <rect width="324" height="228" fill="#2A2A2A" />
                   <rect x="8" y="8" width="308" height="29.85" fill="#fff" />
                   <text x="20" y="27" fill="#1F1F21" fillOpacity=".74" fontFamily="Arial, sans-serif" fontSize="8" letterSpacing="1">
-                    KLERO
+                    PHOEBE
                   </text>
                   <rect x="209.8" y="12" width="69.2" height="21.85" rx="10.9" fill="#D3FB43" />
                   <text x="219" y="26" fill="#1F1F21" fillOpacity=".74" fontFamily="Arial, sans-serif" fontSize="8">
@@ -175,7 +175,7 @@ export default function Hero() {
               </div>
             </div>
             <div className="hero-banner-img-flex">
-              <div className="hero-banner-img-wrap" aria-label="Klero">
+              <div className="hero-banner-img-wrap" aria-label="Phoebe">
                 <div className="hero-banner-img-items">
                   <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#d3fb43', color: '#000', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>K</div>
                 </div>

@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import WebflowRuntime from '@/components/WebflowRuntime';
 
-const TITLE = "Klero – Agents fork. Money doesn't.";
+const TITLE = "Phoebe – Agents fork. Money doesn't.";
 const DESCRIPTION =
-  'Klero is the exactly-once layer for AI agent payments: one winner per job decided by a NEAR contract, escrow with a deadline that ends PAID once or VOID and refunded, and an on-chain spending cap the human controls.';
+  'Phoebe is the exactly-once layer for AI agent payments: one winner per job decided by a NEAR contract, escrow with a deadline that ends PAID once or VOID and refunded, and an on-chain spending cap the human controls.';
 
 export const metadata: Metadata = {
   title: TITLE,

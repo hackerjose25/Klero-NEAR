@@ -31,7 +31,7 @@ export default function Statistics() {
         <div className="container-2nd">
           <div fade-anim="True" className="statitics-content-box">
             <p className="statitics-content-text">
-              An agent that drops its connection should never have to guess whether it paid. With Klero it never does.
+              An agent that drops its connection should never have to guess whether it paid. With Phoebe it never does.
             </p>
           </div>
           <div className="statitics-flex">

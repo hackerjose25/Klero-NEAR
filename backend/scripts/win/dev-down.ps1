@@ -1,5 +1,5 @@
-# Stops the Klero backend services started by dev-up.ps1. Add -Db to stop Postgres too.
-#   powershell -ExecutionPolicy Bypass -File D:\Projects\Klero-1\backend\scripts\win\dev-down.ps1 [-Db]
+# Stops the Phoebe backend services started by dev-up.ps1. Add -Db to stop Postgres too.
+#   powershell -ExecutionPolicy Bypass -File D:\Projects\Phoebe-1\backend\scripts\win\dev-down.ps1 [-Db]
 param([switch]$Db)
 . (Join-Path $PSScriptRoot 'common.ps1')
 foreach ($name in $Services.Keys) {

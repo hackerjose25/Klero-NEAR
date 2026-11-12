@@ -3,7 +3,7 @@ import { Mirror } from '@forkos/shared';
 import { Command } from 'commander';
 import { audit } from './audit';
 
-const program = new Command().name('klero').description('Verify Klero agent payments');
+const program = new Command().name('phoebe').description('Verify Phoebe agent payments');
 
 program
   .command('audit')
@@ -21,8 +21,8 @@ program
 
 program
   .command('audit-near')
-  .description('Replay the Klero NEAR contract from public data and check every job')
-  .option('--contract <id>', 'Klero contract', 'klero-v2.klero-mw8x6bn1.testnet')
+  .description('Replay the Phoebe NEAR contract from public data and check every job')
+  .option('--contract <id>', 'Phoebe contract', 'klero-v2.klero-mw8x6bn1.testnet')
   .option('--token <id>', 'NEP-141 payment token', 'fusd.klero-mw8x6bn1.testnet')
   .option('--rpc <url>', 'NEAR RPC', 'https://test.rpc.fastnear.com')
   .option('--archival <url>', 'archival NEAR RPCs, comma-separated, tried in order', 'https://archival-rpc.testnet.fastnear.com,https://archival-rpc.testnet.near.org')

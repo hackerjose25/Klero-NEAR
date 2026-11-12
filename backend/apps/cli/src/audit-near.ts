@@ -1,6 +1,6 @@
-// Independent audit of the Klero contract on NEAR.
+// Independent audit of the Phoebe contract on NEAR.
 // It lists the contract's transactions (and the escrows sent through the token) from NearBlocks, reads every
-// receipt's logs from a public NEAR RPC, replays the NEP-297 events, and checks each job. No Klero server or key is
+// receipt's logs from a public NEAR RPC, replays the NEP-297 events, and checks each job. No Phoebe server or key is
 // involved; NearBlocks is only used to find tx hashes, and every fact is read back from RPC.
 
 type Ev = { event: string; data: any; tx: string; ts: bigint; seq: number };
@@ -121,7 +121,7 @@ export async function auditNear(o: AuditNearOpts) {
     }
   }
   events.sort((a, b) => (a.ts === b.ts ? a.seq - b.seq : a.ts < b.ts ? -1 : 1));
-  log(`${events.length} Klero events, ${moves.length} token transfers`);
+  log(`${events.length} Phoebe events, ${moves.length} token transfers`);
 
   // Replay.
   const humanOf = new Map<string, string>(); // agent -> human

@@ -5,7 +5,7 @@ export default function About() {
         <div className="container title-container top-border">
           <div className="section-title-flex">
             <h2 className="section-title">
-              ABOUT KLERO
+              ABOUT PHOEBE
             </h2>
             <div className="section-title section-number">
               001
@@ -54,11 +54,11 @@ export default function About() {
                 </div>
                 <div fade-anim="True" className="home-about-author-wrap">
                   <div className="home-about-author-img-box">
-                    <img src="/assets/klero_mark.png" loading="lazy" alt="Klero" className="home-about-author-img" style={{ borderRadius: "50%", objectFit: "cover" }} />
+                    <img src="/assets/klero_mark.png" loading="lazy" alt="Phoebe" className="home-about-author-img" style={{ borderRadius: "50%", objectFit: "cover" }} />
                   </div>
                   <div className="home-about-author-info-box">
                     <div className="home-about-author-name">
-                      KLERO
+                      PHOEBE
                     </div>
                     <p className="home-about-author-designation">
                       NEAR HACKATHON · 2026
@@ -72,10 +72,10 @@ export default function About() {
                     <div className="primary-button-text-items">
                       <div className="primary-button-text-wrap">
                         <div className="primary-button-text one">
-                          TRY KLERO
+                          TRY PHOEBE
                         </div>
                         <div className="primary-button-text two">
-                          TRY KLERO
+                          TRY PHOEBE
                         </div>
                       </div>
                     </div>
@@ -106,7 +106,7 @@ export default function About() {
                         One winner per job
                       </div>
                       <p className="home-about-card-text">
-                        Every agent calls claim on the Klero contract. The first claim in a round wins, and anyone can read the winner from the contract.
+                        Every agent calls claim on the Phoebe contract. The first claim in a round wins, and anyone can read the winner from the contract.
                       </p>
                     </div>
                   </div>

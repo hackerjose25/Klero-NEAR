@@ -1,18 +1,18 @@
 // Three agents of one human buy the same transcription on NEAR. Exactly one pays.
 //
-//   each agent: pick a provider (LLM, or a persona rule without a key) → claim on the Klero contract
+//   each agent: pick a provider (LLM, or a persona rule without a key) → claim on the Phoebe contract
 //   winner:     ask the provider (402) → escrow FUSD → provider works, then settles → result
 //   losers:     wait for the contract to say PAID → fetch the winner's result
 //   if the provider never delivers, the winner voids after the deadline (refund) and the job reopens.
 //
 // Usage: pnpm agents:near            (providers must be running: pnpm dev:providers:near)
 import { createHash } from 'node:crypto';
-import { KleroNear, claimKeyId, intentIdOf, loadNearKeys, nearblocksTx, type NearJob } from '@klero/near';
+import { PhoebeNear, claimKeyId, intentIdOf, loadNearKeys, nearblocksTx, type NearJob } from '@klero/near';
 import { llm, LLM_MODEL } from '@klero/near/llm';
 
 const PROVIDERS = (process.env.PROVIDERS_URL ?? 'http://localhost:4050').replace(/\/$/, '');
 const APPROVER = (process.env.APPROVER_URL ?? 'http://localhost:4060').replace(/\/$/, '');
-const near = new KleroNear();
+const near = new PhoebeNear();
 const keys = loadNearKeys();
 const sha256 = (b: Uint8Array | string) => createHash('sha256').update(b).digest('hex');
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

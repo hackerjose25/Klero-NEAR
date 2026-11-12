@@ -41,10 +41,10 @@ export default function Intelligent() {
                 <div className="primary-button-text-items">
                   <div className="primary-button-text-wrap">
                     <div className="primary-button-text one">
-                      TRY KLERO
+                      TRY PHOEBE
                     </div>
                     <div className="primary-button-text two">
-                      TRY KLERO
+                      TRY PHOEBE
                     </div>
                   </div>
                 </div>

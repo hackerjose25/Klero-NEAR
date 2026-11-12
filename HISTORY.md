@@ -2,6 +2,14 @@
 
 What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UTC. Baseline: tag `pre-hackathon`.
 
+## 2026-11-12: renamed Klero → Phoebe
+- Every name people see is now Phoebe: the website, logos, the page titles and manifest, the terminal output (`phoebe@`, "Phoebe events"),
+  the CLI (`phoebe`), docs, the submission text, and the licence holder. Internal code uses `PhoebeNear`.
+- Kept as `klero` on purpose: the testnet accounts (`klero-v2.klero-mw8x6bn1.testnet`, …), the contract's event standard and memos
+  (changing them means a redeploy and redoing every proof), the `@klero/*` workspace package names, asset file names, the repo URL,
+  raw output in `docs/proof-near.md`, and the Hedera-era docs. README says "formerly Klero".
+- Checked: backend typecheck clean, frontend builds, `pnpm audit:near` passes (4 jobs, 33 checks).
+
 ## 2026-11-12: no traces of the old project in what the demo shows
 - The NEAR commands (`agents:near`, `dev:providers:near`, `dev:approver:near`, `audit:near`, `bootstrap:near`, `smoke:*:near`) run tsx
   directly with `scripts/load-env.mjs`. It loads `backend/.env` only if it exists, so the `../../.env not found` warning is gone, and

@@ -72,7 +72,7 @@ export default function Testimonials() {
                       <div className="testimonials-content-wrap">
                         <div className="testimonials-content-box">
                           <p className="testimonials-content-text">
-                            Agents claim with a key that can only call claim on the Klero contract, and the contract accepts an escrow only from the round's winner.
+                            Agents claim with a key that can only call claim on the Phoebe contract, and the contract accepts an escrow only from the round's winner.
                           </p>
                           <div className="testimonials-author-info-wrap">
                             <div className="testimonials-author-info-flex">

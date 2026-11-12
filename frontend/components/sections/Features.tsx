@@ -52,7 +52,7 @@ export default function Features() {
                             <rect width="324" height="228" fill="#2A2A2A" />
                             <rect x="8" y="8" width="308" height="29.85" fill="#fff" />
                             <text x="20" y="27" fill="#1F1F21" fillOpacity=".74" fontFamily="Arial, sans-serif" fontSize="8" letterSpacing="1">
-                              KLERO
+                              PHOEBE
                             </text>
                             <rect x="209.8" y="12" width="69.2" height="21.85" rx="10.9" fill="#D3FB43" />
                             <text x="219" y="26" fill="#1F1F21" fillOpacity=".74" fontFamily="Arial, sans-serif" fontSize="8">

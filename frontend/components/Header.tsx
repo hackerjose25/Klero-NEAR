@@ -4,8 +4,8 @@ export default function Header() {
       <div className="section-wrap">
         <div className="main-header-flex">
           <a href="/" aria-current="page" className="main-header-logo-box w-inline-block w--current">
-            <img loading="lazy" src="/assets/klero_logo.svg" alt="Klero logo" className="main-header-logo black" style={{ height: "40px", width: "auto" }} />
-            <img loading="lazy" src="/assets/klero_logo_white.svg" alt="Klero logo" className="main-header-logo white" style={{ height: "40px", width: "auto" }} />
+            <img loading="lazy" src="/assets/klero_logo.svg" alt="Phoebe logo" className="main-header-logo black" style={{ height: "40px", width: "auto" }} />
+            <img loading="lazy" src="/assets/klero_logo_white.svg" alt="Phoebe logo" className="main-header-logo white" style={{ height: "40px", width: "auto" }} />
           </a>
           <div className="main-header-navbar">
             <div className="main-header-navigation">
@@ -40,10 +40,10 @@ export default function Header() {
               <div className="primary-button-text-items">
                 <div className="primary-button-text-wrap">
                   <div className="primary-button-text one">
-                    TRY KLERO
+                    TRY PHOEBE
                   </div>
                   <div className="primary-button-text two">
-                    TRY KLERO
+                    TRY PHOEBE
                   </div>
                 </div>
               </div>
