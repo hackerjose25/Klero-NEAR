@@ -3,7 +3,7 @@ import { Mirror } from '@forkos/shared';
 import { Command } from 'commander';
 import { audit } from './audit';
 
-const program = new Command().name('forkos').description('Verify ForkOS agent payments from Hedera Mirror Node');
+const program = new Command().name('klero').description('Verify Klero agent payments');
 
 program
   .command('audit')

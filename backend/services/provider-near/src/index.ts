@@ -56,7 +56,7 @@ const err = (code: string, message: string, extra: object = {}) => ({ error: { c
 app.get('/health', async () => ({ ok: true, contract: near.d.contractId, llm: llm ? 'on' : 'stub' }));
 app.get('/sample-meeting.mp3', async (_req, reply) => reply.type('audio/mpeg').send(readFileSync(SAMPLE)));
 
-/** Service directory (replaces the HCS SERVICE announcements of the Hedera version). */
+/** Service directory: the three providers, their prices and payout accounts. */
 app.get('/providers', async () =>
   Object.entries(near.d.providers).map(([providerId, p]) => ({
     providerId,

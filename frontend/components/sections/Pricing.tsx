@@ -584,7 +584,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6 hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
-                              Measured in the Hedera version
+                              Three agents, three payments
                             </div>
                           </div>
                           <div className="home-pricing-list-items">

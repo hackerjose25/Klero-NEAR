@@ -2,6 +2,14 @@
 
 What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UTC. Baseline: tag `pre-hackathon`.
 
+## 2026-11-12: no traces of the old project in what the demo shows
+- The NEAR commands (`agents:near`, `dev:providers:near`, `dev:approver:near`, `audit:near`, `bootstrap:near`, `smoke:*:near`) run tsx
+  directly with `scripts/load-env.mjs`. It loads `backend/.env` only if it exists, so the `../../.env not found` warning is gone, and
+  no `forkos@` package banner is printed. The root package is renamed `klero`, and so is the CLI (`klero`).
+- The `/near` page and the landing page no longer mention Hedera. The origin is still disclosed in README.md and the submission
+  text, because the hackathon rules (Q-002/Q-003) require it.
+- Checked: providers start clean; `pnpm audit:near` prints only Klero output (4 jobs, 33 checks, all passed). Frontend builds.
+
 ## 2026-11-12: landing page rewritten for NEAR (same design)
 - Reverted the previous change (`1764623`), which had replaced the landing with the `/near` page. The human wanted the original UI kept.
 - `/` is the original landing with every Hedera/World claim replaced by its NEAR counterpart: contract claim, escrow with a deadline,

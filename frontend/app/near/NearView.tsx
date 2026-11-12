@@ -218,9 +218,7 @@ export default function NearView() {
             Run <code>pnpm audit:near</code> in <code>backend/</code>. It replays every job from NearBlocks and an archival RPC and checks
             one winner per round, paid at most once, the cap, and every settlement and refund against the token’s transfers. Source and
             proof: <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer">github.com/hackerjose25/Klero-NEAR</a>.
-          </p>
-          <p className="nr-micro" style={{ marginTop: 12 }}>
-            Klero was first built on Hedera; that version is tag <a href="https://github.com/hackerjose25/Klero-NEAR/tree/pre-hackathon" target="_blank" rel="noreferrer">pre-hackathon</a>. Only the NEAR work is the hackathon entry.
+
           </p>
         </section>
       </main>

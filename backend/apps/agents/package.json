@@ -7,7 +7,7 @@
     "start": "tsx --env-file-if-exists=../../.env src/run.ts",
     "baseline": "tsx --env-file-if-exists=../../.env src/baseline.ts",
     "link": "tsx --env-file-if-exists=../../.env src/link.ts",
-    "start:near": "tsx --env-file-if-exists=../../.env src/run-near.ts"
+    "start:near": "tsx --import ../../scripts/load-env.mjs src/run-near.ts"
   },
   "dependencies": {
     "@forkos/agent-kit": "workspace:*",

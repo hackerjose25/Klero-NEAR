@@ -1,5 +1,5 @@
 {
-  "name": "forkos",
+  "name": "klero",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@9.15.0",
@@ -11,8 +11,8 @@
     "db:down": "docker compose down",
     "db:migrate": "tsx --env-file-if-exists=.env scripts/migrate.ts",
     "keys:new": "tsx scripts/new-keys.ts",
-    "bootstrap:near": "tsx --env-file-if-exists=.env scripts/bootstrap-near.ts",
-    "smoke:near": "tsx --env-file-if-exists=.env scripts/smoke-near.ts",
+    "bootstrap:near": "tsx --import ./scripts/load-env.mjs scripts/bootstrap-near.ts",
+    "smoke:near": "tsx --import ./scripts/load-env.mjs scripts/smoke-near.ts",
     "bootstrap:hedera": "tsx --env-file-if-exists=.env scripts/bootstrap-hedera.ts",
     "smoke:hcs": "tsx --env-file-if-exists=.env scripts/smoke-hcs.ts",
     "smoke:pay": "tsx --env-file-if-exists=.env scripts/smoke-pay.ts",
@@ -33,11 +33,11 @@
     "dev:up": "bash scripts/dev-up.sh",
     "dev:down": "bash scripts/dev-down.sh",
     "agent:link": "pnpm --filter @forkos/agents run link",
-    "dev:providers:near": "pnpm --filter @klero/provider-near dev",
-    "agents:near": "pnpm --filter @forkos/agents start:near",
-    "dev:approver:near": "pnpm --filter @klero/approver-near dev",
-    "audit:near": "pnpm --filter forkos start audit-near",
-    "smoke:cap:near": "tsx --env-file-if-exists=.env scripts/smoke-cap-near.ts"
+    "dev:providers:near": "tsx --import ./scripts/load-env.mjs services/provider-near/src/index.ts",
+    "agents:near": "tsx --import ./scripts/load-env.mjs apps/agents/src/run-near.ts",
+    "dev:approver:near": "tsx --import ./scripts/load-env.mjs services/approver-near/src/index.ts",
+    "audit:near": "tsx --import ./scripts/load-env.mjs apps/cli/src/index.ts audit-near",
+    "smoke:cap:near": "tsx --import ./scripts/load-env.mjs scripts/smoke-cap-near.ts"
   },
   "devDependencies": {
     "@forkos/shared": "workspace:^",
