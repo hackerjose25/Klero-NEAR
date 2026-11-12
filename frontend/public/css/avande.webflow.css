@@ -2076,7 +2076,7 @@ textarea.w-input, textarea.w-select {
 }
 
 :root {
-  --_color---main-color--pale: #f1efe2;
+  --_color---main-color--pale: #eef0f7;
   --text-regular--font-family: var(--_base---font-family--your-body-font);
   --_color---text-color--paragraph-color: var(--_color---accent-color--accent-6);
   --text-regular--font-size: var(--_base---font-size--font-size-2x);
@@ -2138,11 +2138,11 @@ textarea.w-input, textarea.w-select {
   --_color---rgb-color--accent-1: #00000080;
   --_common-spacing---spacing--spacing-2x: 8px;
   --_color---normal-color--transparent: transparent;
-  --_color---rgb-color--accent-7: #f1efe280;
+  --_color---rgb-color--accent-7: #eef0f780;
   --_common-spacing---spacing--spacing-16x: 20px;
   --_common-spacing---spacing--spacing-4x: 12px;
   --_ui---container--padding-2x: 40px;
-  --_color---main-color--dark-pale: #dbdac8;
+  --_color---main-color--dark-pale: #d5d9e8;
   --_common-spacing---gap--gap-3x: 16px;
   --_base---font-family--third-family: "Stack Sans Notch", sans-serif;
   --_base---font-weight--font-weight-regular: 400;
@@ -2166,7 +2166,7 @@ textarea.w-input, textarea.w-select {
   --_color---accent-color--accent-4: #bfbfbf;
   --_color---accent-color--accent-1: #fafafb;
   --_color---normal-color--white: white;
-  --_color---main-color--green-neon: #d3fb43;
+  --_color---main-color--green-neon: #00ec97;
   --_common-spacing---gap--gap-14x: 4px;
   --_color---accent-color--accent-10: #0a0a0a;
   --_common-spacing---gap--gap-5x: 24px;
@@ -2208,7 +2208,7 @@ textarea.w-input, textarea.w-select {
   --_base---font-size--font-size-18x: 164px;
   --_ui---primary-button--padding-4x: 12px;
   --_ui---primary-button--padding-3x: 32px;
-  --_color---rgb-color--accent-11: #dbdac840;
+  --_color---rgb-color--accent-11: #d5d9e840;
   --_base---global-size--global-half: 50%;
   --_common-spacing---spacing--spacing-17x: 50px;
   --_common-spacing---spacing--spacing-18x: 28px;
@@ -2229,7 +2229,7 @@ textarea.w-input, textarea.w-select {
   --_base---spacing-letter--spacing-letter-1x: -.01em;
   --_base---font-size--font-size-15x: 72px;
   --_base---font-size--font-size-10x: 40px;
-  --_color---rgb-color--accent-8: #f1efe2b3;
+  --_color---rgb-color--accent-8: #eef0f7b3;
   --_common-spacing---spacing--spacing-22x: -24px;
   --_common-spacing---spacing--spacing-9x: 48px;
   --_common-spacing---gap--gap-9x: 64px;

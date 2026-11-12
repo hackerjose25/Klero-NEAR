@@ -1,9 +1,9 @@
 /* ScanPay app UI — same visual language as the landing page:
    cream paper, black ink, neon-lime accent, sharp corners, uppercase micro-labels. */
 :root {
-  --pale: #f1efe2;
-  --pale-2: #dbdac8;
-  --neon: #d3fb43;
+  --pale: #eef0f7;
+  --pale-2: #d5d9e8;
+  --neon: #00ec97;
   --ink: #000;
   --dark: #2a2a2a;
   --mute: #5d5c52;
@@ -241,7 +241,7 @@ html, body { margin: 0; padding: 0; background: var(--pale); }
 .state.bad .big { background: var(--bad-bg); color: var(--bad); }
 .state.warn .big { background: var(--warn-bg); color: var(--warn); }
 
-.skel { background: linear-gradient(90deg, var(--pale-2) 25%, #e8e6d6 37%, var(--pale-2) 63%); background-size: 400% 100%; animation: sp-shimmer 1.4s ease infinite; min-height: 18px; }
+.skel { background: linear-gradient(90deg, var(--pale-2) 25%, #e3e6f0 37%, var(--pale-2) 63%); background-size: 400% 100%; animation: sp-shimmer 1.4s ease infinite; min-height: 18px; }
 .spin { animation: sp-spin 0.9s linear infinite; }
 .bars { display: flex; align-items: flex-end; gap: 6px; height: 120px; }
 .bars .bar { flex: 1; background: var(--ink); min-height: 3px; position: relative; }

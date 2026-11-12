@@ -54,7 +54,7 @@ export default function Features() {
                             <text x="20" y="27" fill="#1F1F21" fillOpacity=".74" fontFamily="Arial, sans-serif" fontSize="8" letterSpacing="1">
                               PHOEBE
                             </text>
-                            <rect x="209.8" y="12" width="69.2" height="21.85" rx="10.9" fill="#D3FB43" />
+                            <rect x="209.8" y="12" width="69.2" height="21.85" rx="10.9" fill="#00ec97" />
                             <text x="219" y="26" fill="#1F1F21" fillOpacity=".74" fontFamily="Arial, sans-serif" fontSize="8">
                               Per job
                             </text>
@@ -66,10 +66,10 @@ export default function Features() {
                               <circle cx="296.4" cy="22.9" r=".55" />
                             </g>
                             <g className="circle-bars">
-                              <use className="circle-bar" href="#outer-bar" transform="rotate(-84 161.5 181)" fill="#D3FB43" />
-                              <use className="circle-bar" href="#outer-bar" transform="rotate(-72 161.5 181)" fill="#D3FB43" />
-                              <use className="circle-bar" href="#outer-bar" transform="rotate(-60 161.5 181)" fill="#D3FB43" />
-                              <use className="circle-bar" href="#outer-bar" transform="rotate(-48 161.5 181)" fill="#D3FB43" />
+                              <use className="circle-bar" href="#outer-bar" transform="rotate(-84 161.5 181)" fill="#00ec97" />
+                              <use className="circle-bar" href="#outer-bar" transform="rotate(-72 161.5 181)" fill="#00ec97" />
+                              <use className="circle-bar" href="#outer-bar" transform="rotate(-60 161.5 181)" fill="#00ec97" />
+                              <use className="circle-bar" href="#outer-bar" transform="rotate(-48 161.5 181)" fill="#00ec97" />
                               <use className="circle-bar" href="#outer-bar" transform="rotate(-36 161.5 181)" fill="#D7FD41" opacity=".5" />
                               <use className="circle-bar" href="#outer-bar" transform="rotate(-24 161.5 181)" fill="#D7FD41" opacity=".5" />
                               <use className="circle-bar" href="#outer-bar" transform="rotate(-12 161.5 181)" fill="#D7FD41" opacity=".5" />
@@ -82,7 +82,7 @@ export default function Features() {
                               <use className="circle-bar" href="#outer-bar" transform="rotate(72 161.5 181)" fill="#D7FD41" opacity=".1" />
                               <use className="circle-bar" href="#outer-bar" transform="rotate(84 161.5 181)" fill="#D7FD41" opacity=".1" />
                             </g>
-                            <g className="circle-dots" fill="#D3FB43">
+                            <g className="circle-dots" fill="#00ec97">
                               <use className="circle-dot" href="#inner-dot" transform="rotate(-84 161.5 181)" />
                               <use className="circle-dot" href="#inner-dot" transform="rotate(-76 161.5 181)" />
                               <use className="circle-dot" href="#inner-dot" transform="rotate(-68 161.5 181)" />
@@ -113,7 +113,7 @@ export default function Features() {
                               1
                             </text>
                             <g fontFamily="Arial, sans-serif" fontSize="8" fill="#FAFAFA" fillOpacity=".56">
-                              <circle cx="20.3" cy="212" r="3" fill="none" stroke="#D3FB43" strokeWidth="2" />
+                              <circle cx="20.3" cy="212" r="3" fill="none" stroke="#00ec97" strokeWidth="2" />
                               <text x="29" y="215">
                                 Claim
                               </text>

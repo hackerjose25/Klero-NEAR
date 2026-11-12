@@ -8,8 +8,8 @@
   "lang": "en",
   "categories": ["finance", "business"],
   "display": "standalone",
-  "background_color": "#f1efe2",
-  "theme_color": "#f1efe2",
+  "background_color": "#eef0f7",
+  "theme_color": "#eef0f7",
   "icons": [
     {
       "src": "/icon-192.png",

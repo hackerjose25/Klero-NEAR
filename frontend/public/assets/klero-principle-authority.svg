@@ -4,25 +4,25 @@
 
 <rect x="40" y="38" width="580" height="52" fill="#FAFAFA"/><text x="62" y="71" font-family="Courier New, monospace" font-size="21" letter-spacing="2" fill="#333">AGENT AUTHORITY</text><circle cx="586" cy="64" r="17" fill="#EDEDED"/>
 <circle cx="150" cy="250" r="46" fill="#3A3A3A" stroke="#555" stroke-width="5"/>
-<circle cx="142" cy="250" r="14" fill="none" stroke="#D3FB43" stroke-width="6"/>
-<path d="M156 250 H180 M172 250 V262" stroke="#D3FB43" stroke-width="6" stroke-linecap="round"/>
+<circle cx="142" cy="250" r="14" fill="none" stroke="#00ec97" stroke-width="6"/>
+<path d="M156 250 H180 M172 250 V262" stroke="#00ec97" stroke-width="6" stroke-linecap="round"/>
 <text x="150" y="338" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#BDBDBD">Human</text>
 <circle cx="510" cy="250" r="46" fill="#3A3A3A" stroke="#555" stroke-width="5"/>
-<circle cx="502" cy="250" r="14" fill="none" stroke="#D3FB43" stroke-width="6"/>
-<path d="M516 250 H540 M532 250 V262" stroke="#D3FB43" stroke-width="6" stroke-linecap="round"/>
+<circle cx="502" cy="250" r="14" fill="none" stroke="#00ec97" stroke-width="6"/>
+<path d="M516 250 H540 M532 250 V262" stroke="#00ec97" stroke-width="6" stroke-linecap="round"/>
 <text x="510" y="338" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#BDBDBD">Agent</text>
-<path d="M150 306 V380 Q150 410 180 410 H300" stroke="#D3FB43" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
-<path d="M510 306 V380 Q510 410 480 410 H360" stroke="#D3FB43" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+<path d="M150 306 V380 Q150 410 180 410 H300" stroke="#00ec97" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+<path d="M510 306 V380 Q510 410 480 410 H360" stroke="#00ec97" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
 <rect x="190" y="380" width="280" height="64" fill="#fff"/>
 <text x="330" y="421" text-anchor="middle" font-family="Courier New, monospace" font-size="22" fill="#222">SUB-ACCOUNT</text>
-<path d="M330 444 V500" stroke="#D3FB43" stroke-width="5" stroke-linecap="round"/>
+<path d="M330 444 V500" stroke="#00ec97" stroke-width="5" stroke-linecap="round"/>
 <rect x="40" y="500" width="580" height="170" fill="#434343"/>
 <text x="64" y="552" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#BDBDBD">link_agent on-chain</text>
 <text x="64" y="606" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="38" fill="#fff">a.human.testnet</text>
-<rect x="430" y="574" width="166" height="48" fill="#D3FB43"/>
+<rect x="430" y="574" width="166" height="48" fill="#00ec97"/>
 <text x="513" y="607" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="22" fill="#1F1F21">ACTIVE  ✓</text>
 <text x="64" y="650" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#BDBDBD">Epoch 1</text>
-<rect x="40" y="690" width="580" height="80" fill="#D3FB43"/>
+<rect x="40" y="690" width="580" height="80" fill="#00ec97"/>
 <text x="330" y="742" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="30" fill="#1F1F21">Claim key: one method only</text>
 
 </svg>

@@ -99,7 +99,7 @@ export default function Hero() {
                   <text x="20" y="27" fill="#1F1F21" fillOpacity=".74" fontFamily="Arial, sans-serif" fontSize="8" letterSpacing="1">
                     PHOEBE
                   </text>
-                  <rect x="209.8" y="12" width="69.2" height="21.85" rx="10.9" fill="#D3FB43" />
+                  <rect x="209.8" y="12" width="69.2" height="21.85" rx="10.9" fill="#00ec97" />
                   <text x="219" y="26" fill="#1F1F21" fillOpacity=".74" fontFamily="Arial, sans-serif" fontSize="8">
                     Per job
                   </text>
@@ -111,10 +111,10 @@ export default function Hero() {
                     <circle cx="296.4" cy="22.9" r=".55" />
                   </g>
                   <g className="circle-bars">
-                    <use className="circle-bar" href="#outer-bar" transform="rotate(-84 161.5 181)" fill="#D3FB43" />
-                    <use className="circle-bar" href="#outer-bar" transform="rotate(-72 161.5 181)" fill="#D3FB43" />
-                    <use className="circle-bar" href="#outer-bar" transform="rotate(-60 161.5 181)" fill="#D3FB43" />
-                    <use className="circle-bar" href="#outer-bar" transform="rotate(-48 161.5 181)" fill="#D3FB43" />
+                    <use className="circle-bar" href="#outer-bar" transform="rotate(-84 161.5 181)" fill="#00ec97" />
+                    <use className="circle-bar" href="#outer-bar" transform="rotate(-72 161.5 181)" fill="#00ec97" />
+                    <use className="circle-bar" href="#outer-bar" transform="rotate(-60 161.5 181)" fill="#00ec97" />
+                    <use className="circle-bar" href="#outer-bar" transform="rotate(-48 161.5 181)" fill="#00ec97" />
                     <use className="circle-bar" href="#outer-bar" transform="rotate(-36 161.5 181)" fill="#D7FD41" opacity=".5" />
                     <use className="circle-bar" href="#outer-bar" transform="rotate(-24 161.5 181)" fill="#D7FD41" opacity=".5" />
                     <use className="circle-bar" href="#outer-bar" transform="rotate(-12 161.5 181)" fill="#D7FD41" opacity=".5" />
@@ -127,7 +127,7 @@ export default function Hero() {
                     <use className="circle-bar" href="#outer-bar" transform="rotate(72 161.5 181)" fill="#D7FD41" opacity=".1" />
                     <use className="circle-bar" href="#outer-bar" transform="rotate(84 161.5 181)" fill="#D7FD41" opacity=".1" />
                   </g>
-                  <g className="circle-dots" fill="#D3FB43">
+                  <g className="circle-dots" fill="#00ec97">
                     <use className="circle-dot" href="#inner-dot" transform="rotate(-84 161.5 181)" />
                     <use className="circle-dot" href="#inner-dot" transform="rotate(-76 161.5 181)" />
                     <use className="circle-dot" href="#inner-dot" transform="rotate(-68 161.5 181)" />
@@ -158,7 +158,7 @@ export default function Hero() {
                     1
                   </text>
                   <g fontFamily="Arial, sans-serif" fontSize="8" fill="#FAFAFA" fillOpacity=".56">
-                    <circle cx="20.3" cy="212" r="3" fill="none" stroke="#D3FB43" strokeWidth="2" />
+                    <circle cx="20.3" cy="212" r="3" fill="none" stroke="#00ec97" strokeWidth="2" />
                     <text x="29" y="215">
                       Claim
                     </text>
@@ -177,22 +177,22 @@ export default function Hero() {
             <div className="hero-banner-img-flex">
               <div className="hero-banner-img-wrap" aria-label="Phoebe">
                 <div className="hero-banner-img-items">
-                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#d3fb43', color: '#000', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>P</div>
+                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#00ec97', color: '#000', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>P</div>
                 </div>
                 <div className="hero-banner-img-items">
-                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', color: '#d3fb43', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>H</div>
+                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', color: '#00ec97', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>H</div>
                 </div>
                 <div className="hero-banner-img-items">
-                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#d3fb43', color: '#000', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>O</div>
+                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#00ec97', color: '#000', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>O</div>
                 </div>
                 <div className="hero-banner-img-items">
-                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', color: '#d3fb43', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>E</div>
+                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', color: '#00ec97', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>E</div>
                 </div>
                 <div className="hero-banner-img-items">
-                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#d3fb43', color: '#000', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>B</div>
+                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#00ec97', color: '#000', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>B</div>
                 </div>
                 <div className="hero-banner-img-items">
-                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', color: '#d3fb43', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>E</div>
+                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', color: '#00ec97', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>E</div>
                 </div>
               </div>
               <div className="hero-banner-img-text-flex">
@@ -217,24 +217,24 @@ export default function Hero() {
         <div className="hero-banner-marquee-wrap">
           <div className="hero-banner-marquee-flex">
             <div className="hero-banner-marquee-items">
-              <div className="hero-banner-marquee-img" aria-hidden="true" style={{ height: 360, display: 'flex', alignItems: 'flex-end', paddingBottom: 28, boxSizing: 'border-box', justifyContent: 'space-around', background: '#000', color: '#d3fb43', fontSize: 'clamp(28px, 4.2vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}><span>Claim</span><span style={{ color: '#f1efe2' }}>·</span><span>Intent</span><span style={{ color: '#f1efe2' }}>·</span><span>Settled</span><span style={{ color: '#f1efe2' }}>·</span></div>
+              <div className="hero-banner-marquee-img" aria-hidden="true" style={{ height: 360, display: 'flex', alignItems: 'flex-end', paddingBottom: 28, boxSizing: 'border-box', justifyContent: 'space-around', background: '#000', color: '#00ec97', fontSize: 'clamp(28px, 4.2vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}><span>Claim</span><span style={{ color: '#eef0f7' }}>·</span><span>Intent</span><span style={{ color: '#eef0f7' }}>·</span><span>Settled</span><span style={{ color: '#eef0f7' }}>·</span></div>
             </div>
             <div className="hero-banner-marquee-items">
-              <div className="hero-banner-marquee-img" aria-hidden="true" style={{ height: 360, display: 'flex', alignItems: 'flex-end', paddingBottom: 28, boxSizing: 'border-box', justifyContent: 'space-around', background: '#000', color: '#d3fb43', fontSize: 'clamp(28px, 4.2vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}><span>Claim</span><span style={{ color: '#f1efe2' }}>·</span><span>Intent</span><span style={{ color: '#f1efe2' }}>·</span><span>Settled</span><span style={{ color: '#f1efe2' }}>·</span></div>
+              <div className="hero-banner-marquee-img" aria-hidden="true" style={{ height: 360, display: 'flex', alignItems: 'flex-end', paddingBottom: 28, boxSizing: 'border-box', justifyContent: 'space-around', background: '#000', color: '#00ec97', fontSize: 'clamp(28px, 4.2vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}><span>Claim</span><span style={{ color: '#eef0f7' }}>·</span><span>Intent</span><span style={{ color: '#eef0f7' }}>·</span><span>Settled</span><span style={{ color: '#eef0f7' }}>·</span></div>
             </div>
             <div className="hero-banner-marquee-items">
-              <div className="hero-banner-marquee-img" aria-hidden="true" style={{ height: 360, display: 'flex', alignItems: 'flex-end', paddingBottom: 28, boxSizing: 'border-box', justifyContent: 'space-around', background: '#000', color: '#d3fb43', fontSize: 'clamp(28px, 4.2vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}><span>Claim</span><span style={{ color: '#f1efe2' }}>·</span><span>Intent</span><span style={{ color: '#f1efe2' }}>·</span><span>Settled</span><span style={{ color: '#f1efe2' }}>·</span></div>
+              <div className="hero-banner-marquee-img" aria-hidden="true" style={{ height: 360, display: 'flex', alignItems: 'flex-end', paddingBottom: 28, boxSizing: 'border-box', justifyContent: 'space-around', background: '#000', color: '#00ec97', fontSize: 'clamp(28px, 4.2vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}><span>Claim</span><span style={{ color: '#eef0f7' }}>·</span><span>Intent</span><span style={{ color: '#eef0f7' }}>·</span><span>Settled</span><span style={{ color: '#eef0f7' }}>·</span></div>
             </div>
           </div>
           <div className="hero-banner-marquee-flex">
             <div className="hero-banner-marquee-items">
-              <div className="hero-banner-marquee-img" aria-hidden="true" style={{ height: 360, display: 'flex', alignItems: 'flex-end', paddingBottom: 28, boxSizing: 'border-box', justifyContent: 'space-around', background: '#000', color: '#d3fb43', fontSize: 'clamp(28px, 4.2vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}><span>Claim</span><span style={{ color: '#f1efe2' }}>·</span><span>Intent</span><span style={{ color: '#f1efe2' }}>·</span><span>Settled</span><span style={{ color: '#f1efe2' }}>·</span></div>
+              <div className="hero-banner-marquee-img" aria-hidden="true" style={{ height: 360, display: 'flex', alignItems: 'flex-end', paddingBottom: 28, boxSizing: 'border-box', justifyContent: 'space-around', background: '#000', color: '#00ec97', fontSize: 'clamp(28px, 4.2vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}><span>Claim</span><span style={{ color: '#eef0f7' }}>·</span><span>Intent</span><span style={{ color: '#eef0f7' }}>·</span><span>Settled</span><span style={{ color: '#eef0f7' }}>·</span></div>
             </div>
             <div className="hero-banner-marquee-items">
-              <div className="hero-banner-marquee-img" aria-hidden="true" style={{ height: 360, display: 'flex', alignItems: 'flex-end', paddingBottom: 28, boxSizing: 'border-box', justifyContent: 'space-around', background: '#000', color: '#d3fb43', fontSize: 'clamp(28px, 4.2vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}><span>Claim</span><span style={{ color: '#f1efe2' }}>·</span><span>Intent</span><span style={{ color: '#f1efe2' }}>·</span><span>Settled</span><span style={{ color: '#f1efe2' }}>·</span></div>
+              <div className="hero-banner-marquee-img" aria-hidden="true" style={{ height: 360, display: 'flex', alignItems: 'flex-end', paddingBottom: 28, boxSizing: 'border-box', justifyContent: 'space-around', background: '#000', color: '#00ec97', fontSize: 'clamp(28px, 4.2vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}><span>Claim</span><span style={{ color: '#eef0f7' }}>·</span><span>Intent</span><span style={{ color: '#eef0f7' }}>·</span><span>Settled</span><span style={{ color: '#eef0f7' }}>·</span></div>
             </div>
             <div className="hero-banner-marquee-items">
-              <div className="hero-banner-marquee-img" aria-hidden="true" style={{ height: 360, display: 'flex', alignItems: 'flex-end', paddingBottom: 28, boxSizing: 'border-box', justifyContent: 'space-around', background: '#000', color: '#d3fb43', fontSize: 'clamp(28px, 4.2vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}><span>Claim</span><span style={{ color: '#f1efe2' }}>·</span><span>Intent</span><span style={{ color: '#f1efe2' }}>·</span><span>Settled</span><span style={{ color: '#f1efe2' }}>·</span></div>
+              <div className="hero-banner-marquee-img" aria-hidden="true" style={{ height: 360, display: 'flex', alignItems: 'flex-end', paddingBottom: 28, boxSizing: 'border-box', justifyContent: 'space-around', background: '#000', color: '#00ec97', fontSize: 'clamp(28px, 4.2vw, 64px)', fontWeight: 600, letterSpacing: '-0.03em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}><span>Claim</span><span style={{ color: '#eef0f7' }}>·</span><span>Intent</span><span style={{ color: '#eef0f7' }}>·</span><span>Settled</span><span style={{ color: '#eef0f7' }}>·</span></div>
             </div>
           </div>
           <div className="hero-banner-marquee-icon-wrap">

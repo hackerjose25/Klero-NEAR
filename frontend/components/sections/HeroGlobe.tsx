@@ -105,7 +105,7 @@ export default function HeroGlobe() {
         ctx.arc(sx, sy, 4 + pulse * 14, 0, Math.PI * 2);
         ctx.stroke();
         ctx.globalAlpha = 1;
-        ctx.fillStyle = '#d3fb43';
+        ctx.fillStyle = '#00ec97';
         ctx.strokeStyle = '#000';
         ctx.beginPath();
         ctx.arc(sx, sy, 5, 0, Math.PI * 2);

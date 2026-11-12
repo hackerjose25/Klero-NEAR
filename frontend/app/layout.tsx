@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'The exactly-once payment layer for AI agents, on NEAR.',
   icons: { icon: [{ url: '/icon-192.png', sizes: '192x192', type: 'image/png' }], apple: '/apple-touch-icon.png' },
 };
-export const viewport: Viewport = { themeColor: '#f1efe2', width: 'device-width', initialScale: 1 };
+export const viewport: Viewport = { themeColor: '#eef0f7', width: 'device-width', initialScale: 1 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
