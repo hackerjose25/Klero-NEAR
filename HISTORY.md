@@ -9,6 +9,7 @@ What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UT
   (changing them means a redeploy and redoing every proof), the `@klero/*` workspace package names, asset file names, the repo URL,
   raw output in `docs/proof-near.md`, and the Hedera-era docs. README says "formerly Klero".
 - Checked: backend typecheck clean, frontend builds, `pnpm audit:near` passes (4 jobs, 33 checks).
+- Follow-up (`f43f0a0`): the hero's letter tiles still spelled K-L-E-R-O, because the rename matched whole words only. They now spell P-H-O-E-B-E (six tiles, alternating colors).
 
 ## 2026-11-12: no traces of the old project in what the demo shows
 - The NEAR commands (`agents:near`, `dev:providers:near`, `dev:approver:near`, `audit:near`, `bootstrap:near`, `smoke:*:near`) run tsx
