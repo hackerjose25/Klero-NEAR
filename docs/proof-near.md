@@ -117,3 +117,93 @@ job 09fd9a665884f511… (run mw91tmb0), 3 agents, LLM: off (persona rules)
 ```
 (The run then crashed while reading final balances for its summary: a dropped connection to the public RPC. Read calls are now
 retried. All on-chain steps above had completed.)
+
+## Independent audit (`pnpm audit:near`), run 2026-11-12
+
+The auditor lists the contract's transactions and the escrows sent through the token from NearBlocks (only to find tx hashes).
+It reads every receipt's logs from an archival NEAR RPC and replays the NEP-297 events. It checks each job against the token's
+`ft_transfer` events and the contract's own views. No Klero server or key is involved. Checks per job: one winner per round, paid at
+most once, payer is the round winner, cap respected (or approved), one ending per intent, settlement and refund visible as token
+transfers, contract state matches the replay, and the replay saw every intent the contract holds. The last check was added after a
+deliberately wrong `--token` (escrows not found) still passed; with it, that run reports `VIOLATIONS FOUND`.
+
+```text
+$ pnpm audit:near
+34 transactions to read (26 to the contract, 8 escrows via the token)
+25 Klero events, 11 token transfers
+✓ b1a8f974bcd5a49f  one-winner r0          1 winning claim(s): c.human.klero-mw8x6bn1.testnet
+✓ b1a8f974bcd5a49f  abandoned-free r0      abandoned, no escrow, no money moved
+✓ b1a8f974bcd5a49f  replay-complete r0     no intent on-chain or in replay
+✓ b1a8f974bcd5a49f  one-winner r1          1 winning claim(s): a.human.klero-mw8x6bn1.testnet
+✓ b1a8f974bcd5a49f  replay-complete r1     intent on-chain and in replay
+✓ b1a8f974bcd5a49f  paid-at-most-once      1 settled payment(s)
+✓ b1a8f974bcd5a49f  payer-is-winner r1     payer a.human.klero-mw8x6bn1.testnet → scribe-premium.klero-mw8x6bn1.testnet
+✓ b1a8f974bcd5a49f  cap-respected r1       over cap 1000000, approved up to 2000000
+✓ b1a8f974bcd5a49f  one-ending r1          PAID
+✓ b1a8f974bcd5a49f  settle-on-ledger r1    2000000 → scribe-premium.klero-mw8x6bn1.testnet (tx C5keQsx5k7…)
+✓ b1a8f974bcd5a49f  state-matches r1       contract says PAID, replay says PAID
+✓ 09fd9a665884f511  one-winner r0          1 winning claim(s): a.human.klero-mw8x6bn1.testnet
+✓ 09fd9a665884f511  abandoned-free r0      abandoned, no escrow, no money moved
+✓ 09fd9a665884f511  replay-complete r0     no intent on-chain or in replay
+✓ 09fd9a665884f511  one-winner r1          1 winning claim(s): a.human.klero-mw8x6bn1.testnet
+✓ 09fd9a665884f511  replay-complete r1     intent on-chain and in replay
+✓ 09fd9a665884f511  paid-at-most-once      1 settled payment(s)
+✓ 09fd9a665884f511  payer-is-winner r1     payer a.human.klero-mw8x6bn1.testnet → scribe-premium.klero-mw8x6bn1.testnet
+✓ 09fd9a665884f511  cap-respected r1       over cap 1000000, approved up to 2000000
+✓ 09fd9a665884f511  one-ending r1          PAID
+✓ 09fd9a665884f511  settle-on-ledger r1    2000000 → scribe-premium.klero-mw8x6bn1.testnet (tx 3JJXKaohMc…)
+✓ 09fd9a665884f511  state-matches r1       contract says PAID, replay says PAID
+✓ 321dfc3468a959fa  one-winner r0          1 winning claim(s): a.human.klero-mw8x6bn1.testnet
+✓ 321dfc3468a959fa  replay-complete r0     no intent on-chain or in replay
+✓ 321dfc3468a959fa  paid-at-most-once      0 settled payment(s)
+
+3 jobs, 25 events, 25 checks — ALL PASSED
+
+$ pnpm audit:near --contract klero.klero-mw8x6bn1.testnet
+37 transactions to read (29 to the contract, 8 escrows via the token)
+31 Klero events, 14 token transfers
+✓ bb59243ed7a40cd8  one-winner r0          1 winning claim(s): b.human.klero-mw8x6bn1.testnet
+✓ bb59243ed7a40cd8  replay-complete r0     no intent on-chain or in replay
+✓ bb59243ed7a40cd8  paid-at-most-once      0 settled payment(s)
+✓ 11ec01e9db7292ae  one-winner r0          1 winning claim(s): b.human.klero-mw8x6bn1.testnet
+✓ 11ec01e9db7292ae  replay-complete r0     intent on-chain and in replay
+✓ 11ec01e9db7292ae  paid-at-most-once      1 settled payment(s)
+✓ 11ec01e9db7292ae  payer-is-winner r0     payer b.human.klero-mw8x6bn1.testnet → scribe-premium.klero-mw8x6bn1.testnet
+✓ 11ec01e9db7292ae  cap-respected r0       no cap set
+✓ 11ec01e9db7292ae  one-ending r0          PAID
+✓ 11ec01e9db7292ae  settle-on-ledger r0    2000000 → scribe-premium.klero-mw8x6bn1.testnet (tx AXgQiExn39…)
+✓ 11ec01e9db7292ae  state-matches r0       contract says PAID, replay says PAID
+✓ 0ef4f6989eb0adda  one-winner r0          1 winning claim(s): b.human.klero-mw8x6bn1.testnet
+✓ 0ef4f6989eb0adda  replay-complete r0     intent on-chain and in replay
+✓ 0ef4f6989eb0adda  paid-at-most-once      0 settled payment(s)
+✓ 0ef4f6989eb0adda  payer-is-winner r0     payer b.human.klero-mw8x6bn1.testnet → scribe-b.klero-mw8x6bn1.testnet
+✓ 0ef4f6989eb0adda  cap-respected r0       no cap set
+✓ 0ef4f6989eb0adda  one-ending r0          VOID
+✓ 0ef4f6989eb0adda  refund-on-ledger r0    40000 refunded → b.human.klero-mw8x6bn1.testnet (tx CykwAvSin2…)
+✓ 0ef4f6989eb0adda  state-matches r0       contract says VOID, replay says VOID
+✓ 1b3b6a5b0f7fec8a  one-winner r0          1 winning claim(s): b.human.klero-mw8x6bn1.testnet
+✓ 1b3b6a5b0f7fec8a  replay-complete r0     intent on-chain and in replay
+✓ 1b3b6a5b0f7fec8a  paid-at-most-once      1 settled payment(s)
+✓ 1b3b6a5b0f7fec8a  payer-is-winner r0     payer b.human.klero-mw8x6bn1.testnet → scribe-b.klero-mw8x6bn1.testnet
+✓ 1b3b6a5b0f7fec8a  cap-respected r0       no cap set
+✓ 1b3b6a5b0f7fec8a  one-ending r0          PAID
+✓ 1b3b6a5b0f7fec8a  settle-on-ledger r0    40000 → scribe-b.klero-mw8x6bn1.testnet (tx ALd3Bc4bR6…)
+✓ 1b3b6a5b0f7fec8a  state-matches r0       contract says PAID, replay says PAID
+✓ 0d3cd8b74ebf0ad8  one-winner r0          1 winning claim(s): a.human.klero-mw8x6bn1.testnet
+✓ 0d3cd8b74ebf0ad8  replay-complete r0     intent on-chain and in replay
+✓ 0d3cd8b74ebf0ad8  one-winner r1          1 winning claim(s): a.human.klero-mw8x6bn1.testnet
+✓ 0d3cd8b74ebf0ad8  replay-complete r1     intent on-chain and in replay
+✓ 0d3cd8b74ebf0ad8  paid-at-most-once      1 settled payment(s)
+✓ 0d3cd8b74ebf0ad8  payer-is-winner r0     payer a.human.klero-mw8x6bn1.testnet → scribe-b.klero-mw8x6bn1.testnet
+✓ 0d3cd8b74ebf0ad8  cap-respected r0       no cap set
+✓ 0d3cd8b74ebf0ad8  one-ending r0          VOID
+✓ 0d3cd8b74ebf0ad8  refund-on-ledger r0    40000 refunded → a.human.klero-mw8x6bn1.testnet (tx Fa7uG7QF9w…)
+✓ 0d3cd8b74ebf0ad8  state-matches r0       contract says VOID, replay says VOID
+✓ 0d3cd8b74ebf0ad8  payer-is-winner r1     payer a.human.klero-mw8x6bn1.testnet → scribe-b.klero-mw8x6bn1.testnet
+✓ 0d3cd8b74ebf0ad8  cap-respected r1       no cap set
+✓ 0d3cd8b74ebf0ad8  one-ending r1          PAID
+✓ 0d3cd8b74ebf0ad8  settle-on-ledger r1    40000 → scribe-b.klero-mw8x6bn1.testnet (tx hTYuSYo2HS…)
+✓ 0d3cd8b74ebf0ad8  state-matches r1       contract says PAID, replay says PAID
+
+5 jobs, 31 events, 42 checks — ALL PASSED
+```

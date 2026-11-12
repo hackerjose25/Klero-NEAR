@@ -32,7 +32,10 @@
 >    - `PROVIDERS_FAIL_ONCE=scribe-b` on the providers → crash after escrow → void → refund → round 1.
 >    - `FORCE_PROVIDER=scribe-premium` on the agents → 2 FUSD is over the cap → the agent prints an approval link. Deny → round
 >      abandoned, no money moved; approve → `approve_overcap` on-chain → escrow → delivered.
-> 7. Optional env (`backend/.env`): `WORLD_CLIENT_ID` / `WORLD_CLIENT_SECRET` for World ID approvals (without them the approver runs in a
+> 7. `pnpm audit:near` → replays every job from public data (NearBlocks for tx hashes, archival RPC for logs, the contract's views) and
+>    checks: one winner per round, paid at most once, payer = winner, cap respected, settlement/refund visible as token transfers,
+>    contract state = replay. Output: `ALL PASSED` for v2 (and `--contract klero.klero-mw8x6bn1.testnet` for v1, which holds the VOID runs).
+> 8. Optional env (`backend/.env`): `WORLD_CLIENT_ID` / `WORLD_CLIENT_SECRET` for World ID approvals (without them the approver runs in a
 >    clearly labelled **manual mode**, a local Approve/Deny page); `LLM_API_KEY` (OpenAI, or NEAR AI Cloud with
 >    `LLM_BASE_URL=https://cloud-api.near.ai/v1`) for LLM choices and real transcripts (without it: persona rules, labelled stub transcripts).
 >

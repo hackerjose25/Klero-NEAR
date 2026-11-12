@@ -2,7 +2,16 @@
 
 What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UTC. Baseline: tag `pre-hackathon`.
 
-## 2026-11-12: submission docs for NEAR
+## 2026-11-12: independent NEAR audit (`pnpm audit:near`)
+- `apps/cli/src/audit-near.ts`, command `audit-near`: lists the contract and token transactions from NearBlocks v3 (v1 is retired on
+  testnet), reads receipt logs from an archival RPC (the regular RPC had already pruned 3-day-old txs), replays the events, and checks
+  every job against token transfers and the contract views. RPCs are tried in order, because FastNEAR's archival endpoint returns 429 under load.
+- Found while testing: with a wrong token, the escrows were missing and the audit still passed. Added `replay-complete`, which asks the
+  contract for each round's intent. That run now fails, as it should.
+- Result: v2 3 jobs / 25 checks, v1 5 jobs / 42 checks, all passed (`docs/proof-near.md`).
+- Why: "anyone can check" needed a tool that doesn't trust our servers.
+
+## 2026-11-12: submission docs for NEAR (`fdf40b8`)
 - `docs/submission/description.md` rewritten for NEAR. It only claims what `docs/proof-near.md` shows, and says what is not verified (World ID, LLM, web dashboard). The Hedera version moved to `description-hedera.md`.
 - `docs/demo-video.md` is now a 60–90 s NEAR script. The Hedera script moved to `demo-video-hedera.md`.
 - Why: the old texts described only Hedera, and the judges review the NEAR integration.

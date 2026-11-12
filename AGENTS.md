@@ -18,6 +18,7 @@ NEAR HACKATHON (deadline 2026-11-14 23:59 UTC). Only NEAR work after the baselin
 | `backend/services/provider-near` | one server hosting the 3 providers on NEAR: directory, 402 challenge, verify escrow, work, settle |
 | `backend/apps/agents/src/run-near.ts` | three-agent race on NEAR (claim → approval if over cap → escrow → result, void on failure) |
 | `backend/services/approver-near` | World ID (or manual) approval → `approve_overcap` on-chain; deny → `abandon_round` |
+| `backend/apps/cli/src/audit-near.ts` | independent audit: replays contract events from public data and checks every job |
 | `backend/scripts/smoke-cap-near.ts` | proof that the contract refuses an unapproved over-cap escrow |
 | `backend/deployments/near-testnet.json` | current testnet deployment (public ids only) |
 | `frontend/` | Next.js app (see `frontend/AGENTS.md`) |
@@ -30,6 +31,7 @@ NEAR HACKATHON (deadline 2026-11-14 23:59 UTC). Only NEAR work after the baselin
 - NEAR setup / proof: `pnpm bootstrap:near`, `pnpm smoke:near` (pnpm 9.15 is installed globally)
 - NEAR agent flow: `pnpm dev:providers:near` (4050) + `pnpm dev:approver:near` (4060), then `pnpm agents:near`
 - Cap proof: `pnpm smoke:cap:near`
+- Independent audit: `pnpm audit:near` (v2) or `pnpm audit:near --contract klero.klero-mw8x6bn1.testnet` (v1). Public NearBlocks v3 + archival RPC; no keys.
 - Env (optional): `WORLD_CLIENT_ID`, `WORLD_CLIENT_SECRET`, `LLM_API_KEY`, `LLM_BASE_URL`, `LLM_MODEL`, `PROVIDERS_FAIL_ONCE`, `FORCE_PROVIDER`
 - The current contract is in `deployments/near-testnet.json` (`contractId`, v2). The cap is on-chain (`set_cap`), not an env var.
 - NEAR calls that trigger cross-contract work finish in several receipts: wait for `FINAL` and poll past `SETTLING`/`VOIDING`.

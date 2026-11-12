@@ -36,6 +36,7 @@
     "dev:providers:near": "pnpm --filter @klero/provider-near dev",
     "agents:near": "pnpm --filter @forkos/agents start:near",
     "dev:approver:near": "pnpm --filter @klero/approver-near dev",
+    "audit:near": "pnpm --filter forkos start audit-near",
     "smoke:cap:near": "tsx --env-file-if-exists=.env scripts/smoke-cap-near.ts"
   },
   "devDependencies": {

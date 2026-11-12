@@ -20,6 +20,23 @@ program
   });
 
 program
+  .command('audit-near')
+  .description('Replay the Klero NEAR contract from public data and check every job')
+  .option('--contract <id>', 'Klero contract', 'klero-v2.klero-mw8x6bn1.testnet')
+  .option('--token <id>', 'NEP-141 payment token', 'fusd.klero-mw8x6bn1.testnet')
+  .option('--rpc <url>', 'NEAR RPC', 'https://test.rpc.fastnear.com')
+  .option('--archival <url>', 'archival NEAR RPCs, comma-separated, tried in order', 'https://archival-rpc.testnet.fastnear.com,https://archival-rpc.testnet.near.org')
+  .option('--nearblocks <url>', 'NearBlocks API (only used to list tx hashes)', 'https://api-testnet.nearblocks.io')
+  .option('--job <prefix>', 'only jobs whose key starts with this')
+  .action(async (o) => {
+    const { auditNear } = await import('./audit-near');
+    const r = await auditNear({ ...o, log: (s: string) => console.log(s) });
+    for (const c of r.checks) console.log(`${c.ok ? '✓' : '✗'} ${c.job.slice(0, 16)}  ${c.check.padEnd(22)} ${c.detail}`);
+    console.log(`\n${r.jobs} jobs, ${r.events} events, ${r.checks.length} checks — ${r.ok ? 'ALL PASSED' : 'VIOLATIONS FOUND'}`);
+    process.exit(r.ok ? 0 : 1);
+  });
+
+program
   .command('intent <txId> <deadline>')
   .description('Resolve one payment intent: PAID, FAILED, VOID or UNKNOWN')
   .action(async (txId: string, deadline: string) => {
