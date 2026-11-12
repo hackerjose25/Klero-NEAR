@@ -2,6 +2,13 @@
 
 What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UTC. Baseline: tag `pre-hackathon`.
 
+## 2026-11-12: README is NEAR-only
+- README.md rewritten for the judges: what it does, how it works, security model, what is verified (from `docs/proof-near.md`),
+  how to run and audit it, repo layout, limits, and origin. The Hedera-era README is archived as `docs/hedera-readme.md`,
+  with its links fixed. The origin disclosure (Q-002/Q-003) is kept in an "Origin" section.
+- Fixed a claim: approvals were described as "given by the human through World ID"; every recorded run used manual mode.
+- Checked: every relative link resolves; claims match the code (22 tests, deadline re-check, Fastify).
+
 ## 2026-11-12: repo renamed to Phoebe-NEARHack
 - GitHub repo `hackerjose25/Klero-NEAR` → `hackerjose25/Phoebe-NEARHack`. The git remote and every link (README, submission text, `/near`,
   landing footer and buttons) point to the new URL. GitHub redirects the old one. Earlier HISTORY entries keep the old name.

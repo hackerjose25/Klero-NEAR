@@ -24,6 +24,7 @@ Name: **Phoebe** (formerly Klero). On-chain ids, the `klero` event standard, `@k
 | `backend/scripts/smoke-cap-near.ts` | proof that the contract refuses an unapproved over-cap escrow |
 | `backend/deployments/near-testnet.json` | current testnet deployment (public ids only) |
 | `frontend/` | Next.js app (see `frontend/AGENTS.md`). the landing `/` has NEAR copy; `app/near` is the live contract page; the app routes (dashboard, race) are Hedera-era |
+| `docs/hedera-readme.md` | archived README of the Hedera version |
 | `docs/proof-near.md` | verified NEAR output; README claims must match it |
 
 ## Commands
