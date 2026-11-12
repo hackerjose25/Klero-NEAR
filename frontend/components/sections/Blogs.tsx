@@ -77,7 +77,7 @@ export default function Blogs() {
                 <div fade-anim="True" className="blogs-collection-wrap w-dyn-list">
                   <div role="list" className="blogs-collection-grid one-grid w-dyn-items">
                     <div role="listitem" className="blogs-collection-items border-none w-dyn-item">
-                      <a href="https://github.com/hackerjose25/Klero-NEAR/blob/main/docs/proof-near.md" className="blogs-collection-box height w-inline-block">
+                      <a href="https://github.com/hackerjose25/Phoebe-NEARHack/blob/main/docs/proof-near.md" className="blogs-collection-box height w-inline-block">
                         <div className="blogs-collection-title-box">
                           <div className="paragraph-small blogs-collection-date">
                             November 2026
@@ -107,7 +107,7 @@ export default function Blogs() {
               </div>
             </div>
             <div className="home-blogs-link-box">
-              <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer" className="home-blogs-link w-inline-block">
+              <a href="https://github.com/hackerjose25/Phoebe-NEARHack" target="_blank" rel="noreferrer" className="home-blogs-link w-inline-block">
                 <div className="home-blogs-link-text">
                   Read the docs
                 </div>

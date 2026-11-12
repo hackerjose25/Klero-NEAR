@@ -77,8 +77,8 @@ matches the replay. Results on testnet: contract v2, 3 jobs and 25 checks; v1, 5
 
 ## Origin and honesty
 
-Phoebe was first built on Hedera, as tag [`pre-hackathon`](https://github.com/hackerjose25/Klero-NEAR/tree/pre-hackathon). Only the
-NEAR work is the hackathon entry: [`pre-hackathon...main`](https://github.com/hackerjose25/Klero-NEAR/compare/pre-hackathon...main).
+Phoebe was first built on Hedera, as tag [`pre-hackathon`](https://github.com/hackerjose25/Phoebe-NEARHack/tree/pre-hackathon). Only the
+NEAR work is the hackathon entry: [`pre-hackathon...main`](https://github.com/hackerjose25/Phoebe-NEARHack/compare/pre-hackathon...main).
 NEAR made the design simpler: on Hedera, VOID was inferred from transaction expiry plus a 404. On NEAR the contract holds the money
 and the state machine, so VOID is contract state. Everything runs on testnet only. The proof runs used persona rules and labelled stub
 transcripts (no LLM key set), and approvals ran in manual mode (no World credentials set). The Hedera-era web dashboard is not

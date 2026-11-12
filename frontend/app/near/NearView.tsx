@@ -217,7 +217,7 @@ export default function NearView() {
           <p>
             Run <code>pnpm audit:near</code> in <code>backend/</code>. It replays every job from NearBlocks and an archival RPC and checks
             one winner per round, paid at most once, the cap, and every settlement and refund against the token’s transfers. Source and
-            proof: <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer">github.com/hackerjose25/Klero-NEAR</a>.
+            proof: <a href="https://github.com/hackerjose25/Phoebe-NEARHack" target="_blank" rel="noreferrer">github.com/hackerjose25/Phoebe-NEARHack</a>.
 
           </p>
         </section>

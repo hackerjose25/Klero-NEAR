@@ -9,8 +9,8 @@
 >
 > This repository is Phoebe's entry for [NEAR HACKATHON](https://nearhackathon.com) (tracks: `security`, `swarms`, `agents`).
 > Phoebe was first built on **Hedera** (everything below the line, originally for ETHGlobal). As the rules allow (Q-002), only the
-> **NEAR integration** is the hackathon work. The baseline is tag [`pre-hackathon`](https://github.com/hackerjose25/Klero-NEAR/tree/pre-hackathon); the hackathon diff is
-> [`pre-hackathon...main`](https://github.com/hackerjose25/Klero-NEAR/compare/pre-hackathon...main). Change log: [HISTORY.md](HISTORY.md).
+> **NEAR integration** is the hackathon work. The baseline is tag [`pre-hackathon`](https://github.com/hackerjose25/Phoebe-NEARHack/tree/pre-hackathon); the hackathon diff is
+> [`pre-hackathon...main`](https://github.com/hackerjose25/Phoebe-NEARHack/compare/pre-hackathon...main). Change log: [HISTORY.md](HISTORY.md).
 >
 > **What runs on NEAR (testnet), verified:**
 > - [`contracts/klero`](contracts/klero): one contract is referee, escrow and policy. Agents of one human `claim` a job; the first

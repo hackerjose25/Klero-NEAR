@@ -2,6 +2,10 @@
 
 What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UTC. Baseline: tag `pre-hackathon`.
 
+## 2026-11-12: repo renamed to Phoebe-NEARHack
+- GitHub repo `hackerjose25/Klero-NEAR` → `hackerjose25/Phoebe-NEARHack`. The git remote and every link (README, submission text, `/near`,
+  landing footer and buttons) point to the new URL. GitHub redirects the old one. Earlier HISTORY entries keep the old name.
+
 ## 2026-11-12: "moonlight" color theme
 - Phoebe is the Titaness of radiance and the moon, so the cream + neon-lime palette became moon silver + NEAR mint: `#d3fb43` → `#00ec97`,
   `#f1efe2` → `#eef0f7`, `#dbdac8` → `#d5d9e8`, `#e8e6d6` → `#e3e6f0` (300 values in 34 files: Webflow CSS, components, SVGs, manifest).

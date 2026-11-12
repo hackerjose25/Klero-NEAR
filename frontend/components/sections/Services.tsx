@@ -51,7 +51,7 @@ export default function Services() {
               <div className="service-collection-wrap w-dyn-list">
                 <div role="list" className="service-collection-list w-dyn-items">
                   <div role="listitem" className="service-collection-items w-dyn-item">
-                    <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer" className="service-items w-inline-block">
+                    <a href="https://github.com/hackerjose25/Phoebe-NEARHack" target="_blank" rel="noreferrer" className="service-items w-inline-block">
                       <div fade-anim="True" className="service-title-wrap">
                         <div className="service-title">
                           Rust contract
@@ -82,7 +82,7 @@ export default function Services() {
                     </a>
                   </div>
                   <div role="listitem" className="service-collection-items w-dyn-item">
-                    <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer" className="service-items w-inline-block">
+                    <a href="https://github.com/hackerjose25/Phoebe-NEARHack" target="_blank" rel="noreferrer" className="service-items w-inline-block">
                       <div fade-anim="True" className="service-title-wrap">
                         <div className="service-title">
                           Agent runner

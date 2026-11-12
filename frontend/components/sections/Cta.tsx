@@ -30,7 +30,7 @@ export default function Cta() {
                     <div className="primary-button-icon-box two"><img src="/assets/6a9d5d88f0c4f20f0444af57_btn_icon_4.svg" loading="lazy" alt="Icon" className="primary-button-icon" /></div>
                   </div>
                 </a>
-                <a data-wf--primary-button--variant="main-button" href="https://github.com/hackerjose25/Klero-NEAR/blob/main/docs/proof-near.md" className="primary-button w-inline-block">
+                <a data-wf--primary-button--variant="main-button" href="https://github.com/hackerjose25/Phoebe-NEARHack/blob/main/docs/proof-near.md" className="primary-button w-inline-block">
                   <div className="primary-button-text-items"><div className="primary-button-text-wrap">
                     <div className="primary-button-text one">READ THE PROOF</div>
                     <div className="primary-button-text two">READ THE PROOF</div>

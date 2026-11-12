@@ -12,7 +12,7 @@ export default function Footer() {
                   </div>
                 </div>
                 <div className="footer-social-media-wrap">
-                  <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer" className="footer-page-link w-inline-block"><div className="footer-page-link-box"><div className="footer-page-link-text one">GitHub</div><div className="footer-page-link-text two">GitHub</div></div></a>
+                  <a href="https://github.com/hackerjose25/Phoebe-NEARHack" target="_blank" rel="noreferrer" className="footer-page-link w-inline-block"><div className="footer-page-link-box"><div className="footer-page-link-text one">GitHub</div><div className="footer-page-link-text two">GitHub</div></div></a>
                 </div>
               </div>
               <div fade-anim="True" className="footer-page-items">
@@ -81,7 +81,7 @@ export default function Footer() {
                       </div>
                     </div>
                   </a>
-                  <a href="https://github.com/hackerjose25/Klero-NEAR/blob/main/docs/proof-near.md" className="footer-page-link w-inline-block">
+                  <a href="https://github.com/hackerjose25/Phoebe-NEARHack/blob/main/docs/proof-near.md" className="footer-page-link w-inline-block">
                     <div className="footer-page-link-box">
                       <div className="footer-page-link-text one">
                         Proof
@@ -91,7 +91,7 @@ export default function Footer() {
                       </div>
                     </div>
                   </a>
-                  <a href="https://github.com/hackerjose25/Klero-NEAR/blob/main/README.md" className="footer-page-link w-inline-block">
+                  <a href="https://github.com/hackerjose25/Phoebe-NEARHack/blob/main/README.md" className="footer-page-link w-inline-block">
                     <div className="footer-page-link-box">
                       <div className="footer-page-link-text one">
                         README
@@ -149,7 +149,7 @@ export default function Footer() {
                   </div>
                 </div>
                 <div className="footer-page-wrap">
-                  <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer" className="footer-page-link w-inline-block">
+                  <a href="https://github.com/hackerjose25/Phoebe-NEARHack" target="_blank" rel="noreferrer" className="footer-page-link w-inline-block">
                     <div className="footer-page-link-box">
                       <div className="footer-page-link-text one">
                         GitHub
