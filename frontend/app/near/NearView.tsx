@@ -219,6 +219,9 @@ export default function NearView() {
             one winner per round, paid at most once, the cap, and every settlement and refund against the token’s transfers. Source and
             proof: <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer">github.com/hackerjose25/Klero-NEAR</a>.
           </p>
+          <p className="nr-micro" style={{ marginTop: 12 }}>
+            Klero was first built on Hedera; that version is kept at <a href="/hedera">/hedera</a>. Only the NEAR work is the hackathon entry.
+          </p>
         </section>
       </main>
     </div>

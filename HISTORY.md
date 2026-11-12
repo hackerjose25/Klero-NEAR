@@ -2,7 +2,11 @@
 
 What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UTC. Baseline: tag `pre-hackathon`.
 
-## 2026-11-12: `/near` web page
+## 2026-11-12: NEAR page is the home page
+- `/` now renders the NEAR page; the Hedera/World Webflow landing moved to `/hedera` (kept, linked from the NEAR page as the origin).
+- Why: visitors to the site still saw the Hedera landing first.
+
+## 2026-11-12: `/near` web page (`4e4ffa3`)
 - `frontend/app/near`: a standalone page that reads the v2 (and v1) contract from the browser over public RPC: each proof job's rounds
   with PAID / VOID / PENDING (with a deadline countdown) / NO ESCROW, payer → provider, amount, the human's on-chain cap, NearBlocks
   links, and a lookup for any job key. The landing header links to it ("LIVE ON NEAR"). `next build` passes; RPC reads checked by hand.
