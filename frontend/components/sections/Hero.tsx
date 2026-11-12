@@ -177,19 +177,22 @@ export default function Hero() {
             <div className="hero-banner-img-flex">
               <div className="hero-banner-img-wrap" aria-label="Phoebe">
                 <div className="hero-banner-img-items">
-                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#d3fb43', color: '#000', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>K</div>
+                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#d3fb43', color: '#000', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>P</div>
                 </div>
                 <div className="hero-banner-img-items">
-                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', color: '#d3fb43', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>L</div>
-                </div>
-                <div className="hero-banner-img-items">
-                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#d3fb43', color: '#000', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>E</div>
-                </div>
-                <div className="hero-banner-img-items">
-                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', color: '#d3fb43', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>R</div>
+                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', color: '#d3fb43', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>H</div>
                 </div>
                 <div className="hero-banner-img-items">
                   <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#d3fb43', color: '#000', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>O</div>
+                </div>
+                <div className="hero-banner-img-items">
+                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', color: '#d3fb43', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>E</div>
+                </div>
+                <div className="hero-banner-img-items">
+                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#d3fb43', color: '#000', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>B</div>
+                </div>
+                <div className="hero-banner-img-items">
+                  <div className="hero-banner-img" style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', color: '#d3fb43', border: '1px solid #000', fontSize: 12, fontWeight: 700 }}>E</div>
                 </div>
               </div>
               <div className="hero-banner-img-text-flex">
