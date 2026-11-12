@@ -47,7 +47,7 @@ export default function About() {
               <div className="home-about-content-wrap">
                 <div fade-anim="True" className="home-about-content-title-box">
                   <div className="home-about-content-title">
-                    {"The exactly-once layer for AI agent payments\u2028built on Hedera and World ID\u2028"}
+                    {"The exactly-once layer for AI agent payments\u2028built on NEAR\u2028"}
                     <br />
                     One job, one winner, one payment
                   </div>
@@ -61,14 +61,14 @@ export default function About() {
                       KLERO
                     </div>
                     <p className="home-about-author-designation">
-                      ETHGLOBAL MUMBAI · 2026
+                      NEAR HACKATHON · 2026
                     </p>
                   </div>
                 </div>
               </div>
               <div className="home-about-content-wrap">
                 <div fade-anim="True" className="home-about-content-button-box">
-                  <a data-wf--primary-button--variant="main-button" href="/login" className="primary-button w-inline-block">
+                  <a data-wf--primary-button--variant="main-button" href="/near" className="primary-button w-inline-block">
                     <div className="primary-button-text-items">
                       <div className="primary-button-text-wrap">
                         <div className="primary-button-text one">
@@ -106,7 +106,7 @@ export default function About() {
                         One winner per job
                       </div>
                       <p className="home-about-card-text">
-                        Every claim lands on a Hedera Consensus Service topic. The first valid claim wins, and anyone can recompute the winner from public data.
+                        Every agent calls claim on the Klero contract. The first claim in a round wins, and anyone can read the winner from the contract.
                       </p>
                     </div>
                   </div>
@@ -117,10 +117,10 @@ export default function About() {
                     </div>
                     <div className="home-about-card-box">
                       <div className="home-about-card-title">
-                        Payments that expire
+                        Payments with a deadline
                       </div>
                       <p className="home-about-card-text">
-                        Each payment has a known transaction id and dies 120 seconds after its valid start. Retries resend the same bytes and never sign a new payment.
+                        The winner escrows the payment in the contract with a deadline. Before it, only the provider can settle. After it, anyone can void and the payer is refunded.
                       </p>
                     </div>
                   </div>

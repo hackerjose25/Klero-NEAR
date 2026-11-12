@@ -12,7 +12,7 @@
 <circle cx="330" cy="330" r="34" fill="#2A2A2A"/>
 <circle cx="330" cy="330" r="16" fill="none" stroke="#D3FB43" stroke-width="5"/>
 <path d="M330 314 V298 M330 346 V362 M314 330 H298 M346 330 H362" stroke="#D3FB43" stroke-width="5" stroke-linecap="round"/>
-<text x="330" y="450" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#fff">Mirror</text>
+<text x="330" y="450" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#fff">Contract</text>
 <path d="M400 330 H452" stroke="#D3FB43" stroke-width="6" stroke-linecap="round"/>
 <path d="M444 316 L462 330 L444 344" stroke="#D3FB43" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 <rect x="470" y="276" width="120" height="108" fill="#3A3A3A" stroke="#555" stroke-width="5"/>
@@ -20,11 +20,11 @@
 <text x="530" y="344" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="34" fill="#BDBDBD">✓</text>
 <text x="530" y="430" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#BDBDBD">Paid</text>
 <rect x="40" y="520" width="580" height="150" fill="#434343"/>
-<text x="64" y="574" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#BDBDBD">Mirror Node result</text>
-<text x="596" y="574" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#BDBDBD">SUCCESS</text>
+<text x="64" y="574" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#BDBDBD">get_intent_state</text>
+<text x="596" y="574" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#BDBDBD">PAID</text>
 <text x="64" y="628" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#BDBDBD">Intent state</text>
 <text x="596" y="632" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="34" fill="#fff">PAID</text>
 <rect x="40" y="690" width="580" height="80" fill="#D3FB43"/>
-<text x="330" y="742" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="30" fill="#1F1F21">Proven from Mirror Node  ✓</text>
+<text x="330" y="742" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="30" fill="#1F1F21">Read from the contract  ✓</text>
 
 </svg>

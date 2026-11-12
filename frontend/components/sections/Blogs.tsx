@@ -53,13 +53,13 @@ export default function Blogs() {
                         </div>
                         <div className="blogs-collection-content-flex">
                           <div className="paragraph-small blogs-collection-content-category">
-                            Hedera
+                            NEAR
                           </div>
                           <div>
                             <img src="/assets/klero-blog-death-clock.svg" loading="lazy" alt="The death clock" />
                           </div>
                           <div className="paragraph-small blogs-collection-content-text">
-                            Hedera rejects a transaction after its valid duration and any id it has already seen, so a payment intent can settle at most once, ever.
+                            The contract holds the money and the state machine. Settle works only before the deadline and void only after it, so every payment ends exactly one way.
                           </div>
                         </div>
                         <div className="display-none">
@@ -77,24 +77,24 @@ export default function Blogs() {
                 <div fade-anim="True" className="blogs-collection-wrap w-dyn-list">
                   <div role="list" className="blogs-collection-grid one-grid w-dyn-items">
                     <div role="listitem" className="blogs-collection-items border-none w-dyn-item">
-                      <a href="/directory" className="blogs-collection-box height w-inline-block">
+                      <a href="https://github.com/hackerjose25/Klero-NEAR/blob/main/docs/proof-near.md" className="blogs-collection-box height w-inline-block">
                         <div className="blogs-collection-title-box">
                           <div className="paragraph-small blogs-collection-date">
                             November 2026
                           </div>
                           <div className="blogs-collection-title">
-                            Why World ID
+                            Why an on-chain cap
                           </div>
                         </div>
                         <div className="blogs-collection-content-flex">
                           <div className="paragraph-small blogs-collection-content-category">
-                            Identity
+                            Security
                           </div>
                           <div>
-                            <img src="/assets/klero-blog-world.svg" loading="lazy" alt="Why World ID" />
+                            <img src="/assets/klero-blog-world.svg" loading="lazy" alt="Why an on-chain cap" />
                           </div>
                           <div className="paragraph-small blogs-collection-content-text">
-                            Every agent links to one real human with World ID, so your Claude agent and your script agent share one budget and one dedupe scope, and only you can approve what is over the cap.
+                            Each human's spending cap lives in the contract. An escrow above it is refused unless the human approved that exact payment, so a runaway agent cannot overspend.
                           </div>
                         </div>
                         <div className="display-none">
@@ -107,7 +107,7 @@ export default function Blogs() {
               </div>
             </div>
             <div className="home-blogs-link-box">
-              <a href="https://github.com/sylesh7/Klero-1" target="_blank" rel="noreferrer" className="home-blogs-link w-inline-block">
+              <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer" className="home-blogs-link w-inline-block">
                 <div className="home-blogs-link-text">
                   Read the docs
                 </div>

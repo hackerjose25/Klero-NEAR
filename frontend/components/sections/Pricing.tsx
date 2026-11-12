@@ -43,7 +43,7 @@ export default function Pricing() {
                     OVER CAP
                   </div>
                   <div className="home-pricing-tabs-link-discount">
-                    WORLD ID
+                    APPROVAL
                   </div>
                 </a>
               </div>
@@ -77,7 +77,7 @@ export default function Pricing() {
                             </div>
                           </div>
                           <div className="home-pricing-button-box">
-                            <a data-wf--primary-button--variant="main-button" href="/login" className="primary-button w-inline-block">
+                            <a data-wf--primary-button--variant="main-button" href="/near" className="primary-button w-inline-block">
                               <div className="primary-button-text-items">
                                 <div className="primary-button-text-wrap">
                                   <div className="primary-button-text one">
@@ -114,7 +114,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              x402 challenge on POST /v1/jobs
+                              402 challenge from the provider
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -123,7 +123,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              Listed in the HCS directory
+                              Listed in the provider directory
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -132,7 +132,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              Fenced to the live HCS winner
+                              Fenced to the on-chain winner
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -141,7 +141,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              Settles before the job runs
+                              Settles after it delivers
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -150,7 +150,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              Whisper transcript and summary
+                              Transcript and summary
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -159,7 +159,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              Paid in FUSD, an HTS token
+                              Paid in FUSD, a NEP-141 token
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -168,7 +168,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              Refunded in HTS if the job fails
+                              Refunded by void if it fails
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -215,7 +215,7 @@ export default function Pricing() {
                             </div>
                           </div>
                           <div className="home-pricing-button-box">
-                            <a data-wf--primary-button--variant="2nd-button" href="/login" className="primary-button w-variant-343503ab-2e9e-7956-3a30-bcb84afd9be7 w-inline-block">
+                            <a data-wf--primary-button--variant="2nd-button" href="/near" className="primary-button w-variant-343503ab-2e9e-7956-3a30-bcb84afd9be7 w-inline-block">
                               <div className="primary-button-text-items">
                                 <div className="primary-button-text-wrap">
                                   <div className="primary-button-text one">
@@ -261,7 +261,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6 hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
-                              Its own Hedera payout account
+                              Its own NEAR payout account
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -270,7 +270,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6 hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
-                              Agents compare price on HCS
+                              Agents compare price in the directory
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -279,7 +279,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6 hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
-                              Same death-clock payment intent
+                              Same escrow with a deadline
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -288,7 +288,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6 hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
-                              Facilitator replay table
+                              One intent per job and round
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -297,7 +297,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6 hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
-                              Result refetchable by tx id
+                              Losers fetch the winner's result
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -306,7 +306,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6 hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
-                              DONE event written to HCS
+                              settled event on-chain
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -355,7 +355,7 @@ export default function Pricing() {
                             </div>
                           </div>
                           <div className="home-pricing-button-box">
-                            <a data-wf--primary-button--variant="main-button" href="/login" className="primary-button w-inline-block">
+                            <a data-wf--primary-button--variant="main-button" href="/near" className="primary-button w-inline-block">
                               <div className="primary-button-text-items">
                                 <div className="primary-button-text-wrap">
                                   <div className="primary-button-text one">
@@ -392,7 +392,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              Over the 1.00 FUSD default cap
+                              Over the 1.00 FUSD on-chain cap
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -401,7 +401,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              Payer pauses: approval required
+                              Contract refuses: approval required
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -410,7 +410,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              World ID approval on your phone
+                              The human approves or denies
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -419,7 +419,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              Bound to the action digest
+                              Bound to job, round and amount
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -428,7 +428,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              Expires after 5 minutes
+                              One-shot: used once
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -446,7 +446,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text">
-                              APPROVAL event on HCS, no PII
+                              approve event on-chain, no PII
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -493,7 +493,7 @@ export default function Pricing() {
                             </div>
                           </div>
                           <div className="home-pricing-button-box">
-                            <a data-wf--primary-button--variant="2nd-button" href="/login" className="primary-button w-variant-343503ab-2e9e-7956-3a30-bcb84afd9be7 w-inline-block">
+                            <a data-wf--primary-button--variant="2nd-button" href="/near" className="primary-button w-variant-343503ab-2e9e-7956-3a30-bcb84afd9be7 w-inline-block">
                               <div className="primary-button-text-items">
                                 <div className="primary-button-text-wrap">
                                   <div className="primary-button-text one">
@@ -530,7 +530,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6 hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
-                              Stock x402 middleware
+                              Plain pay-per-request
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -584,7 +584,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6 hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
-                              Counted from Mirror Node
+                              Measured in the Hedera version
                             </div>
                           </div>
                           <div className="home-pricing-list-items">
@@ -593,7 +593,7 @@ export default function Pricing() {
                               <img loading="lazy" src="/assets/6a9d47e5bde9c565bba19868_5185dfa37394418713dbaebc1045e9d6_plus_black.svg" alt="Icon" className="home-pricing-list-icon w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6 hidden" />
                             </div>
                             <div className="paragraph-small home-pricing-list-text w-variant-5cbad008-4e0b-ceec-6a57-09d6b6cb33a6">
-                              Shown side by side in the demo
+                              Klero on NEAR: 1 payment per job
                             </div>
                           </div>
                         </div>

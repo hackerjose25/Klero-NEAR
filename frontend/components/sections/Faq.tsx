@@ -10,11 +10,11 @@ export default function Faq() {
                   Contact
                 </div>
                 <p className="faq-contact-content-text">
-                  Give your agents exactly-once payments on Hedera
+                  Give your agents exactly-once payments on NEAR
                 </p>
               </div>
               <div fade-anim="True" className="faq-contact-button-box">
-                <a data-wf--primary-button--variant="full-width" href="/login" className="primary-button w-variant-a463856d-9e90-63e6-cf33-267087a243a0 w-inline-block">
+                <a data-wf--primary-button--variant="full-width" href="/near" className="primary-button w-variant-a463856d-9e90-63e6-cf33-267087a243a0 w-inline-block">
                   <div className="primary-button-text-items">
                     <div className="primary-button-text-wrap">
                       <div className="primary-button-text one">
@@ -68,7 +68,7 @@ export default function Faq() {
                   </div>
                   <div className="faq-ans-box">
                     <p className="faq-ans-text">
-                      The resolver asks Mirror Node by transaction id. Found means PAID. Not found after the 120 s death clock plus a 45 s margin means VOID forever, and the next round opens.
+                      Ask the contract. The payment is PAID, or pending until its deadline. After the deadline anyone can void it: VOID, refunded, and the next round opens.
                     </p>
                   </div>
                 </div>
@@ -85,14 +85,14 @@ export default function Faq() {
                   </div>
                   <div className="faq-ans-box">
                     <p className="faq-ans-text">
-                      Both post a claim. Hedera Consensus Service orders them, the first valid claim wins and the other backs off. One job, one payment, even across Claude, Cursor and scripts.
+                      Both call claim on the Klero contract. The first claim in the round wins and the other backs off and receives the result. One job, one payment.
                     </p>
                   </div>
                 </div>
                 <div className="faq-items">
                   <div className="faq-title-flex">
                     <div className="faq-qus">
-                      Do my agents hold payment keys?
+                      What can a leaked agent key do?
                     </div>
                     <div className="faq-qus-icon-wrap">
                       <div className="faq-qus-icon-box">
@@ -102,14 +102,14 @@ export default function Faq() {
                   </div>
                   <div className="faq-ans-box">
                     <p className="faq-ans-text">
-                      No. Agents hold only an identity key. The Klero payer signs for the HCS winner, within the per-payment cap, daily cap and allowlist you set.
+                      Very little. Agents claim with a function-call key scoped to the claim method of the Klero contract, and the contract accepts an escrow only from the round's winner, within the human's cap.
                     </p>
                   </div>
                 </div>
                 <div className="faq-items">
                   <div className="faq-title-flex">
                     <div className="faq-qus">
-                      Why World ID?
+                      What if an agent wants to spend too much?
                     </div>
                     <div className="faq-qus-icon-wrap">
                       <div className="faq-qus-icon-box">
@@ -119,7 +119,7 @@ export default function Faq() {
                   </div>
                   <div className="faq-ans-box">
                     <p className="faq-ans-text">
-                      Each agent links to its human once with World ID Agent Pass. Firing an agent or spending above the autonomous cap needs a fresh approval bound to that exact action.
+                      The contract refuses any escrow above the human's on-chain cap unless the human approved that exact job, round and amount. Deny, and the round is abandoned with no money moved.
                     </p>
                   </div>
                 </div>
@@ -136,7 +136,7 @@ export default function Faq() {
                   </div>
                   <div className="faq-ans-box">
                     <p className="faq-ans-text">
-                      Yes. Every event is written to a public HCS topic. Run npx klero audit to rebuild and check the whole history from Mirror Node, without trusting our server.
+                      Yes. Run pnpm audit:near. It replays every job from NearBlocks and an archival RPC and checks it against the contract and the token's transfers, without trusting our server.
                     </p>
                   </div>
                 </div>

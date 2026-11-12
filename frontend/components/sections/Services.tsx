@@ -51,17 +51,17 @@ export default function Services() {
               <div className="service-collection-wrap w-dyn-list">
                 <div role="list" className="service-collection-list w-dyn-items">
                   <div role="listitem" className="service-collection-items w-dyn-item">
-                    <a href="https://github.com/sylesh7/Klero-1" target="_blank" rel="noreferrer" className="service-items w-inline-block">
+                    <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer" className="service-items w-inline-block">
                       <div fade-anim="True" className="service-title-wrap">
                         <div className="service-title">
-                          MCP server
+                          Rust contract
                         </div>
                         <div className="service-tag-flex">
                           <div className="paragraph-small service-tag">
-                            Claude
+                            near-sdk
                           </div>
                           <div className="paragraph-small service-tag">
-                            Cursor
+                            NEP-297 events
                           </div>
                         </div>
                       </div>
@@ -82,17 +82,17 @@ export default function Services() {
                     </a>
                   </div>
                   <div role="listitem" className="service-collection-items w-dyn-item">
-                    <a href="https://github.com/sylesh7/Klero-1" target="_blank" rel="noreferrer" className="service-items w-inline-block">
+                    <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer" className="service-items w-inline-block">
                       <div fade-anim="True" className="service-title-wrap">
                         <div className="service-title">
-                          Agent kit
+                          Agent runner
                         </div>
                         <div className="service-tag-flex">
                           <div className="paragraph-small service-tag">
                             TypeScript
                           </div>
                           <div className="paragraph-small service-tag">
-                            Any script
+                            near-api-js
                           </div>
                         </div>
                       </div>
@@ -113,7 +113,7 @@ export default function Services() {
                     </a>
                   </div>
                   <div role="listitem" className="service-collection-items w-dyn-item">
-                    <a href="/race" className="service-items w-inline-block">
+                    <a href="/near" className="service-items w-inline-block">
                       <div fade-anim="True" className="service-title-wrap">
                         <div className="service-title">
                           CLI
@@ -123,7 +123,7 @@ export default function Services() {
                             Audit
                           </div>
                           <div className="paragraph-small service-tag">
-                            Mirror Node
+                            NearBlocks + RPC
                           </div>
                         </div>
                       </div>
@@ -167,22 +167,22 @@ export default function Services() {
             <div className="services-logo-wrap">
               <div fade-anim="True" className="services-logo-items">
                 <div className="services-logo-box">
-                  <img src="/assets/klero-built-hiero.svg" loading="lazy" alt="Hiero SDK" className="services-logo" />
+                  <img src="/assets/klero-built-near-sdk.svg" loading="lazy" alt="near-sdk" className="services-logo" />
                 </div>
               </div>
               <div fade-anim="True" className="services-logo-items">
                 <div className="services-logo-box">
-                  <img src="/assets/klero-built-x402sdk.svg" loading="lazy" alt="x402" className="services-logo" />
+                  <img src="/assets/klero-built-near-api-js.svg" loading="lazy" alt="near-api-js" className="services-logo" />
                 </div>
               </div>
               <div fade-anim="True" className="services-logo-items">
                 <div className="services-logo-box">
-                  <img src="/assets/klero-built-world.svg" loading="lazy" alt="World ID" className="services-logo" />
+                  <img src="/assets/klero-built-nep141.svg" loading="lazy" alt="NEP-141" className="services-logo" />
                 </div>
               </div>
               <div fade-anim="True" className="services-logo-items">
                 <div className="services-logo-box">
-                  <img src="/assets/klero-built-mcp.svg" loading="lazy" alt="MCP" className="services-logo" />
+                  <img src="/assets/klero-built-nearblocks.svg" loading="lazy" alt="NearBlocks" className="services-logo" />
                 </div>
               </div>
             </div>

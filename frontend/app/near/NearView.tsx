@@ -220,7 +220,7 @@ export default function NearView() {
             proof: <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer">github.com/hackerjose25/Klero-NEAR</a>.
           </p>
           <p className="nr-micro" style={{ marginTop: 12 }}>
-            Klero was first built on Hedera; that version is kept at <a href="/hedera">/hedera</a>. Only the NEAR work is the hackathon entry.
+            Klero was first built on Hedera; that version is tag <a href="https://github.com/hackerjose25/Klero-NEAR/tree/pre-hackathon" target="_blank" rel="noreferrer">pre-hackathon</a>. Only the NEAR work is the hackathon entry.
           </p>
         </section>
       </main>

@@ -21,7 +21,7 @@ NEAR HACKATHON (deadline 2026-11-14 23:59 UTC). Only NEAR work after the baselin
 | `backend/apps/cli/src/audit-near.ts` | independent audit: replays contract events from public data and checks every job |
 | `backend/scripts/smoke-cap-near.ts` | proof that the contract refuses an unapproved over-cap escrow |
 | `backend/deployments/near-testnet.json` | current testnet deployment (public ids only) |
-| `frontend/` | Next.js app (see `frontend/AGENTS.md`). `app/near` is the NEAR page (live contract reads), also served at `/`; the Hedera landing is at `/hedera`; the rest is Hedera-era |
+| `frontend/` | Next.js app (see `frontend/AGENTS.md`). the landing `/` has NEAR copy; `app/near` is the live contract page; the app routes (dashboard, race) are Hedera-era |
 | `docs/proof-near.md` | verified NEAR output; README claims must match it |
 
 ## Commands

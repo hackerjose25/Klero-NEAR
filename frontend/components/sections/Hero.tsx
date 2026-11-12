@@ -17,10 +17,10 @@ export default function Hero() {
             </div>
             <div className="hero-banner-line" />
             <p className="hero-banner-description">
-              The exactly-once layer for AI agent payments. When your agents fork, one claim wins, one payment settles on Hedera, and nobody can make you pay twice.
+              The exactly-once layer for AI agent payments. When your agents fork, one claim wins, a NEAR contract escrows one payment, and it ends PAID once or VOID and refunded.
             </p>
             <div className="hero-banner-button-box">
-              <a data-wf--primary-button--variant="3rd-button" href="/login" className="primary-button w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e w-inline-block">
+              <a data-wf--primary-button--variant="3rd-button" href="/near" className="primary-button w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e w-inline-block">
                 <div className="primary-button-text-items w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e">
                   <div className="primary-button-text-wrap w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e">
                     <div className="primary-button-text one">
@@ -194,13 +194,13 @@ export default function Hero() {
               </div>
               <div className="hero-banner-img-text-flex">
                 <div className="hero-banner-info-tag">
-                  BUILT AT
+                  BUILT FOR
                 </div>
                 <div className="hero-banner-info-tag color">
-                  ETHGLOBAL
+                  NEAR
                 </div>
                 <div className="hero-banner-info-tag">
-                  MUMBAI
+                  HACKATHON
                 </div>
               </div>
             </div>

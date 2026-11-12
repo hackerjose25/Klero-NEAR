@@ -2,9 +2,12 @@
 
 What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UTC. Baseline: tag `pre-hackathon`.
 
-## 2026-11-12: NEAR page is the home page
-- `/` now renders the NEAR page; the Hedera/World Webflow landing moved to `/hedera` (kept, linked from the NEAR page as the origin).
-- Why: visitors to the site still saw the Hedera landing first.
+## 2026-11-12: landing page rewritten for NEAR (same design)
+- Reverted the previous change (`1764623`), which had replaced the landing with the `/near` page. The human wanted the original UI kept.
+- `/` is the original landing with every Hedera/World claim replaced by its NEAR counterpart: contract claim, escrow with a deadline,
+  PAID/VOID, on-chain cap, claim-only keys, pay on delivery, `pnpm audit:near`. Logos and the SVG illustrations were updated the same
+  way. Buttons go to `/near`, and the footer links to this repo, the proof and NearBlocks. The baseline column notes it was measured in the Hedera version.
+- Why: judges see one consistent NEAR story, in the original design.
 
 ## 2026-11-12: `/near` web page (`4e4ffa3`)
 - `frontend/app/near`: a standalone page that reads the v2 (and v1) contract from the browser over public RPC: each proof job's rounds

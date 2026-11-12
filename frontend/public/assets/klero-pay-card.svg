@@ -1,7 +1,7 @@
 <svg width="824" height="896" viewBox="0 0 824 896" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="824" height="896" fill="#2A2A2A"/>
 <rect x="16" y="16" width="792" height="76" fill="#FAFAFA"/>
-<text x="40" y="66" font-family="Courier New, monospace" font-size="26" letter-spacing="2" fill="#333">HCS WINNER</text>
+<text x="40" y="66" font-family="Courier New, monospace" font-size="26" letter-spacing="2" fill="#333">ROUND WINNER</text>
 <circle cx="753" cy="54" r="31" fill="#EDEDED"/>
 <g fill="#555"><circle cx="738" cy="54" r="3.5"/><circle cx="753" cy="54" r="3.5"/><circle cx="768" cy="54" r="3.5"/></g>
 <text x="412" y="146" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#C9C9C9">Agents fork. Money doesn't.</text>
@@ -18,8 +18,8 @@
 <rect x="16" y="632" width="792" height="154" fill="#434343"/>
 <text x="40" y="690" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#BDBDBD">Amount</text>
 <text x="784" y="690" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#BDBDBD">0.05 FUSD</text>
-<text x="40" y="750" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#BDBDBD">Death clock</text>
+<text x="40" y="750" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#BDBDBD">Deadline</text>
 <text x="784" y="754" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="42" fill="#FFFFFF">120 s</text>
 <rect x="16" y="800" width="792" height="96" fill="#D7FD41"/>
-<text x="412" y="860" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="34" fill="#1F1F21">Settled on Hedera</text>
+<text x="412" y="860" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="34" fill="#1F1F21">Settled on NEAR</text>
 </svg>

@@ -32,7 +32,7 @@ export default function Testimonials() {
                       <div className="testimonials-content-wrap">
                         <div className="testimonials-content-box">
                           <p className="testimonials-content-text">
-                            {"\"No server can mark a payment paid. The resolver asks Mirror Node: found means PAID, a 404 after the death clock means VOID forever.\""}
+                            {"\"No server can mark a payment paid. The contract holds the state: PAID before the deadline, or VOID and refunded after it.\""}
                           </p>
                           <div className="testimonials-author-info-wrap">
                             <div className="testimonials-author-info-flex">
@@ -41,7 +41,7 @@ export default function Testimonials() {
                               </div>
                               <div className="testimonials-author-dot" />
                               <div className="paragraph-small testimonials-author-designation">
-                                MIRROR NODE
+                                CONTRACT VIEW
                               </div>
                             </div>
                             <div className="testimonials-author-icon-flex">
@@ -72,7 +72,7 @@ export default function Testimonials() {
                       <div className="testimonials-content-wrap">
                         <div className="testimonials-content-box">
                           <p className="testimonials-content-text">
-                            Agents never hold payment keys. The payer signs only for the HCS winner of a round, inside the budget and allowlist the human set.
+                            Agents claim with a key that can only call claim on the Klero contract, and the contract accepts an escrow only from the round's winner.
                           </p>
                           <div className="testimonials-author-info-wrap">
                             <div className="testimonials-author-info-flex">
@@ -81,7 +81,7 @@ export default function Testimonials() {
                               </div>
                               <div className="testimonials-author-dot" />
                               <div className="paragraph-small testimonials-author-designation">
-                                API PAYER
+                                FUNCTION-CALL KEY
                               </div>
                             </div>
                             <div className="testimonials-author-icon-flex">
@@ -112,12 +112,12 @@ export default function Testimonials() {
                       <div className="testimonials-content-wrap">
                         <div className="testimonials-content-box">
                           <p className="testimonials-content-text">
-                            {"\"Every payment is stored before it leaves the machine. Retries resend the same bytes, so a dropped connection never becomes a second charge.\""}
+                            {"\"Pay on delivery: the provider checks the escrow on-chain, does the work, then settles. A provider that fails never gets paid and the payer is refunded.\""}
                           </p>
                           <div className="testimonials-author-info-wrap">
                             <div className="testimonials-author-info-flex">
                               <div className="paragraph-small testimonials-author-name">
-                                REPLAY DEFENSE
+                                PAY ON DELIVERY
                               </div>
                               <div className="testimonials-author-dot" />
                               <div className="paragraph-small testimonials-author-designation">
@@ -165,10 +165,10 @@ export default function Testimonials() {
               </div>
               <div fade-anim="True" className="testimonials-card-items">
                 <p className="testimonials-card-text">
-                  Sponsor Networks
+                  Possible Endings
                 </p>
                 <div className="testimonials-card-num">
-                  3
+                  2
                 </div>
               </div>
             </div>

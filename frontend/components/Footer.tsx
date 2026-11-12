@@ -12,7 +12,7 @@ export default function Footer() {
                   </div>
                 </div>
                 <div className="footer-social-media-wrap">
-                  <a href="https://github.com/sylesh7/Klero-1" target="_blank" rel="noreferrer" className="footer-page-link w-inline-block"><div className="footer-page-link-box"><div className="footer-page-link-text one">GitHub</div><div className="footer-page-link-text two">GitHub</div></div></a>
+                  <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer" className="footer-page-link w-inline-block"><div className="footer-page-link-box"><div className="footer-page-link-text one">GitHub</div><div className="footer-page-link-text two">GitHub</div></div></a>
                 </div>
               </div>
               <div fade-anim="True" className="footer-page-items">
@@ -71,33 +71,33 @@ export default function Footer() {
                   </div>
                 </div>
                 <div className="footer-page-wrap">
-                  <a href="/dashboard" className="footer-page-link w-inline-block">
+                  <a href="/near" className="footer-page-link w-inline-block">
                     <div className="footer-page-link-box">
                       <div className="footer-page-link-text one">
-                        Dashboard
+                        Live state
                       </div>
                       <div className="footer-page-link-text two">
-                        Dashboard
+                        Live state
                       </div>
                     </div>
                   </a>
-                  <a href="/race" className="footer-page-link w-inline-block">
+                  <a href="https://github.com/hackerjose25/Klero-NEAR/blob/main/docs/proof-near.md" className="footer-page-link w-inline-block">
                     <div className="footer-page-link-box">
                       <div className="footer-page-link-text one">
-                        Race demo
+                        Proof
                       </div>
                       <div className="footer-page-link-text two">
-                        Race demo
+                        Proof
                       </div>
                     </div>
                   </a>
-                  <a href="/directory" className="footer-page-link w-inline-block">
+                  <a href="https://github.com/hackerjose25/Klero-NEAR/blob/main/README.md" className="footer-page-link w-inline-block">
                     <div className="footer-page-link-box">
                       <div className="footer-page-link-text one">
-                        Directory
+                        README
                       </div>
                       <div className="footer-page-link-text two">
-                        Directory
+                        README
                       </div>
                     </div>
                   </a>
@@ -120,23 +120,23 @@ export default function Footer() {
                   </div>
                 </div>
                 <div className="footer-page-wrap">
-                  <a href="https://hedera.com/" target="_blank" rel="noreferrer" className="footer-page-link w-inline-block">
+                  <a href="https://near.org/" target="_blank" rel="noreferrer" className="footer-page-link w-inline-block">
                     <div className="footer-page-link-box">
                       <div className="footer-page-link-text one">
-                        Hedera
+                        NEAR
                       </div>
                       <div className="footer-page-link-text two">
-                        Hedera
+                        NEAR
                       </div>
                     </div>
                   </a>
-                  <a href="https://world.org/" target="_blank" rel="noreferrer" className="footer-page-link w-inline-block">
+                  <a href="https://testnet.nearblocks.io/address/klero-v2.klero-mw8x6bn1.testnet" target="_blank" rel="noreferrer" className="footer-page-link w-inline-block">
                     <div className="footer-page-link-box">
                       <div className="footer-page-link-text one">
-                        World
+                        Contract
                       </div>
                       <div className="footer-page-link-text two">
-                        World
+                        Contract
                       </div>
                     </div>
                   </a>
@@ -149,7 +149,7 @@ export default function Footer() {
                   </div>
                 </div>
                 <div className="footer-page-wrap">
-                  <a href="https://github.com/sylesh7/Klero-1" target="_blank" rel="noreferrer" className="footer-page-link w-inline-block">
+                  <a href="https://github.com/hackerjose25/Klero-NEAR" target="_blank" rel="noreferrer" className="footer-page-link w-inline-block">
                     <div className="footer-page-link-box">
                       <div className="footer-page-link-text one">
                         GitHub
@@ -159,23 +159,23 @@ export default function Footer() {
                       </div>
                     </div>
                   </a>
-                  <a href="https://hashscan.io/testnet" className="footer-page-link w-inline-block">
+                  <a href="https://testnet.nearblocks.io" className="footer-page-link w-inline-block">
                     <div className="footer-page-link-box">
                       <div className="footer-page-link-text one">
-                        hashscan.io/testnet
+                        testnet.nearblocks.io
                       </div>
                       <div className="footer-page-link-text two">
-                        hashscan.io/testnet
+                        testnet.nearblocks.io
                       </div>
                     </div>
                   </a>
-                  <a href="https://world.org" target="_blank" className="footer-page-link w-inline-block">
+                  <a href="https://near.org" target="_blank" className="footer-page-link w-inline-block">
                     <div className="footer-page-link-box">
                       <div className="footer-page-link-text one">
-                        world.org
+                        near.org
                       </div>
                       <div className="footer-page-link-text two">
-                        world.org
+                        near.org
                       </div>
                     </div>
                   </a>
@@ -188,13 +188,13 @@ export default function Footer() {
               </a>
               <div className="footer-copy-right-flex">
                 <p className="footer-copy-right-text">
-                  © 2026 - KLERO | Built at “
-                  <a href="https://ethglobal.com/" target="_blank" className="footer-copy-right-text-link">
-                    ETHGlobal Mumbai
+                  © 2026 - KLERO | Built for “
+                  <a href="https://nearhackathon.com" target="_blank" className="footer-copy-right-text-link">
+                    NEAR HACKATHON
                   </a>
                   {"” | MIT License | Powered by "}
-                  <a href="https://hedera.com/" target="_blank" className="footer-copy-right-text-link">
-                    Hedera
+                  <a href="https://near.org/" target="_blank" className="footer-copy-right-text-link">
+                    NEAR
                   </a>
                 </p>
                 <div className="footer-copy-right-button-box">

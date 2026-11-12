@@ -40,7 +40,7 @@ export default function Statistics() {
                 <div className="section-info-card-flex">
                   <div className="section-info-card-dot" />
                   <div className="section-info-card-text">
-                    WHY HEDERA
+                    WHY NEAR
                   </div>
                 </div>
                 <div className="utility-arrow-wrap another">
@@ -80,7 +80,7 @@ export default function Statistics() {
                     </div>
                   </div>
                   <p className="statitics-card-description">
-                    held by your agents. The payer signs only for the HCS winner
+                    full-access keys needed to claim: each agent claims with a key scoped to one method
                   </p>
                 </div>
               </div>
@@ -92,14 +92,14 @@ export default function Statistics() {
                 <div className="statitics-card-box">
                   <div className="statitics-card-num-box">
                     <div className="statitics-card-num">
-                      120
+                      600
                     </div>
                     <div className="statitics-card-num percent">
                       s
                     </div>
                   </div>
                   <p className="statitics-card-description">
-                    after its valid start, a payment intent is dead and can never execute
+                    is the longest an escrow can wait: after its deadline the provider can no longer settle
                   </p>
                 </div>
               </div>
@@ -111,14 +111,14 @@ export default function Statistics() {
                 <div className="statitics-card-box">
                   <div className="statitics-card-num-box">
                     <div className="statitics-card-num">
-                      45
+                      0
                     </div>
                     <div className="statitics-card-num percent">
                       s
                     </div>
                   </div>
                   <p className="statitics-card-description">
-                    of margin before a Mirror Node 404 proves a payment VOID forever
+                    of overlap between the settle window and the void window, so a payment never ends both ways
                   </p>
                 </div>
               </div>

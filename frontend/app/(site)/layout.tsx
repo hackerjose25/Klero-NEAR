@@ -4,7 +4,7 @@ import WebflowRuntime from '@/components/WebflowRuntime';
 
 const TITLE = "Klero – Agents fork. Money doesn't.";
 const DESCRIPTION =
-  'Klero is the exactly-once layer for AI agent payments: x402 on Hedera, one winner per job decided by HCS consensus, payment intents that die after 120 seconds, and World ID approval for the actions that matter.';
+  'Klero is the exactly-once layer for AI agent payments: one winner per job decided by a NEAR contract, escrow with a deadline that ends PAID once or VOID and refunded, and an on-chain spending cap the human controls.';
 
 export const metadata: Metadata = {
   title: TITLE,

@@ -10,7 +10,7 @@ export default function Automation() {
         <div className="container title-container w-variant-0d7a3a05-4c6a-cab0-9e2f-7c9727c2b618 top-border">
           <div className="section-title-flex w-variant-0d7a3a05-4c6a-cab0-9e2f-7c9727c2b618">
             <h2 className="section-title w-variant-0d7a3a05-4c6a-cab0-9e2f-7c9727c2b618">
-              WHY HEDERA
+              WHY NEAR
             </h2>
             <div className="section-title w-variant-0d7a3a05-4c6a-cab0-9e2f-7c9727c2b618 section-number">
               010
@@ -29,21 +29,21 @@ export default function Automation() {
             <div className="automation-content-flex">
               <div fade-anim="True" className="automation-content-box">
                 <div className="automation-content-text">
-                  Hedera makes an unknown payment provable: either it settled, or it can never settle
+                  NEAR makes an unknown payment answerable: the contract says PAID, or VOID and refunded
                 </div>
               </div>
               <div fade-anim="True" className="automation-card-content-flex">
                 <div className="automation-card-content-text">
-                  (I) Deterministic expiry
+                  (I) Escrow with a deadline
                 </div>
                 <div className="automation-card-content-border" />
                 <p className="automation-card-content-description">
-                  The network rejects a transaction past its valid start plus 120 seconds and any id it has already seen, so a Mirror Node 404 after the clock is proof, not a guess.
+                  The contract holds the payment. The provider can settle only before the deadline and anyone can void only after it, so VOID is contract state you can read, not a guess.
                 </p>
               </div>
             </div>
             <div fade-anim="True" className="automation-content-button-box">
-              <a data-wf--primary-button--variant="4th-button" href="/login" className="primary-button w-variant-c8937a21-aef7-f716-ecab-1c4a85c94367 w-inline-block">
+              <a data-wf--primary-button--variant="4th-button" href="/near" className="primary-button w-variant-c8937a21-aef7-f716-ecab-1c4a85c94367 w-inline-block">
                 <div className="primary-button-text-items w-variant-c8937a21-aef7-f716-ecab-1c4a85c94367">
                   <div className="primary-button-text-wrap">
                     <div className="primary-button-text one">
@@ -99,7 +99,7 @@ export default function Automation() {
                 </div>
                 <div fade-anim="True" className="automation-apps-content-box">
                   <p className="automation-apps-content-text">
-                    Klero ships as an MCP server, an agent kit and a CLI. Give any MCP agent a safe pay tool, and let anyone rebuild the whole history from Mirror Node with npx klero audit.
+                    Klero ships as a Rust contract, an agent runner, a provider server and a CLI. Anyone can rebuild the whole history from public data with pnpm audit:near.
                   </p>
                 </div>
               </div>

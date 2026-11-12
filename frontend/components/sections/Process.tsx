@@ -32,7 +32,7 @@ export default function Process() {
               </div>
             </div>
             <div scale-up="True" className="process-button-box">
-              <a data-wf--primary-button--variant="3rd-button" href="/login" className="primary-button w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e w-inline-block">
+              <a data-wf--primary-button--variant="3rd-button" href="/near" className="primary-button w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e w-inline-block">
                 <div className="primary-button-text-items w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e">
                   <div className="primary-button-text-wrap w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e">
                     <div className="primary-button-text one">
@@ -109,11 +109,11 @@ export default function Process() {
                             Job key
                           </div>
                           <div className="process-tabs-contents-tags">
-                            HCS
+                            NEAR
                           </div>
                         </div>
                         <p className="process-contents-description">
-                          Every agent computes the same job key from your human id, the capability and the input hash, then posts a claim on the HCS topic, paid by its own Hedera account.
+                          Every agent computes the same job key from your human id, the capability and the input hash, then calls claim on the Klero contract with its claim-only key.
                         </p>
                       </div>
                     </div>
@@ -135,14 +135,14 @@ export default function Process() {
                       <div className="process-tabs-contents-box">
                         <div className="process-tabs-contents-tags-flex">
                           <div className="process-tabs-contents-tags">
-                            Consensus
+                            First claim
                           </div>
                           <div className="process-tabs-contents-tags">
-                            Mirror Node
+                            get_job
                           </div>
                         </div>
                         <p className="process-contents-description">
-                          Hedera Consensus Service orders the claims. The first valid claim for the round wins and every agent reads the same winner from Mirror Node. The others back off.
+                          The contract records the round's first claim as the winner. The others get won = false, back off, and wait for the winner's result.
                         </p>
                       </div>
                     </div>
@@ -164,14 +164,14 @@ export default function Process() {
                       <div className="process-tabs-contents-box">
                         <div className="process-tabs-contents-tags-flex">
                           <div className="process-tabs-contents-tags">
-                            120 s
+                            Deadline
                           </div>
                           <div className="process-tabs-contents-tags">
-                            Stored first
+                            Escrow
                           </div>
                         </div>
                         <p className="process-contents-description">
-                          Klero builds the winner's payment as an intent: a Hedera transfer with a known transaction id that dies 120 seconds after its valid start. It is stored before it is sent.
+                          The provider answers with a 402. The winner pays it with ft_transfer_call, and the contract holds the FUSD as an intent with a deadline. Over the cap, the human must approve.
                         </p>
                       </div>
                     </div>
@@ -193,14 +193,14 @@ export default function Process() {
                       <div className="process-tabs-contents-box">
                         <div className="process-tabs-contents-tags-flex">
                           <div className="process-tabs-contents-tags">
-                            x402
+                            Delivery
                           </div>
                           <div className="process-tabs-contents-tags">
-                            HTS
+                            NEP-141
                           </div>
                         </div>
                         <p className="process-contents-description">
-                          The provider checks HCS, settles through our x402 facilitator in FUSD, then runs the job. If the job fails it refunds in HTS. Unknown outcomes resolve to PAID or VOID.
+                          The provider checks the escrow on-chain, does the work, then settles: PAID. If it never delivers, the payer voids after the deadline: VOID, refunded, next round.
                         </p>
                       </div>
                     </div>

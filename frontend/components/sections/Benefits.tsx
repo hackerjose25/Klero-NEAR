@@ -26,11 +26,11 @@ export default function Benefits() {
                 ONE PAYMENT, EVER
               </div>
               <div className="paragraph-small short-description">
-                Every job carries three guarantees, each enforced by a public network rather than our server: one winner, one payment, one live authority.
+                Every job carries three guarantees, each enforced by a NEAR contract rather than our server: one winner, one payment, one human in charge.
               </div>
             </div>
             <div fade-anim="True" className="benefits-content-button-box">
-              <a data-wf--primary-button--variant="3rd-button" href="/login" className="primary-button w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e w-inline-block">
+              <a data-wf--primary-button--variant="3rd-button" href="/near" className="primary-button w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e w-inline-block">
                 <div className="primary-button-text-items w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e">
                   <div className="primary-button-text-wrap w-variant-5c198abb-72b9-9083-ac28-2758d34ab69e">
                     <div className="primary-button-text one">
@@ -62,7 +62,7 @@ export default function Benefits() {
             <div fade-anim="True" data-wf--benefits-card-items--variant="main-card" className="benefits-card-items">
               <div className="benefits-card-info-flex">
                 <div className="benefits-card-info-text">
-                  (hcs)
+                  (claim)
                 </div>
                 <div className="benefits-card-num">
                   01
@@ -76,14 +76,14 @@ export default function Benefits() {
                   One Winner
                 </div>
                 <p className="paragraph-small benefits-card-content-description">
-                  Claims are ordered by Hedera Consensus Service. The first valid claim for a job round wins, and every agent, provider and auditor computes the same winner.
+                  Agents call claim on the Klero contract. The first claim in a round wins, and every agent, provider and auditor reads the same winner from the contract.
                 </p>
               </div>
             </div>
             <div fade-anim="True" data-wf--benefits-card-items--variant="main-card" className="benefits-card-items">
               <div className="benefits-card-info-flex">
                 <div className="benefits-card-info-text">
-                  (hedera)
+                  (escrow)
                 </div>
                 <div className="benefits-card-num">
                   02
@@ -97,14 +97,14 @@ export default function Benefits() {
                   One Payment
                 </div>
                 <p className="paragraph-small benefits-card-content-description">
-                  Payment intents die 120 seconds after their valid start. Hedera's transaction-id dedupe and our facilitator's replay table stop any second settlement.
+                  The winner escrows into the contract with a deadline. Settling before it gives PAID; voiding after it gives VOID and a refund. The two windows never overlap.
                 </p>
               </div>
             </div>
             <div fade-anim="True" data-wf--benefits-card-items--variant="right-border-none" className="benefits-card-items w-variant-fd48819a-9177-0907-a45c-824c4c76c822">
               <div className="benefits-card-info-flex">
                 <div className="benefits-card-info-text">
-                  (world)
+                  (cap)
                 </div>
                 <div className="benefits-card-num">
                   03
@@ -115,10 +115,10 @@ export default function Benefits() {
               </div>
               <div className="benefits-card-content-box">
                 <div className="benefits-card-content-title">
-                  One Live Authority
+                  One Human In Charge
                 </div>
                 <p className="paragraph-small benefits-card-content-description">
-                  Agents link to their human with World ID. Firing an agent or spending above the cap needs a fresh approval, and providers check the agent's live authority on HCS before they run a job.
+                  Agents are sub-accounts of their human. The contract refuses a payment above the human's on-chain cap unless the human approved that exact job, round and amount.
                 </p>
               </div>
             </div>
