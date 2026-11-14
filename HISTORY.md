@@ -123,3 +123,5 @@ What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UT
 ## 2026-11-09: Repo created (`45d2ae8`, tag `pre-hackathon`)
 - New repo, seeded with Klero (Hedera) as of commit `1cb9f19` of the original repo. Port plan:
   `docs/planning/near-port-plan.md`.
+
+- 45d9ab2: Docker setup (backend/frontend Dockerfiles, compose.yaml) and provider-near job discovery; ignore backend/.pnpm-store.
