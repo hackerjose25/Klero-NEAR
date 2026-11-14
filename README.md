@@ -14,7 +14,7 @@ Entry for [NEAR HACKATHON](https://nearhackathon.com), tracks `security`, `swarm
 | Payment token (FUSD, NEP-141, 6 dp) | [`fusd.klero-mw8x6bn1.testnet`](https://testnet.nearblocks.io/address/fusd.klero-mw8x6bn1.testnet) |
 | Human and agents | [`human.klero-mw8x6bn1.testnet`](https://testnet.nearblocks.io/address/human.klero-mw8x6bn1.testnet) with sub-accounts `a.`, `b.`, `c.` |
 | Proof (raw output, NearBlocks links) | [docs/proof-near.md](docs/proof-near.md) |
-| Demo video | coming soon |
+| Demo video | [X post](https://x.com/hackerjose25/status/2121539719435850006) |
 | Submission text | [docs/submission/description.md](docs/submission/description.md) |
 
 The account ids start with `klero` because the project was called Klero before the hackathon, and NEAR account names are permanent.

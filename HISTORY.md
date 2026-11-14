@@ -125,3 +125,5 @@ What changed, newest first. Hackathon window: 2026-10-19 → 2026-11-14 23:59 UT
   `docs/planning/near-port-plan.md`.
 
 - 45d9ab2: Docker setup (backend/frontend Dockerfiles, compose.yaml) and provider-near job discovery; ignore backend/.pnpm-store.
+
+- README: demo video row links the X demo post.
