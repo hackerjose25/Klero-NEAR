@@ -13,16 +13,7 @@ const HUMAN = 'human.klero-mw8x6bn1.testnet';
 const AGENTS = ['a', 'b', 'c'].map((x) => `${x}.${HUMAN}`);
 const DECIMALS = 6;
 
-type Demo = { contract: string; key: string; label: string };
-const DEMOS: Demo[] = [
-  { contract: V2, key: '09fd9a665884f511b71333aee6fff5a870bc2b2453a3e7790b5dc713d47490a8', label: 'Over the cap: the human denied (round abandoned, nothing moved), then approved → 2 FUSD paid once' },
-  { contract: V2, key: 'b1a8f974bcd5a49fb04f963d0bb53506fa589406a1503e202d892d9dd7b71d36', label: 'Over the cap: round 0 abandoned, round 1 approved → paid once' },
-  { contract: V2, key: '321dfc3468a959fa9b097fb8d54aa16dece96f791ac44ad82ef28d92dcca264a', label: 'Over the cap with no approval: the contract refused the escrow, the agent kept its money' },
-  { contract: V1, key: '0d3cd8b74ebf0ad8b3589b14d0b321c95d358de11aab8868bcc9d7b4a3d6f6d3', label: 'Provider crashed after escrow: round 0 VOID and refunded, round 1 paid once' },
-  { contract: V1, key: '0ef4f6989eb0adda177d546128625ba5f8dac7a12919049dbe6d4dee4b9a88d9', label: 'Never settled: deadline passed → VOID, refunded' },
-  { contract: V1, key: '1b3b6a5b0f7fec8a7b6bfdfc04ab8cc8ab79047763f3ea9b8b5dcc14f8a1764d', label: 'Three agents, one winner, delivered → paid once' },
-  { contract: V1, key: '11ec01e9db7292ae89b66ab4d09776ea9c515a008c62d10a0ec400bc1e68e02d', label: 'Smoke test: three claims, one escrow, settled → paid once' },
-];
+type DiscoveredJob = { contract: string; key: string; txHash: string; timestamp: string };
 
 type Job = { human: string; round: number; winner: string | null; provider: string | null; status: string; intent_id: string | null };
 type Intent = { job_key: string; round: number; payer: string; provider: string; amount: string; created_ns: number; deadline_ns: number; status: string };
@@ -90,7 +81,7 @@ function Clock({ intent, state }: { intent: Intent; state: string | null }) {
   return <span className="nr-clock">settle window closes in {left.toFixed(1)} s, then anyone may void</span>;
 }
 
-function JobCard({ contract, jobKey, label }: { contract: string; jobKey: string; label?: string }) {
+function JobCard({ contract, jobKey, label, timestamp }: { contract: string; jobKey: string; label?: string; timestamp?: string }) {
   const [data, setData] = useState<Loaded | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const load = useCallback(() => {
@@ -108,6 +99,7 @@ function JobCard({ contract, jobKey, label }: { contract: string; jobKey: string
           <p className="mono">
             job {jobKey.slice(0, 16)}… · <a href={acctLink(contract)} target="_blank" rel="noreferrer">{contract === V2 ? 'contract v2' : 'contract v1'}</a>
           </p>
+          {timestamp && <p className="nr-micro">Recorded: {new Date(Number(timestamp) / 1_000_000).toLocaleString()}</p>}
         </div>
         <div className="nr-count">
           <span className="num">{data ? paid : '–'}</span>
@@ -159,6 +151,40 @@ export default function NearView() {
   const [q, setQ] = useState('');
   const [lookup, setLookup] = useState<{ contract: string; key: string } | null>(null);
   const [contract, setContract] = useState(V2);
+  const [jobs, setJobs] = useState<DiscoveredJob[]>([]);
+  const [jobsLoading, setJobsLoading] = useState(true);
+  const [jobsError, setJobsError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+
+    const loadJobs = async () => {
+      try {
+        const response = await fetch('http://localhost:4050/jobs');
+        if (!response.ok) throw new Error(`Provider API returned ${response.status}`);
+
+        const result = (await response.json()) as DiscoveredJob[];
+        if (!Array.isArray(result)) throw new Error('Invalid jobs response');
+
+        if (active) {
+          setJobs(result);
+          setJobsError(null);
+        }
+      } catch (error) {
+        if (active) setJobsError(error instanceof Error ? error.message : 'Could not load jobs');
+      } finally {
+        if (active) setJobsLoading(false);
+      }
+    };
+
+    void loadJobs();
+    const timer = window.setInterval(() => void loadJobs(), 30_000);
+
+    return () => {
+      active = false;
+      window.clearInterval(timer);
+    };
+  }, []);
 
   return (
     <div className="sp nr">
@@ -168,7 +194,7 @@ export default function NearView() {
         <p className="nr-lead">
           Three AI agents of one human race for the same job. The Phoebe contract on NEAR picks one winner, holds the payment in escrow, and
           ends it exactly one way: <b>PAID</b> once by the provider before the deadline, or <b>VOID</b> and refunded after it. Every row
-          below is read live from the contract in your browser, not from our server.
+          below is discovered through NearBlocks by our server; job state and payment details are read live from the contract in your browser.
         </p>
 
         <section className="nr-facts">
@@ -204,12 +230,21 @@ export default function NearView() {
         </section>
 
         <section>
-          <h2 className="nr-h2">Jobs from the recorded proof runs</h2>
+          <h2 className="nr-h2">Recently discovered jobs</h2>
           <div className="nr-grid">
-            {DEMOS.map((d) => (
-              <JobCard key={d.key} contract={d.contract} jobKey={d.key} label={d.label} />
+            {jobsLoading && <p>Discovering jobs from NEAR testnet...</p>}
+            {jobsError && <p role="alert">Could not load jobs: {jobsError}</p>}
+            {!jobsLoading && !jobsError && jobs.length === 0 && <p>No jobs discovered yet.</p>}
+            {jobs.map((job) => (
+              <JobCard
+                key={`${job.contract}:${job.key}`}
+                contract={job.contract}
+                jobKey={job.key}
+                timestamp={job.timestamp}
+              />
             ))}
           </div>
+          <p className="nr-micro">Job discovery powered by <a href="https://nearblocks.io" target="_blank" rel="noreferrer">NearBlocks</a>.</p>
         </section>
 
         <section className="nr-verify">

@@ -1,0 +1,45 @@
+name: phoebe
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_TELEMETRY_DISABLED: "1"
+
+  providers:
+    build: ./backend
+    command: ["pnpm", "dev:providers:near"]
+    ports:
+      - "4050:4050"
+    environment:
+      PROVIDERS_PORT: "4050"
+      PROVIDERS_PUBLIC_URL: "http://providers:4050"
+    volumes:
+      - ./backend/.secrets:/app/.secrets:ro
+    env_file:
+      - ./backend/.env
+
+  approver:
+    build: ./backend
+    command: ["pnpm", "dev:approver:near"]
+    ports:
+      - "4060:4060"
+    environment:
+      APPROVER_PORT: "4060"
+      APPROVER_PUBLIC_URL: "http://localhost:4060"
+    volumes:
+      - ./backend/.secrets:/app/.secrets:ro
+
+  agents:
+    build: ./backend
+    profiles: ["agents"]
+    command: ["pnpm", "agents:near"]
+    environment:
+      PROVIDERS_URL: "http://providers:4050"
+      APPROVER_URL: "http://approver:4060"
+    volumes:
+      - ./backend/.secrets:/app/.secrets:ro
+    env_file:
+      - ./backend/.env

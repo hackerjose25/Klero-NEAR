@@ -1,3 +1,4 @@
+import { createJobDiscovery } from './job-discovery.js';
 // Phoebe providers on NEAR: one server hosts scribe-a, scribe-b and scribe-premium.
 //
 // Payment rule: pay on delivery. The agent's FUSD sits in the Phoebe contract's escrow. The provider checks the
@@ -10,11 +11,16 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import Fastify from 'fastify';
-import { toFile } from 'openai';
 import { PhoebeNear, intentIdOf, loadNearKeys, nearblocksTx } from '@klero/near';
 import { llm, LLM_MODEL } from '@klero/near/llm';
+import { GoogleGenAI } from '@google/genai';
 
 const near = new PhoebeNear();
+const discovery = createJobDiscovery([...new Set([near.d.contractId, ...(near.d.previousContracts ?? [])])]);
+const gemini = new GoogleGenAI({
+  apiKey: process.env.LLM_API_KEY ?? process.env.GEMINI_API_KEY,
+});
+
 const keys = loadNearKeys();
 const PUBLIC_URL = (process.env.PROVIDERS_PUBLIC_URL ?? 'http://localhost:4050').replace(/\/$/, '');
 const SAMPLE = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'provider', 'public', 'sample-meeting.mp3');
@@ -37,22 +43,46 @@ async function work(audio: Uint8Array): Promise<Result> {
     const summary = '- stub summary (set LLM_API_KEY for a real transcript)';
     return { transcript, summary, outputHash: sha256(transcript + summary), mode: 'stub' };
   }
-  const file = await toFile(audio, 'meeting.mp3', { type: 'audio/mpeg' });
-  const tr = await llm.audio.transcriptions.create({ file, model: process.env.LLM_STT_MODEL ?? 'whisper-1' });
+  
+const tr = await gemini.models.generateContent({
+  model: LLM_MODEL,
+  contents: [{
+  role: 'user',
+  parts: [
+    {
+      text: 'Transcribe this audio accurately. Return only the spoken words, preserving the original language.'
+    },
+    {
+      inlineData: {
+        mimeType: 'audio/mp3',
+        data: Buffer.from(audio).toString('base64'),
+      },
+    },
+  ],
+}],
+});
+
+const transcript = tr.text?.trim() ?? '';
+if (!transcript) throw new Error('Gemini returned an empty transcript');
+
   const chat = await llm.chat.completions.create({
     model: LLM_MODEL,
     messages: [
       { role: 'system', content: 'Summarize this meeting transcript as 3-6 short bullet points: decisions first, then action items with owners.' },
-      { role: 'user', content: tr.text.slice(0, 24_000) },
+      { role: 'user', content: transcript.slice(0, 24_000) },
     ],
   });
   const summary = chat.choices[0]?.message?.content?.trim() ?? '';
-  return { transcript: tr.text, summary, outputHash: sha256(tr.text + summary), mode: 'llm' };
+  return { transcript, summary, outputHash: sha256(transcript + summary), mode: 'llm' };
 }
 
 const app = Fastify({ logger: { level: 'info' } });
+app.addHook('onRequest', async (_request, reply) => {
+  reply.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+});
 const err = (code: string, message: string, extra: object = {}) => ({ error: { code, message }, ...extra });
 
+app.get('/jobs', async () => discovery.list());
 app.get('/health', async () => ({ ok: true, contract: near.d.contractId, llm: llm ? 'on' : 'stub' }));
 app.get('/sample-meeting.mp3', async (_req, reply) => reply.type('audio/mpeg').send(readFileSync(SAMPLE)));
 
@@ -147,4 +177,5 @@ app.get<{ Params: { providerId: string; jobKey: string }; Querystring: { agent?:
   return d;
 });
 
+discovery.start();
 await app.listen({ host: '0.0.0.0', port: Number(process.env.PROVIDERS_PORT ?? 4050) });

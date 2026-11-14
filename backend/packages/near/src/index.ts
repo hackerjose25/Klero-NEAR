@@ -12,6 +12,7 @@ export type NearDeployment = {
   rpc: string;
   operatorId: string;
   contractId: string;
+  previousContracts?: string[];
   token: { id: string; symbol: string; decimals: number };
   providers: Record<string, { accountId: string; price: string }>;
   human: { accountId: string; humanHash: string };
